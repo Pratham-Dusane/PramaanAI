@@ -1,0 +1,138 @@
+{
+  "rule_pack_id": "DEMO_EOA_2026",
+  "version": "1.0.0",
+  "status": "DEMO_ONLY",
+  "demo_only": true,
+  "application_category": "DEMO_EOA",
+  "academic_year": "2026-27",
+  "effective_from": "2026-04-01",
+  "effective_to": "2027-03-31",
+  "source_disclaimer": "Entire pack is illustrative synthetic data. No rule here should be treated as an AICTE requirement. Replace only after verified source review.",
+  "rules": [
+    {
+      "rule_id": "DEMO.DOC.FACULTY_CERT_PRESENT",
+      "version": "1.0.0",
+      "title": "Demo: faculty credential evidence is present",
+      "description": "Illustrative required-evidence check.",
+      "category_ids": [
+        "DEMO_EOA"
+      ],
+      "academic_years": [
+        "2026-27"
+      ],
+      "severity": "MEDIUM",
+      "status": "DEMO_ONLY",
+      "applicability": {
+        "op": "equals",
+        "left": {
+          "path": "context.category"
+        },
+        "right": {
+          "value": "DEMO_EOA"
+        }
+      },
+      "required_evidence_types": [
+        "FACULTY_CREDENTIAL"
+      ],
+      "predicate": {
+        "op": "exists",
+        "left": {
+          "path": "evidence.faculty_credential"
+        }
+      },
+      "result_if_true": "PASS",
+      "result_if_false": "INSUFFICIENT_EVIDENCE",
+      "missing_data_result": "INSUFFICIENT_EVIDENCE",
+      "explanation_template": "Demo check: supporting faculty credential evidence {result}.",
+      "recommended_next_action": "Upload or link the required evidence and request a review.",
+      "source": {
+        "status": "DEMO_ONLY",
+        "title": "Synthetic demo rule; not an official regulation",
+        "publisher": "Project fixture",
+        "edition": "1.0",
+        "clause": "No legal clause",
+        "page": null,
+        "url": null,
+        "retrieved_at": null,
+        "checksum": null,
+        "notes": "Must not be interpreted as a real AICTE requirement."
+      },
+      "tests": [
+        {
+          "case": "evidence_present",
+          "expected": "PASS"
+        },
+        {
+          "case": "evidence_missing",
+          "expected": "INSUFFICIENT_EVIDENCE"
+        }
+      ]
+    },
+    {
+      "rule_id": "DEMO.CERT.DATE_REVIEW",
+      "version": "1.0.0",
+      "title": "Demo: certificate date requires review",
+      "description": "Illustrative date comparison, not official eligibility criteria.",
+      "category_ids": [
+        "DEMO_EOA"
+      ],
+      "academic_years": [
+        "2026-27"
+      ],
+      "severity": "MEDIUM",
+      "status": "DEMO_ONLY",
+      "applicability": {
+        "op": "equals",
+        "left": {
+          "path": "context.category"
+        },
+        "right": {
+          "value": "DEMO_EOA"
+        }
+      },
+      "required_evidence_types": [
+        "BUILDING_CERTIFICATE"
+      ],
+      "predicate": {
+        "op": "date_after",
+        "left": {
+          "path": "evidence.building_certificate.valid_until"
+        },
+        "right": {
+          "path": "context.evaluation_date"
+        }
+      },
+      "result_if_true": "PASS",
+      "result_if_false": "REVIEW",
+      "missing_data_result": "INSUFFICIENT_EVIDENCE",
+      "explanation_template": "Demo date check requires reviewer confirmation.",
+      "recommended_next_action": "Confirm the date against the original source or authorized issuer.",
+      "source": {
+        "status": "DEMO_ONLY",
+        "title": "Synthetic demo rule; not an official regulation",
+        "publisher": "Project fixture",
+        "edition": "1.0",
+        "clause": "No legal clause",
+        "page": null,
+        "url": null,
+        "retrieved_at": null,
+        "checksum": null,
+        "notes": "Boundary semantics must be tested; this is not legal guidance."
+      },
+      "tests": [
+        {
+          "case": "future_valid_until",
+          "expected": "PASS"
+        },
+        {
+          "case": "past_valid_until",
+          "expected": "REVIEW"
+        },
+        {
+          "case": "missing_date",
+          "expected": "INSUFFICIENT_EVIDENCE"
+        }
+      ]
+    }
+  ]
+}

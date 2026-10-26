@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aicte/schemas/evidence_graph.schema.json",
+  "title": "Evidence Graph Response",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "application_id",
+    "nodes",
+    "edges"
+  ],
+  "properties": {
+    "application_id": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type",
+          "label"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "INSTITUTION",
+              "APPLICATION",
+              "DOCUMENT_VERSION",
+              "EXTRACTED_FIELD",
+              "RULE_VERSION",
+              "SOURCE_RECORD",
+              "VALIDATION_RUN",
+              "FINDING",
+              "REVIEW_ACTION",
+              "DEADLINE_ALERT",
+              "INFRASTRUCTURE_OBSERVATION"
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "metadata": {
+            "type": "object"
+          },
+          "restricted_summary": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "from",
+          "to",
+          "relation"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "relation": {
+            "type": "string",
+            "enum": [
+              "HAS_APPLICATION",
+              "HAS_DOCUMENT",
+              "EXTRACTED_AS",
+              "EVALUATED_BY",
+              "GENERATED",
+              "SUPPORTED_BY",
+              "VERIFIED_AGAINST",
+              "CHANGED_FROM",
+              "REVIEWED_BY",
+              "SUPERSEDES",
+              "POTENTIAL_MATCH",
+              "HAS_ALERT"
+            ]
+          },
+          "label": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "metadata": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  }
+}

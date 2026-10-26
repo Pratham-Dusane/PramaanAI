@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aicte/schemas/rule_definition.schema.json",
+  "title": "Declarative Rule Definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "rule_id",
+    "version",
+    "title",
+    "description",
+    "category_ids",
+    "severity",
+    "applicability",
+    "predicate",
+    "missing_data_result",
+    "source",
+    "status"
+  ],
+  "properties": {
+    "rule_id": {
+      "type": "string",
+      "pattern": "^[A-Z0-9_.-]+$"
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "category_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "academic_years": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "effective_from": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "effective_to": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date"
+    },
+    "severity": {
+      "enum": [
+        "INFO",
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "CRITICAL"
+      ]
+    },
+    "applicability": {
+      "type": "object"
+    },
+    "required_evidence_types": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "predicate": {
+      "type": "object"
+    },
+    "result_if_true": {
+      "enum": [
+        "PASS",
+        "REVIEW",
+        "INSUFFICIENT_EVIDENCE",
+        "NOT_APPLICABLE",
+        "ERROR"
+      ]
+    },
+    "result_if_false": {
+      "enum": [
+        "PASS",
+        "REVIEW",
+        "INSUFFICIENT_EVIDENCE",
+        "NOT_APPLICABLE",
+        "ERROR"
+      ]
+    },
+    "missing_data_result": {
+      "enum": [
+        "PASS",
+        "REVIEW",
+        "INSUFFICIENT_EVIDENCE",
+        "NOT_APPLICABLE",
+        "ERROR"
+      ]
+    },
+    "explanation_template": {
+      "type": "string"
+    },
+    "recommended_next_action": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "status",
+        "title"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "OFFICIAL_SOURCE_REVIEWED",
+            "DEMO_ONLY",
+            "NEEDS_REVIEW"
+          ]
+        },
+        "title": {
+          "type": "string"
+        },
+        "publisher": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "edition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "clause": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "page": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "retrieved_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "checksum": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "owner": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tests": {
+      "type": "array",
+      "items": {
+        "type": "object"
+      }
+    },
+    "status": {
+      "enum": [
+        "DRAFT",
+        "TESTED",
+        "PUBLISHED",
+        "SUPERSEDED",
+        "RETIRED",
+        "DEMO_ONLY"
+      ]
+    },
+    "published_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "published_by": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/aicte/schemas/connector_result.schema.json",
+  "title": "Source Verification Connector Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "status",
+    "provider_id",
+    "checked_at",
+    "simulated",
+    "message"
+  ],
+  "properties": {
+    "status": {
+      "enum": [
+        "VERIFIED_MATCH",
+        "VERIFIED_MISMATCH",
+        "NOT_FOUND",
+        "NOT_SUPPORTED",
+        "UNAVAILABLE",
+        "UNAUTHORIZED",
+        "TIMEOUT",
+        "ERROR",
+        "SIMULATED_MATCH",
+        "SIMULATED_MISMATCH"
+      ]
+    },
+    "provider_id": {
+      "type": "string"
+    },
+    "checked_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "simulated": {
+      "type": "boolean"
+    },
+    "source_reference": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "response_fingerprint": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "matched_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mismatched_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "message": {
+      "type": "string"
+    },
+    "retryable": {
+      "type": "boolean"
+    },
+    "latency_ms": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

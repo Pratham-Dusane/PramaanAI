@@ -1,0 +1,69 @@
+{
+  "dataset_id": "AICTE-DEMO-SYNTHETIC-2026-01",
+  "version": "1.0.0",
+  "synthetic": true,
+  "official_records": false,
+  "purpose": "Demonstrate validation workflows only; contains no real institutions, applicants, staff or official records.",
+  "seed_command": "python -m app.scripts.seed_demo",
+  "reset_guard": "APP_ENV must be development or test and an explicit demo reset flag must be set.",
+  "institutions": [
+    {
+      "id": "DEMO-INST-001",
+      "display_name": "Example Technical Institute A",
+      "description": "Fictional institution with two application years."
+    },
+    {
+      "id": "DEMO-INST-002",
+      "display_name": "Example Technical Institute B",
+      "description": "Fictional institution for cross-institution candidate relationship tests."
+    }
+  ],
+  "applications": [
+    {
+      "id": "DEMO-EOA-2025-001",
+      "institution_id": "DEMO-INST-001",
+      "category": "DEMO_EOA",
+      "academic_year": "2025-26",
+      "purpose": "prior snapshot; one near-expiry evidence item"
+    },
+    {
+      "id": "DEMO-EOA-2026-001",
+      "institution_id": "DEMO-INST-001",
+      "category": "DEMO_EOA",
+      "academic_year": "2026-27",
+      "purpose": "missing demo requirement, field mismatch, expiry, duplicate image candidate"
+    },
+    {
+      "id": "DEMO-EOA-2026-002",
+      "institution_id": "DEMO-INST-002",
+      "category": "DEMO_EOA",
+      "academic_year": "2026-27",
+      "purpose": "benign shared asset and relationship testing"
+    }
+  ],
+  "documents": [
+    "clean native-text PDF",
+    "scanned low-quality PDF",
+    "faculty roster CSV/PDF",
+    "synthetic qualification certificate",
+    "synthetic infrastructure photograph A",
+    "duplicate/re-encoded infrastructure photograph B",
+    "floor-plan image with synthetic label discrepancy"
+  ],
+  "connector_fixtures": [
+    "SIMULATED_MATCH",
+    "SIMULATED_MISMATCH",
+    "NOT_FOUND",
+    "NOT_SUPPORTED",
+    "UNAVAILABLE",
+    "UNAUTHORIZED",
+    "TIMEOUT",
+    "ERROR"
+  ],
+  "rule_pack": "examples/sample_rule_pack.json",
+  "known_limitations": [
+    "All requirements in sample rule pack are demo-only, not official AICTE criteria.",
+    "Connector outputs are simulated and are never live verification.",
+    "Images only produce review signals; they do not establish actual facility existence or compliance."
+  ]
+}

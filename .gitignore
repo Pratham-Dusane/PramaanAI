@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# Distribution & Build
+frontend/dist/
+frontend/dist-ssr/
+*.egg-info/
+
+# Local data & logs
+var/
+*.log
+.DS_Store
+
+# Environment & local secrets
+.env
+.env.local

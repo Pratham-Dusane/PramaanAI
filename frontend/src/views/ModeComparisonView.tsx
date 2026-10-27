@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { 
-  Scale, 
-  Sparkles, 
-  CheckCircle2, 
-  XCircle, 
-  AlertTriangle, 
-  ChevronDown, 
-  ChevronUp, 
-  ArrowRight, 
-  Table, 
+import {
+  Scale,
+  Sparkles,
+  CheckCircle2,
+  XCircle,
+  AlertTriangle,
+  ChevronDown,
+  ChevronUp,
+  ArrowRight,
+  Table,
   LayoutGrid,
   Info,
   Clock,
@@ -33,17 +33,17 @@ export const ModeComparisonView: React.FC<ModeComparisonViewProps> = ({
   const [expandedResidualMode, setExpandedResidualMode] = useState<MethodologyMode | null>('DESK_ONLY');
   const [channelFilter, setChannelFilter] = useState<string>('ALL');
 
-  const filteredChannels = channelFilter === 'ALL' 
-    ? mockChannelMatrix 
+  const filteredChannels = channelFilter === 'ALL'
+    ? mockChannelMatrix
     : mockChannelMatrix.filter(c => c.category.toUpperCase() === channelFilter);
 
   const categories = ['ALL', 'LABORATORY', 'FACULTY', 'INSTRUCTIONAL', 'AMENITIES', 'ADMINISTRATIVE'];
 
   return (
     <div className="mode-comparison-container" style={{ padding: '24px 32px 80px', maxWidth: '1380px', margin: '0 auto' }}>
-      
+
       {/* ── 1. Advisory & Configuration Disclaimer ── */}
-      <div 
+      <div
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -96,7 +96,7 @@ export const ModeComparisonView: React.FC<ModeComparisonViewProps> = ({
             </p>
           </div>
 
-          <div 
+          <div
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(4, 1fr)',
@@ -111,15 +111,15 @@ export const ModeComparisonView: React.FC<ModeComparisonViewProps> = ({
               const coveragePct = Math.round((col.itemsFull / totalItems) * 100);
 
               return (
-                <div 
+                <div
                   key={col.mode}
                   style={{
                     background: isRecommended ? '#ffffff' : '#ffffff',
                     borderRadius: '18px',
                     padding: '24px 20px',
                     border: isRecommended ? '2.5px solid var(--accent-gold)' : '1px solid rgba(38, 61, 57, 0.12)',
-                    boxShadow: isRecommended 
-                      ? '0 16px 36px -10px rgba(212, 160, 52, 0.28), 0 0 0 1px rgba(212, 160, 52, 0.4)' 
+                    boxShadow: isRecommended
+                      ? '0 16px 36px -10px rgba(212, 160, 52, 0.28), 0 0 0 1px rgba(212, 160, 52, 0.4)'
                       : '0 4px 14px rgba(38, 61, 57, 0.04)',
                     opacity: isBlocked ? 0.78 : 1,
                     position: 'relative',
@@ -131,7 +131,7 @@ export const ModeComparisonView: React.FC<ModeComparisonViewProps> = ({
                   {/* Top Badge */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
                     {isRecommended ? (
-                      <span 
+                      <span
                         style={{
                           background: 'linear-gradient(135deg, #d4a034, #b8861d)',
                           color: '#ffffff',
@@ -148,7 +148,7 @@ export const ModeComparisonView: React.FC<ModeComparisonViewProps> = ({
                         <Sparkles size={11} /> RECOMMENDED
                       </span>
                     ) : (
-                      <span 
+                      <span
                         style={{
                           background: 'rgba(239, 68, 68, 0.1)',
                           color: '#dc2626',
@@ -177,7 +177,7 @@ export const ModeComparisonView: React.FC<ModeComparisonViewProps> = ({
 
                   {/* Gate Block Reason (if blocked) */}
                   {isBlocked && (
-                    <div 
+                    <div
                       style={{
                         background: 'rgba(239, 68, 68, 0.06)',
                         border: '1px solid rgba(239, 68, 68, 0.2)',
@@ -194,7 +194,7 @@ export const ModeComparisonView: React.FC<ModeComparisonViewProps> = ({
                   )}
 
                   {!isBlocked && (
-                    <div 
+                    <div
                       style={{
                         background: 'rgba(16, 185, 129, 0.08)',
                         border: '1px solid rgba(16, 185, 129, 0.25)',
@@ -254,7 +254,7 @@ export const ModeComparisonView: React.FC<ModeComparisonViewProps> = ({
                     </div>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                       {col.evidenceArtefacts.map((art, i) => (
-                        <span 
+                        <span
                           key={i}
                           style={{
                             background: 'var(--bg-main)',
@@ -290,8 +290,8 @@ export const ModeComparisonView: React.FC<ModeComparisonViewProps> = ({
                       }}
                     >
                       <span>
-                        {col.residualUncertainties.length > 0 
-                          ? `${col.residualUncertainties.length} Residual Blindspots` 
+                        {col.residualUncertainties.length > 0
+                          ? `${col.residualUncertainties.length} Residual Blindspots`
                           : 'Zero Blindspots'}
                       </span>
                       {col.residualUncertainties.length > 0 && (
@@ -408,10 +408,10 @@ export const ModeComparisonView: React.FC<ModeComparisonViewProps> = ({
                         {item.category}
                       </span>
                     </td>
-                    
+
                     {/* Desk */}
                     <td style={{ padding: '12px 14px', textAlign: 'center' }}>
-                      <span 
+                      <span
                         style={{
                           display: 'inline-block',
                           padding: '2px 8px',
@@ -428,7 +428,7 @@ export const ModeComparisonView: React.FC<ModeComparisonViewProps> = ({
 
                     {/* Remote */}
                     <td style={{ padding: '12px 14px', textAlign: 'center' }}>
-                      <span 
+                      <span
                         style={{
                           display: 'inline-block',
                           padding: '2px 8px',
@@ -445,7 +445,7 @@ export const ModeComparisonView: React.FC<ModeComparisonViewProps> = ({
 
                     {/* Physical */}
                     <td style={{ padding: '12px 14px', textAlign: 'center' }}>
-                      <span 
+                      <span
                         style={{
                           display: 'inline-block',
                           padding: '2px 8px',

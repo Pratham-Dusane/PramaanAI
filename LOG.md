@@ -74,4 +74,20 @@ Append entries below using the format in `AGENTS.md`. If a previous entry is wro
 - Tests: `npx tsc -b --noEmit` exited with code 0 (zero errors). Vite dev server active and running.
 - Decisions: None.
 - Handoff: Ready for user verification.
-
+### 2026-10-27 19:10 UTC - T11-DIGITAL-TWIN-AUDIT-REFINEMENT - frontend-designer
+- Status: DONE
+- Changed: Addressed targeted layout refinements:
+  1. `DigitalTwinView.tsx`: Changed the perspective tabs strip (`Multi-Year Baseline & Drift Analysis`, `Historical Inspection Baseline`, `Time-Aware Attribute Ledger`) from a full-width container to a compact `fit-content` inline pill strip with `alignSelf: flex-start` and clean horizontal padding, taking only the necessary width.
+  2. `AuditLogView.tsx`: Removed the white card container, border, and shadow behind the search and filter strip (`Search by actor, action event...`, filter pills, and entry counter), allowing controls to sit unboxed directly on the canvas.
+  3. Strict Constraints: Zero emojis, zero em or en dashes, and zero unrequested git pushes.
+- Tests: `npx tsc -b --noEmit` exited with code 0 (zero errors).
+### 2026-10-27 19:15 UTC - T11-DIGITAL-TWIN-CENTER-AND-FIT - frontend-designer
+- Status: DONE
+- Changed: Refined `DigitalTwinView.tsx`:
+  1. Centered the perspective tabs container (`Multi-Year Baseline & Drift Analysis`, `Historical Inspection Baseline`, `Time-Aware Attribute Ledger`) horizontally on the page with `justifyContent: center`.
+  2. Constrained the output display cards across all three tabs to a fitted `maxWidth: 1080px` and centered them on the canvas.
+  3. Eliminated the excessive horizontal stretching and unnecessary whitespace between table columns in the reconciliation matrix and attribute ledger.
+  4. Zero emojis, zero em or en dashes, and no git push.
+- Tests: `npx tsc -b --noEmit` exited with code 0 (zero errors).
+- Decisions: None.
+- Handoff: Ready for user testing.

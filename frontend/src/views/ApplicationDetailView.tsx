@@ -86,7 +86,7 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
 
   return (
     <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '28px', maxWidth: '1680px', margin: '0 auto', width: '100%', paddingTop: '16px' }}>
-      
+
       {/* 1. LEAN EXECUTIVE WORKSPACE TOOLBAR (WITH GENEROUS BLANK SPACE) */}
       <div style={{
         display: 'flex',
@@ -257,7 +257,7 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
       {/* Tab 1: Documents & OCR Extraction */}
       {activeTab === 'DOCUMENTS' && (
         isSplitPaneOpen ? (
-          <SplitPaneDocumentReview 
+          <SplitPaneDocumentReview
             findingData={splitPaneFinding}
             onClose={() => {
               setIsSplitPaneOpen(false);
@@ -269,328 +269,328 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
             }}
           />
         ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '20px' }}>
-          {/* Document File Selector (Outer Card Removed, Floating Items) */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', padding: '2px 4px' }}>
-              <div>
-                <h3 style={{ fontSize: '12px', fontWeight: 800, color: '#475569', letterSpacing: '0.04em', textTransform: 'uppercase', margin: 0 }}>
-                  Submitted Evidence Dossier ({application.documents.length})
-                </h3>
-                <span style={{ fontSize: '11px', color: '#94a3b8' }}>Cryptographically signed records</span>
-              </div>
-              <button 
-                onClick={() => setIsSplitPaneOpen(true)}
-                style={{
-                  background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
-                  border: '1.5px solid #fcd34d',
-                  borderRadius: '100px',
-                  color: '#92400e',
-                  fontSize: '11px',
-                  fontWeight: 800,
-                  padding: '5px 12px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px',
-                  cursor: 'pointer',
-                  boxShadow: '0 2px 8px rgba(245, 158, 11, 0.15)',
-                  transition: 'all 0.18s ease'
-                }}
-                title="Open side-by-side split-pane comparison with overlapping documents"
-              >
-                <GitFork size={13} color="#b45309" /> Split-Pane Compare
-              </button>
-            </div>
-
-            {/* Floating Document Cards */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {application.documents.map((doc) => {
-                const isSelected = doc.id === selectedDoc?.id;
-                return (
-                  <div
-                    key={doc.id}
-                    onClick={() => setSelectedDocId(doc.id)}
-                    style={{
-                      background: isSelected ? '#ffffff' : '#ffffff',
-                      border: isSelected ? '2px solid #166534' : '1px solid #dbe5e2',
-                      borderRadius: '14px',
-                      padding: '14px 16px',
-                      cursor: 'pointer',
-                      transition: 'all 0.18s ease',
-                      boxShadow: isSelected 
-                        ? '0 6px 20px rgba(22, 101, 52, 0.12)' 
-                        : '0 2px 8px rgba(0, 0, 0, 0.03)',
-                      position: 'relative',
-                      overflow: 'hidden'
-                    }}
-                  >
-                    {isSelected && (
-                      <div style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        bottom: 0,
-                        width: '4px',
-                        background: 'linear-gradient(180deg, #166534 0%, #d4a034 100%)'
-                      }} />
-                    )}
-
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <span style={{
-                        fontSize: '9px',
-                        fontWeight: 800,
-                        padding: '2px 8px',
-                        borderRadius: '4px',
-                        background: '#e0f2fe',
-                        color: '#0369a1'
-                      }}>
-                        {doc.documentType}
-                      </span>
-                      <span style={{
-                        fontSize: '9px',
-                        fontWeight: 800,
-                        padding: '2px 8px',
-                        borderRadius: '4px',
-                        background: doc.status === 'EXTRACTED' ? '#dcfce7' : '#fee2e2',
-                        color: doc.status === 'EXTRACTED' ? '#15803d' : '#b91c1c'
-                      }}>
-                        {doc.status}
-                      </span>
-                    </div>
-
-                    <h4 style={{ fontSize: '13px', fontWeight: 800, color: isSelected ? '#166534' : '#0f172a', margin: '8px 0 0 0', lineHeight: 1.3 }}>
-                      {doc.title}
-                    </h4>
-
-                    <div style={{ fontSize: '11px', color: '#64748b', marginTop: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <FileText size={12} color="#94a3b8" />
-                      <span>{doc.filename}</span>
-                      <span>•</span>
-                      <span>{(doc.sizeBytes / (1024 * 1024)).toFixed(2)} MB</span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Document Content & Extracted Fields Pane */}
-          {selectedDoc && (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              {/* Document Metadata Bar */}
-              <div style={{
-                background: '#ffffff',
-                border: '1.5px solid #dbe5e2',
-                borderRadius: '16px',
-                padding: '16px 20px',
-                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-                  <div>
-                    <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', margin: 0 }}>{selectedDoc.title}</h3>
-                    <div style={{ fontSize: '11px', color: '#64748b', fontFamily: 'monospace', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                      <ShieldCheck size={13} color="#16a34a" />
-                      <span>Server SHA-256 Digest:</span>
-                      <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: '4px', color: '#334155' }}>{selectedDoc.sha256}</code>
-                    </div>
-                  </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    {selectedDoc.originalLanguage !== 'en' && (
-                      <button
-                        className={`btn btn-sm ${showTranslated ? 'btn-primary' : 'btn-secondary'}`}
-                        onClick={() => setShowTranslated(!showTranslated)}
-                        title="Toggle BHASHINI translation"
-                        style={{ borderRadius: '100px', fontSize: '11px', padding: '6px 14px' }}
-                      >
-                        <Globe size={13} />
-                        {showTranslated ? 'Viewing English Translation' : `Original Language (${selectedDoc.originalLanguage.toUpperCase()})`}
-                      </button>
-                    )}
-                    <span style={{
-                      background: '#dcfce7',
-                      color: '#15803d',
-                      border: '1px solid #86efac',
-                      borderRadius: '100px',
-                      fontSize: '10px',
-                      fontWeight: 800,
-                      padding: '4px 10px',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '4px'
-                    }}>
-                      <CheckCircle2 size={12} color="#16a34a" /> Verified Immutable Storage
-                    </span>
-                  </div>
+          <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '20px' }}>
+            {/* Document File Selector (Outer Card Removed, Floating Items) */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', padding: '2px 4px' }}>
+                <div>
+                  <h3 style={{ fontSize: '12px', fontWeight: 800, color: '#475569', letterSpacing: '0.04em', textTransform: 'uppercase', margin: 0 }}>
+                    Submitted Evidence Dossier ({application.documents.length})
+                  </h3>
+                  <span style={{ fontSize: '11px', color: '#94a3b8' }}>Cryptographically signed records</span>
                 </div>
+                <button
+                  onClick={() => setIsSplitPaneOpen(true)}
+                  style={{
+                    background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
+                    border: '1.5px solid #fcd34d',
+                    borderRadius: '100px',
+                    color: '#92400e',
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    padding: '5px 12px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    cursor: 'pointer',
+                    boxShadow: '0 2px 8px rgba(245, 158, 11, 0.15)',
+                    transition: 'all 0.18s ease'
+                  }}
+                  title="Open side-by-side split-pane comparison with overlapping documents"
+                >
+                  <GitFork size={13} color="#b45309" /> Split-Pane Compare
+                </button>
               </div>
 
-              {/* Split View: Visual Document Simulator & Extracted Fields */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                {/* Visual Document & Bounding Box Viewer */}
+              {/* Floating Document Cards */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                {application.documents.map((doc) => {
+                  const isSelected = doc.id === selectedDoc?.id;
+                  return (
+                    <div
+                      key={doc.id}
+                      onClick={() => setSelectedDocId(doc.id)}
+                      style={{
+                        background: isSelected ? '#ffffff' : '#ffffff',
+                        border: isSelected ? '2px solid #166534' : '1px solid #dbe5e2',
+                        borderRadius: '14px',
+                        padding: '14px 16px',
+                        cursor: 'pointer',
+                        transition: 'all 0.18s ease',
+                        boxShadow: isSelected
+                          ? '0 6px 20px rgba(22, 101, 52, 0.12)'
+                          : '0 2px 8px rgba(0, 0, 0, 0.03)',
+                        position: 'relative',
+                        overflow: 'hidden'
+                      }}
+                    >
+                      {isSelected && (
+                        <div style={{
+                          position: 'absolute',
+                          top: 0,
+                          left: 0,
+                          bottom: 0,
+                          width: '4px',
+                          background: 'linear-gradient(180deg, #166534 0%, #d4a034 100%)'
+                        }} />
+                      )}
+
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <span style={{
+                          fontSize: '9px',
+                          fontWeight: 800,
+                          padding: '2px 8px',
+                          borderRadius: '4px',
+                          background: '#e0f2fe',
+                          color: '#0369a1'
+                        }}>
+                          {doc.documentType}
+                        </span>
+                        <span style={{
+                          fontSize: '9px',
+                          fontWeight: 800,
+                          padding: '2px 8px',
+                          borderRadius: '4px',
+                          background: doc.status === 'EXTRACTED' ? '#dcfce7' : '#fee2e2',
+                          color: doc.status === 'EXTRACTED' ? '#15803d' : '#b91c1c'
+                        }}>
+                          {doc.status}
+                        </span>
+                      </div>
+
+                      <h4 style={{ fontSize: '13px', fontWeight: 800, color: isSelected ? '#166534' : '#0f172a', margin: '8px 0 0 0', lineHeight: 1.3 }}>
+                        {doc.title}
+                      </h4>
+
+                      <div style={{ fontSize: '11px', color: '#64748b', marginTop: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <FileText size={12} color="#94a3b8" />
+                        <span>{doc.filename}</span>
+                        <span>•</span>
+                        <span>{(doc.sizeBytes / (1024 * 1024)).toFixed(2)} MB</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Document Content & Extracted Fields Pane */}
+            {selectedDoc && (
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                {/* Document Metadata Bar */}
                 <div style={{
                   background: '#ffffff',
                   border: '1.5px solid #dbe5e2',
                   borderRadius: '16px',
-                  padding: '18px',
-                  minHeight: '380px',
+                  padding: '16px 20px',
                   boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)'
                 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
-                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>
-                      Page Viewer (Page 1 of {selectedDoc.pageCount})
-                    </span>
-                    <span style={{ fontSize: '11px', color: '#64748b' }}>
-                      Native Text Layer + OCR Box Overlays
-                    </span>
-                  </div>
-
-                  <div style={{
-                    background: '#fafbf9',
-                    border: '1.5px solid #d8e4e0',
-                    borderRadius: '12px',
-                    padding: '24px',
-                    minHeight: '340px',
-                    position: 'relative',
-                    color: '#1e293b',
-                    fontSize: '12px',
-                    lineHeight: 1.8,
-                    fontFamily: 'serif',
-                    boxShadow: 'inset 0 0 20px rgba(38, 61, 57, 0.03)'
-                  }}>
-                    <div style={{ textAlign: 'center', marginBottom: '16px', borderBottom: '1px solid rgba(38, 61, 57, 0.1)', paddingBottom: '8px' }}>
-                      <strong style={{ fontSize: '13px', color: '#0f172a', textTransform: 'uppercase' }}>
-                        {selectedDoc.title}
-                      </strong>
-                      <div style={{ fontSize: '10px', color: '#64748b' }}>
-                        Official Filing Annexure • Academic Year 2026-27
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
+                    <div>
+                      <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', margin: 0 }}>{selectedDoc.title}</h3>
+                      <div style={{ fontSize: '11px', color: '#64748b', fontFamily: 'monospace', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        <ShieldCheck size={13} color="#16a34a" />
+                        <span>Server SHA-256 Digest:</span>
+                        <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: '4px', color: '#334155' }}>{selectedDoc.sha256}</code>
                       </div>
                     </div>
 
-                    {showTranslated && selectedDoc.originalLanguage === 'mr' ? (
-                      <div style={{ background: 'rgba(99, 102, 241, 0.08)', padding: '12px', borderRadius: '8px' }}>
-                        <div style={{ fontSize: '11px', color: '#4f46e5', fontWeight: 700, marginBottom: '6px' }}>
-                          [BHASHINI MOCK TRANSLATION - ENGLISH]
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      {selectedDoc.originalLanguage !== 'en' && (
+                        <button
+                          className={`btn btn-sm ${showTranslated ? 'btn-primary' : 'btn-secondary'}`}
+                          onClick={() => setShowTranslated(!showTranslated)}
+                          title="Toggle BHASHINI translation"
+                          style={{ borderRadius: '100px', fontSize: '11px', padding: '6px 14px' }}
+                        >
+                          <Globe size={13} />
+                          {showTranslated ? 'Viewing English Translation' : `Original Language (${selectedDoc.originalLanguage.toUpperCase()})`}
+                        </button>
+                      )}
+                      <span style={{
+                        background: '#dcfce7',
+                        color: '#15803d',
+                        border: '1px solid #86efac',
+                        borderRadius: '100px',
+                        fontSize: '10px',
+                        fontWeight: 800,
+                        padding: '4px 10px',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '4px'
+                      }}>
+                        <CheckCircle2 size={12} color="#16a34a" /> Verified Immutable Storage
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Split View: Visual Document Simulator & Extracted Fields */}
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  {/* Visual Document & Bounding Box Viewer */}
+                  <div style={{
+                    background: '#ffffff',
+                    border: '1.5px solid #dbe5e2',
+                    borderRadius: '16px',
+                    padding: '18px',
+                    minHeight: '380px',
+                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>
+                        Page Viewer (Page 1 of {selectedDoc.pageCount})
+                      </span>
+                      <span style={{ fontSize: '11px', color: '#64748b' }}>
+                        Native Text Layer + OCR Box Overlays
+                      </span>
+                    </div>
+
+                    <div style={{
+                      background: '#fafbf9',
+                      border: '1.5px solid #d8e4e0',
+                      borderRadius: '12px',
+                      padding: '24px',
+                      minHeight: '340px',
+                      position: 'relative',
+                      color: '#1e293b',
+                      fontSize: '12px',
+                      lineHeight: 1.8,
+                      fontFamily: 'serif',
+                      boxShadow: 'inset 0 0 20px rgba(38, 61, 57, 0.03)'
+                    }}>
+                      <div style={{ textAlign: 'center', marginBottom: '16px', borderBottom: '1px solid rgba(38, 61, 57, 0.1)', paddingBottom: '8px' }}>
+                        <strong style={{ fontSize: '13px', color: '#0f172a', textTransform: 'uppercase' }}>
+                          {selectedDoc.title}
+                        </strong>
+                        <div style={{ fontSize: '10px', color: '#64748b' }}>
+                          Official Filing Annexure • Academic Year 2026-27
                         </div>
-                        <p>This is to certify that the institutional premises have undergone full municipal fire safety inspection.</p>
-                        <p style={{ marginTop: '8px', border: '1px dashed #d97706', padding: '4px 8px', borderRadius: '4px' }}>
-                          <strong>Expiration Clause:</strong> This certificate remains valid strictly until <strong>31st March 2026</strong>.
-                        </p>
                       </div>
-                    ) : (
-                      <div>
-                        <p>To Whomsoever It May Concern,</p>
-                        <p style={{ marginTop: '8px' }}>
-                          The verified administrative and instructional schedule for <strong>{application.institutionName}</strong> is certified as recorded in statutory inspection registers.
-                        </p>
-                        {selectedDoc.extractedFields.map((f) => (
+
+                      {showTranslated && selectedDoc.originalLanguage === 'mr' ? (
+                        <div style={{ background: 'rgba(99, 102, 241, 0.08)', padding: '12px', borderRadius: '8px' }}>
+                          <div style={{ fontSize: '11px', color: '#4f46e5', fontWeight: 700, marginBottom: '6px' }}>
+                            [BHASHINI MOCK TRANSLATION - ENGLISH]
+                          </div>
+                          <p>This is to certify that the institutional premises have undergone full municipal fire safety inspection.</p>
+                          <p style={{ marginTop: '8px', border: '1px dashed #d97706', padding: '4px 8px', borderRadius: '4px' }}>
+                            <strong>Expiration Clause:</strong> This certificate remains valid strictly until <strong>31st March 2026</strong>.
+                          </p>
+                        </div>
+                      ) : (
+                        <div>
+                          <p>To Whomsoever It May Concern,</p>
+                          <p style={{ marginTop: '8px' }}>
+                            The verified administrative and instructional schedule for <strong>{application.institutionName}</strong> is certified as recorded in statutory inspection registers.
+                          </p>
+                          {selectedDoc.extractedFields.map((f) => (
+                            <div
+                              key={f.id}
+                              style={{
+                                marginTop: '10px',
+                                border: '1px solid #06b6d4',
+                                background: 'rgba(6, 182, 212, 0.08)',
+                                padding: '8px 12px',
+                                borderRadius: '6px'
+                              }}
+                            >
+                              <span style={{ fontSize: '10px', color: '#0891b2', fontWeight: 800, display: 'block' }}>
+                                OCR BOUNDING ANCHOR (Conf: {(f.confidence! * 100).toFixed(0)}%)
+                              </span>
+                              "{f.sourceExcerpt}"
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Extracted Fields Table */}
+                  <div style={{
+                    background: '#ffffff',
+                    border: '1.5px solid #dbe5e2',
+                    borderRadius: '16px',
+                    padding: '18px',
+                    boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)'
+                  }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+                      <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>
+                        Extracted Fields ({selectedDoc.extractedFields.length})
+                      </span>
+                      <span style={{ fontSize: '11px', color: '#64748b' }}>
+                        Raw vs Normalized Provenance
+                      </span>
+                    </div>
+
+                    {selectedDoc.extractedFields.length > 0 ? (
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                        {selectedDoc.extractedFields.map((field) => (
                           <div
-                            key={f.id}
+                            key={field.id}
                             style={{
-                              marginTop: '10px',
-                              border: '1px solid #06b6d4',
-                              background: 'rgba(6, 182, 212, 0.08)',
-                              padding: '8px 12px',
-                              borderRadius: '6px'
+                              background: '#f8fafc',
+                              border: '1px solid #e2e8f0',
+                              borderRadius: '10px',
+                              padding: '12px 14px',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              gap: '6px'
                             }}
                           >
-                            <span style={{ fontSize: '10px', color: '#0891b2', fontWeight: 800, display: 'block' }}>
-                              OCR BOUNDING ANCHOR (Conf: {(f.confidence! * 100).toFixed(0)}%)
-                            </span>
-                            "{f.sourceExcerpt}"
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                              <span style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a' }}>
+                                {field.label}
+                              </span>
+                              <span
+                                style={{
+                                  fontSize: '10px',
+                                  fontWeight: 800,
+                                  padding: '2px 8px',
+                                  borderRadius: '4px',
+                                  background: (field.confidence || 0) >= 0.95 ? '#dcfce7' : '#fef3c7',
+                                  color: (field.confidence || 0) >= 0.95 ? '#15803d' : '#92400e'
+                                }}
+                              >
+                                Conf: {((field.confidence || 0) * 100).toFixed(0)}%
+                              </span>
+                            </div>
+
+                            <div style={{ fontSize: '12px', color: '#475569' }}>
+                              <strong>Raw OCR:</strong> <code style={{ color: '#0f172a', background: '#e2e8f0', padding: '2px 6px', borderRadius: '4px' }}>"{field.rawValue}"</code>
+                            </div>
+                            <div style={{ fontSize: '12px', color: '#475569' }}>
+                              <strong>Normalized:</strong> <code style={{ color: '#0369a1', background: '#e0f2fe', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>{field.normalizedValue}</code>
+                            </div>
+
+                            {field.reviewedValue && (
+                              <div style={{
+                                fontSize: '11px',
+                                background: '#f0fdf4',
+                                border: '1px solid #86efac',
+                                padding: '5px 10px',
+                                borderRadius: '6px',
+                                color: '#15803d'
+                              }}>
+                                Reviewed Value: <strong>{field.reviewedValue}</strong> (by {field.reviewedBy})
+                              </div>
+                            )}
+
+                            <div style={{ fontSize: '10px', color: '#94a3b8', marginTop: '2px' }}>
+                              Source Page: {field.pageNumber} • Status: {field.status}
+                            </div>
                           </div>
                         ))}
                       </div>
+                    ) : (
+                      <div style={{ textAlign: 'center', padding: '30px', color: '#94a3b8' }}>
+                        No discrete tabular fields mapped for this photograph/plan.
+                      </div>
                     )}
                   </div>
                 </div>
-
-                {/* Extracted Fields Table */}
-                <div style={{
-                  background: '#ffffff',
-                  border: '1.5px solid #dbe5e2',
-                  borderRadius: '16px',
-                  padding: '18px',
-                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)'
-                }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
-                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>
-                      Extracted Fields ({selectedDoc.extractedFields.length})
-                    </span>
-                    <span style={{ fontSize: '11px', color: '#64748b' }}>
-                      Raw vs Normalized Provenance
-                    </span>
-                  </div>
-
-                  {selectedDoc.extractedFields.length > 0 ? (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                      {selectedDoc.extractedFields.map((field) => (
-                        <div
-                          key={field.id}
-                          style={{
-                            background: '#f8fafc',
-                            border: '1px solid #e2e8f0',
-                            borderRadius: '10px',
-                            padding: '12px 14px',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '6px'
-                          }}
-                        >
-                          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <span style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a' }}>
-                              {field.label}
-                            </span>
-                            <span
-                              style={{
-                                fontSize: '10px',
-                                fontWeight: 800,
-                                padding: '2px 8px',
-                                borderRadius: '4px',
-                                background: (field.confidence || 0) >= 0.95 ? '#dcfce7' : '#fef3c7',
-                                color: (field.confidence || 0) >= 0.95 ? '#15803d' : '#92400e'
-                              }}
-                            >
-                              Conf: {((field.confidence || 0) * 100).toFixed(0)}%
-                            </span>
-                          </div>
-
-                          <div style={{ fontSize: '12px', color: '#475569' }}>
-                            <strong>Raw OCR:</strong> <code style={{ color: '#0f172a', background: '#e2e8f0', padding: '2px 6px', borderRadius: '4px' }}>"{field.rawValue}"</code>
-                          </div>
-                          <div style={{ fontSize: '12px', color: '#475569' }}>
-                            <strong>Normalized:</strong> <code style={{ color: '#0369a1', background: '#e0f2fe', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>{field.normalizedValue}</code>
-                          </div>
-
-                          {field.reviewedValue && (
-                            <div style={{
-                              fontSize: '11px',
-                              background: '#f0fdf4',
-                              border: '1px solid #86efac',
-                              padding: '5px 10px',
-                              borderRadius: '6px',
-                              color: '#15803d'
-                            }}>
-                              Reviewed Value: <strong>{field.reviewedValue}</strong> (by {field.reviewedBy})
-                            </div>
-                          )}
-
-                          <div style={{ fontSize: '10px', color: '#94a3b8', marginTop: '2px' }}>
-                            Source Page: {field.pageNumber} • Status: {field.status}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div style={{ textAlign: 'center', padding: '30px', color: '#94a3b8' }}>
-                      No discrete tabular fields mapped for this photograph/plan.
-                    </div>
-                  )}
-                </div>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
         )
       )}
 
@@ -764,7 +764,7 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
 
         return (
           <div style={{ display: 'grid', gridTemplateColumns: '350px 1fr', gap: '20px', alignItems: 'start' }}>
-            
+
             {/* Left Column: Finding Selector List */}
             <div style={{
               background: '#ffffff',
@@ -1074,7 +1074,7 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
 
       {/* Tab 4: Evidence Graph */}
       {activeTab === 'GRAPH' && (
-        <AccessibleGraph 
+        <AccessibleGraph
           initialFocusedCluster="cluster-pune-land"
           onOpenCaseReview={(finding) => {
             setSplitPaneFinding(finding);
@@ -1087,7 +1087,7 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
       {/* Tab 5: Cross-Year Intelligence & Digital Twin History */}
       {activeTab === 'TWIN_DIFF' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          
+
           {/* Cross-Year Intelligence Table (Modern Table Inspo Layout) */}
           <div style={{
             background: '#ffffff',
@@ -1561,7 +1561,7 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
       {activeTab === 'METHODOLOGY' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
           {/* Hero Methodology Summary Card */}
-          <div 
+          <div
             style={{
               background: 'linear-gradient(135deg, #1b2f2b 0%, #263d39 60%, #1e3531 100%)',
               borderRadius: '20px',
@@ -1577,7 +1577,7 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
           >
             <div style={{ flex: '1 1 480px' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                <span 
+                <span
                   style={{
                     background: 'rgba(212, 160, 52, 0.2)',
                     color: '#fbbf24',
@@ -1617,7 +1617,7 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
             </div>
 
             {/* Right Metric Card */}
-            <div 
+            <div
               style={{
                 background: 'rgba(0, 0, 0, 0.25)',
                 borderRadius: '16px',

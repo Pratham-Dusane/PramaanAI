@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { 
-  Search, 
-  Filter, 
-  Clock, 
-  AlertTriangle, 
-  CheckCircle2, 
-  ChevronRight, 
-  ShieldAlert, 
+import {
+  Search,
+  Filter,
+  Clock,
+  AlertTriangle,
+  CheckCircle2,
+  ChevronRight,
+  ShieldAlert,
   FileText,
   MapPin,
   Calendar,
@@ -54,11 +54,11 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
   const filteredApps = applications.filter((app) => {
     const loc = institutionLocations[app.id];
     const locString = loc ? `${loc.city} ${loc.state}` : '';
-    const matchesSearch = 
+    const matchesSearch =
       app.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
       app.institutionName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       locString.toLowerCase().includes(searchTerm.toLowerCase());
-    
+
     let matchesTab = true;
     if (activeTab === 'URGENT') matchesTab = app.urgencyScore >= 75;
     if (activeTab === 'REVIEW') matchesTab = app.status === 'READY_FOR_REVIEW' || app.status === 'UNDER_REVIEW';
@@ -74,13 +74,13 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
 
   return (
     <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-      
+
       {/* 1. Clean Institutional Search & Filter Capsule Bar */}
       <div className="search-capsule">
         {/* Top Input Row */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'minmax(280px, 2fr) minmax(160px, 1fr) minmax(160px, 1fr) minmax(140px, 1fr)', 
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'minmax(280px, 2fr) minmax(160px, 1fr) minmax(160px, 1fr) minmax(140px, 1fr)',
           gap: '14px',
           alignItems: 'center'
         }}>
@@ -94,7 +94,7 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
             borderRadius: 'var(--radius-full)'
           }}>
             <Search size={17} color="var(--accent-gold-dark)" />
-            <input 
+            <input
               type="text"
               placeholder="SEARCH BY INSTITUTION NAME, ID, OR CITY..."
               value={searchTerm}
@@ -111,7 +111,7 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
               }}
             />
             {searchTerm && (
-              <button 
+              <button
                 onClick={() => setSearchTerm('')}
                 style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}
               >
@@ -183,9 +183,9 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
         </div>
 
         {/* Bottom Filter & Segmented Pill Row */}
-        <div style={{ 
-          display: 'flex', 
-          alignItems: 'center', 
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
           justifyContent: 'space-between',
           flexWrap: 'wrap',
           gap: '14px',
@@ -193,25 +193,25 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
         }}>
           {/* Segmented Capsule Toggles */}
           <div className="pill-segmented-toggle">
-            <button 
+            <button
               className={`segmented-pill-btn ${activeTab === 'ALL' ? 'active' : ''}`}
               onClick={() => setActiveTab('ALL')}
             >
               ALL CASES
             </button>
-            <button 
+            <button
               className={`segmented-pill-btn ${activeTab === 'URGENT' ? 'active' : ''}`}
               onClick={() => setActiveTab('URGENT')}
             >
               HIGH URGENCY (≥75)
             </button>
-            <button 
+            <button
               className={`segmented-pill-btn ${activeTab === 'REVIEW' ? 'active' : ''}`}
               onClick={() => setActiveTab('REVIEW')}
             >
               IN SCRUTINY
             </button>
-            <button 
+            <button
               className={`segmented-pill-btn ${activeTab === 'DECIDED' ? 'active' : ''}`}
               onClick={() => setActiveTab('DECIDED')}
             >
@@ -238,7 +238,7 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
             </div>
 
             {/* Warm Mustard Gold Search & Filter Button */}
-            <button 
+            <button
               className="btn btn-primary"
               style={{ padding: '10px 28px', fontSize: '12px', letterSpacing: '0.06em' }}
             >
@@ -249,10 +249,10 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
       </div>
 
       {/* 2. Top Metric Cards (Image 2 style) */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
-        gap: '20px' 
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+        gap: '20px'
       }}>
         {/* Card 1: Warm Mustard Gold Contoured Card */}
         <div style={{
@@ -348,21 +348,21 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
       </div>
 
       {/* 3. Main Workspace: Split Grid (Left Boarding Pass Cases, Right Interactive Analytics) */}
-      <div style={{ 
-        display: 'grid', 
-        gridTemplateColumns: 'minmax(0, 1.85fr) minmax(310px, 1fr)', 
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'minmax(0, 1.85fr) minmax(310px, 1fr)',
         gap: '24px',
         alignItems: 'start'
       }}>
-        
+
         {/* Left Column: Boarding Pass Cases List */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {/* Header Row: RESULT (X) + Filter & Sort Pills */}
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 4px' }}>
-            <h2 style={{ 
-              fontSize: '15px', 
-              fontWeight: 800, 
-              letterSpacing: '0.06em', 
+            <h2 style={{
+              fontSize: '15px',
+              fontWeight: 800,
+              letterSpacing: '0.06em',
               textTransform: 'uppercase',
               color: 'var(--text-main)'
             }}>
@@ -454,19 +454,19 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
             }
 
             return (
-              <div 
-                key={app.id} 
+              <div
+                key={app.id}
                 className="boarding-pass-card"
                 style={{ padding: '18px 22px', overflow: 'hidden' }}
               >
                 {/* Main Card Row: Proportional Grid with ample room for button */}
-                <div style={{ 
-                  display: 'grid', 
+                <div style={{
+                  display: 'grid',
                   gridTemplateColumns: 'minmax(130px, 1.1fr) minmax(110px, 0.9fr) minmax(130px, 1fr) auto',
                   alignItems: 'center',
                   gap: '14px'
                 }}>
-                  
+
                   {/* Column 1: Monogram Emblem & Application Identifiers (Redundant category cylinder removed) */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '12px', minWidth: 0 }}>
                     <div style={{
@@ -498,12 +498,12 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
 
                   {/* Column 2: Real Institution Location & Scrutiny Stage */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', minWidth: 0 }}>
-                    <div style={{ 
-                      fontSize: '12px', 
-                      fontWeight: 800, 
-                      color: 'var(--text-main)', 
-                      display: 'flex', 
-                      alignItems: 'center', 
+                    <div style={{
+                      fontSize: '12px',
+                      fontWeight: 800,
+                      color: 'var(--text-main)',
+                      display: 'flex',
+                      alignItems: 'center',
                       gap: '5px',
                       whiteSpace: 'nowrap',
                       overflow: 'hidden',
@@ -523,28 +523,28 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
                       <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '0.05em', color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
                         EVIDENCE DOSSIER
                       </span>
-                      <span style={{ 
-                        fontSize: '11px', 
-                        fontWeight: 800, 
-                        color: docPercent === 100 ? 'var(--status-pass-text)' : 'var(--accent-gold-dark)' 
+                      <span style={{
+                        fontSize: '11px',
+                        fontWeight: 800,
+                        color: docPercent === 100 ? 'var(--status-pass-text)' : 'var(--accent-gold-dark)'
                       }}>
                         {presentDocs}/{totalDocs} ({docPercent}%)
                       </span>
                     </div>
 
                     {/* Dynamic Capsule Progress Track */}
-                    <div style={{ 
-                      width: '100%', 
-                      height: '8px', 
-                      background: 'var(--bg-surface-elevated)', 
-                      borderRadius: 'var(--radius-full)', 
-                      overflow: 'hidden' 
+                    <div style={{
+                      width: '100%',
+                      height: '8px',
+                      background: 'var(--bg-surface-elevated)',
+                      borderRadius: 'var(--radius-full)',
+                      overflow: 'hidden'
                     }}>
-                      <div style={{ 
-                        width: `${docPercent}%`, 
-                        height: '100%', 
-                        background: docPercent === 100 
-                          ? 'var(--status-pass-text)' 
+                      <div style={{
+                        width: `${docPercent}%`,
+                        height: '100%',
+                        background: docPercent === 100
+                          ? 'var(--status-pass-text)'
                           : 'linear-gradient(90deg, #d4a034 0%, #c18f27 100%)',
                         borderRadius: 'var(--radius-full)',
                         transition: 'width 0.4s ease'
@@ -563,9 +563,9 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
                         <div style={{ fontSize: '9px', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
                           VNI NEED
                         </div>
-                        <div style={{ 
-                          fontSize: '16px', 
-                          fontWeight: 900, 
+                        <div style={{
+                          fontSize: '16px',
+                          fontWeight: 900,
                           color: app.vniScore >= 70 ? 'var(--mode-physical)' : 'var(--dim-d1)',
                           lineHeight: 1.2
                         }}>
@@ -583,9 +583,9 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
                       <div style={{ fontSize: '9px', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
                         URGENCY
                       </div>
-                      <div style={{ 
-                        fontSize: '18px', 
-                        fontWeight: 900, 
+                      <div style={{
+                        fontSize: '18px',
+                        fontWeight: 900,
                         color: app.urgencyScore >= 75 ? 'var(--status-insufficient-text)' : 'var(--accent-gold-dark)',
                         lineHeight: 1.2
                       }}>
@@ -593,12 +593,12 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
                       </div>
                     </div>
 
-                    <button 
+                    <button
                       className="btn btn-primary"
                       onClick={() => onSelectApplication(app.id)}
-                      style={{ 
-                        padding: '9px 18px', 
-                        fontSize: '11px', 
+                      style={{
+                        padding: '9px 18px',
+                        fontSize: '11px',
                         letterSpacing: '0.05em',
                         whiteSpace: 'nowrap',
                         flexShrink: 0
@@ -613,27 +613,27 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
                 <div className="boarding-divider" style={{ margin: '14px 0' }} />
 
                 {/* Card Sub-Details: Single Line (Institute Name + Reviewer + Discrepancies) */}
-                <div style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'space-between', 
-                  flexWrap: 'nowrap', 
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  flexWrap: 'nowrap',
                   gap: '12px',
                   fontSize: '12px',
                   overflow: 'hidden'
                 }}>
                   {/* Institute Name & Reviewer on same line */}
-                  <div style={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    gap: '8px', 
-                    minWidth: 0, 
-                    overflow: 'hidden', 
-                    textOverflow: 'ellipsis', 
-                    whiteSpace: 'nowrap' 
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    minWidth: 0,
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap'
                   }}>
-                    <strong 
-                      style={{ color: 'var(--text-main)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} 
+                    <strong
+                      style={{ color: 'var(--text-main)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}
                       title={app.institutionName}
                     >
                       {app.institutionName}
@@ -656,11 +656,11 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
                     ) : (
                       <>
                         {/* Most urgent discrepancy badge first - Deep Linked to Evidence Graph */}
-                        <span 
-                          className={`badge ${orderedDiscrepancies[0].badgeClass}`} 
-                          style={{ 
-                            fontSize: '10px', 
-                            padding: '3px 8px', 
+                        <span
+                          className={`badge ${orderedDiscrepancies[0].badgeClass}`}
+                          style={{
+                            fontSize: '10px',
+                            padding: '3px 8px',
                             whiteSpace: 'nowrap',
                             cursor: onOpenGraphForCase ? 'pointer' : 'default',
                             display: 'inline-flex',
@@ -683,13 +683,13 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
 
                         {/* Compact +1 badge if additional discrepancy levels exist */}
                         {orderedDiscrepancies.length > 1 && (
-                          <span 
+                          <span
                             className="badge badge-info"
                             title={orderedDiscrepancies.slice(1).map(d => d.label).join(', ')}
-                            style={{ 
-                              fontSize: '10px', 
-                              padding: '3px 7px', 
-                              fontWeight: 800, 
+                            style={{
+                              fontSize: '10px',
+                              padding: '3px 7px',
+                              fontWeight: 800,
                               cursor: onOpenGraphForCase ? 'pointer' : 'help',
                               whiteSpace: 'nowrap'
                             }}

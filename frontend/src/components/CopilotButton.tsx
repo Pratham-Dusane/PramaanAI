@@ -10,7 +10,7 @@ export const CopilotButton: React.FC<CopilotButtonProps> = ({ isOpen, onToggle }
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div 
+    <div
       style={{
         position: 'fixed',
         bottom: '28px',
@@ -22,7 +22,7 @@ export const CopilotButton: React.FC<CopilotButtonProps> = ({ isOpen, onToggle }
       }}
     >
       {/* Kokonut / Bklit Hover Label Badge */}
-      <div 
+      <div
         style={{
           background: 'var(--bg-pine)',
           color: '#ffffff',
@@ -57,8 +57,8 @@ export const CopilotButton: React.FC<CopilotButtonProps> = ({ isOpen, onToggle }
           width: '58px',
           height: '58px',
           borderRadius: '50%',
-          background: isOpen 
-            ? 'var(--bg-pine)' 
+          background: isOpen
+            ? 'var(--bg-pine)'
             : 'linear-gradient(135deg, var(--accent-gold) 0%, #c49028 100%)',
           border: isOpen ? '2px solid var(--accent-gold)' : 'none',
           color: '#ffffff',
@@ -66,8 +66,8 @@ export const CopilotButton: React.FC<CopilotButtonProps> = ({ isOpen, onToggle }
           alignItems: 'center',
           justifyContent: 'center',
           cursor: 'pointer',
-          boxShadow: isOpen 
-            ? '0 8px 24px rgba(38, 61, 57, 0.3)' 
+          boxShadow: isOpen
+            ? '0 8px 24px rgba(38, 61, 57, 0.3)'
             : '0 8px 28px rgba(212, 160, 52, 0.45), 0 2px 8px rgba(38, 61, 57, 0.1)',
           transition: 'all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
           transform: isHovered ? 'scale(1.08) translateY(-2px)' : 'scale(1)',
@@ -76,7 +76,7 @@ export const CopilotButton: React.FC<CopilotButtonProps> = ({ isOpen, onToggle }
       >
         {/* Subtle breathing ripple ring when closed */}
         {!isOpen && (
-          <span 
+          <span
             style={{
               position: 'absolute',
               inset: '-4px',
@@ -85,16 +85,16 @@ export const CopilotButton: React.FC<CopilotButtonProps> = ({ isOpen, onToggle }
               opacity: isHovered ? 0.8 : 0.4,
               animation: 'pulseGold 2.2s infinite',
               pointerEvents: 'none'
-            }} 
+            }}
           />
         )}
 
         {isOpen ? (
           <X size={22} color="var(--accent-gold)" />
         ) : (
-          <Sparkles 
-            size={24} 
-            color="#ffffff" 
+          <Sparkles
+            size={24}
+            color="#ffffff"
             style={{
               transform: isHovered ? 'rotate(15deg) scale(1.1)' : 'rotate(0deg)',
               transition: 'transform 0.3s ease'

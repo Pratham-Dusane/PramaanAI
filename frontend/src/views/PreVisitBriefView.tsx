@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { 
-  FileText, 
-  CheckSquare, 
-  Square, 
-  ChevronDown, 
-  ChevronUp, 
-  Printer, 
-  Download, 
-  AlertCircle, 
-  ShieldAlert, 
-  FolderCheck, 
-  Clock, 
+import {
+  FileText,
+  CheckSquare,
+  Square,
+  ChevronDown,
+  ChevronUp,
+  Printer,
+  Download,
+  AlertCircle,
+  ShieldAlert,
+  FolderCheck,
+  Clock,
   ExternalLink,
   BookOpen,
   FlaskConical,
@@ -72,9 +72,9 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
 
   return (
     <div className="brief-container" style={{ padding: '24px 32px 80px', maxWidth: '1280px', margin: '0 auto' }}>
-      
+
       {/* 1. Header Bar with Actions */}
-      <div 
+      <div
         style={{
           display: 'flex',
           flexWrap: 'wrap',
@@ -86,7 +86,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
       >
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-            <span 
+            <span
               style={{
                 background: 'rgba(212, 160, 52, 0.16)',
                 color: 'var(--accent-gold-dark)',
@@ -154,7 +154,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
       </div>
 
       {/* Advisory Banner */}
-      <div 
+      <div
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -175,7 +175,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
       </div>
 
       {/* 2. HERO: Progress Ring and Case Summary */}
-      <div 
+      <div
         style={{
           background: 'linear-gradient(135deg, #1b2f2b 0%, #263d39 60%, #1e3531 100%)',
           borderRadius: '20px',
@@ -214,7 +214,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
                 style={{ transition: 'stroke-dashoffset 0.4s ease' }}
               />
             </svg>
-            <div 
+            <div
               style={{
                 position: 'absolute',
                 top: 0,
@@ -261,7 +261,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
             {brief.applicationSummary}
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-            <span 
+            <span
               style={{
                 background: 'rgba(217, 119, 6, 0.25)',
                 color: '#fbbf24',
@@ -274,7 +274,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
             >
               Mode: PHYSICAL EVC
             </span>
-            <span 
+            <span
               style={{
                 background: 'rgba(255,255,255,0.1)',
                 color: 'rgba(255,255,255,0.85)',
@@ -293,9 +293,9 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
 
       {/* 3. ACCORDIONS: Breathing Room, Clean Details on Demand */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-        
+
         {/* Section 1: Focus Checklist (13 items across 5 categories) */}
-        <div 
+        <div
           style={{
             background: '#ffffff',
             borderRadius: '14px',
@@ -334,7 +334,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
             <div style={{ padding: '0 24px 24px', borderTop: '1px solid rgba(38, 61, 57, 0.08)' }}>
               {brief.focusChecklist.map((group, groupIdx) => (
                 <div key={groupIdx} style={{ marginTop: '20px' }}>
-                  <div 
+                  <div
                     style={{
                       fontSize: '12px',
                       fontWeight: 800,
@@ -356,7 +356,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
                       const isChecked = checkedItems[item.label] || false;
 
                       return (
-                        <div 
+                        <div
                           key={itemIdx}
                           onClick={() => toggleCheck(item.label)}
                           style={{
@@ -383,7 +383,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
                           </div>
 
                           {item.evidenceId && (
-                            <span 
+                            <span
                               style={{
                                 fontSize: '10px',
                                 fontFamily: 'var(--font-mono)',
@@ -408,7 +408,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
         </div>
 
         {/* Section 2: Documents to Obtain Beforehand (5 physical items) */}
-        <div 
+        <div
           style={{
             background: '#ffffff',
             borderRadius: '14px',
@@ -447,7 +447,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
             <div style={{ padding: '0 24px 24px', borderTop: '1px solid rgba(38, 61, 57, 0.08)' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '16px' }}>
                 {brief.documentsToObtain.map((doc, idx) => (
-                  <div 
+                  <div
                     key={idx}
                     style={{
                       display: 'flex',
@@ -471,7 +471,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
         </div>
 
         {/* Section 3: Mode Decision Reasons (3 cited drivers) */}
-        <div 
+        <div
           style={{
             background: '#ffffff',
             borderRadius: '14px',
@@ -510,7 +510,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
             <div style={{ padding: '0 24px 24px', borderTop: '1px solid rgba(38, 61, 57, 0.08)' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '16px' }}>
                 {brief.modeReasons.map((reasonObj, idx) => (
-                  <div 
+                  <div
                     key={idx}
                     style={{
                       padding: '14px 18px',
@@ -524,7 +524,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
                     </div>
                     <div style={{ display: 'flex', gap: '6px' }}>
                       {reasonObj.evidenceIds.map(id => (
-                        <span 
+                        <span
                           key={id}
                           style={{
                             fontSize: '10px',
@@ -548,7 +548,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
         </div>
 
         {/* Section 4: Prior Deficiencies from Digital Twin */}
-        <div 
+        <div
           style={{
             background: '#ffffff',
             borderRadius: '14px',
@@ -587,7 +587,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
             <div style={{ padding: '0 24px 24px', borderTop: '1px solid rgba(38, 61, 57, 0.08)' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '16px' }}>
                 {brief.openDeficiencies.map((def, idx) => (
-                  <div 
+                  <div
                     key={idx}
                     style={{
                       display: 'flex',
@@ -618,7 +618,7 @@ export const PreVisitBriefView: React.FC<PreVisitBriefViewProps> = ({
         </div>
 
         {/* Section 5: Caveats and Demo Disclaimers */}
-        <div 
+        <div
           style={{
             background: '#ffffff',
             borderRadius: '14px',

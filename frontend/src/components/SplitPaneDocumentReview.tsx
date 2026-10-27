@@ -1,13 +1,13 @@
 import React from 'react';
-import { 
-  FileText, 
-  AlertTriangle, 
-  CheckCircle2, 
-  ArrowLeft, 
-  GitFork, 
-  Copy, 
-  Layers, 
-  ShieldAlert, 
+import {
+  FileText,
+  AlertTriangle,
+  CheckCircle2,
+  ArrowLeft,
+  GitFork,
+  Copy,
+  Layers,
+  ShieldAlert,
   Building2,
   ExternalLink,
   Sparkles
@@ -45,7 +45,7 @@ export const SplitPaneDocumentReview: React.FC<SplitPaneDocumentReviewProps> = (
       {/* Top Navigation & Status Bar */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px', borderBottom: '1px solid rgba(22, 101, 74, 0.25)', paddingBottom: '14px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <button 
+          <button
             className="btn btn-outline btn-sm"
             onClick={onClose}
             style={{ borderRadius: 'var(--radius-full)', padding: '6px 12px' }}
@@ -53,7 +53,7 @@ export const SplitPaneDocumentReview: React.FC<SplitPaneDocumentReviewProps> = (
             <ArrowLeft size={14} /> Back to Dossier
           </button>
           {onBackToGraph && (
-            <button 
+            <button
               className="btn btn-outline btn-sm"
               onClick={onBackToGraph}
               style={{ borderRadius: 'var(--radius-full)', padding: '6px 12px' }}
@@ -386,13 +386,13 @@ export const SplitPaneDocumentReview: React.FC<SplitPaneDocumentReviewProps> = (
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <button 
+          <button
             className="btn btn-outline btn-sm"
             onClick={onClose}
           >
             Close Split-Pane View
           </button>
-          <button 
+          <button
             className="btn btn-primary btn-sm"
             onClick={() => {
               alert('Notice for physical Expert Visit Committee (EVC) cadastre boundary verification drafted.');

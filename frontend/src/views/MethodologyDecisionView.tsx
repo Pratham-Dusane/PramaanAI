@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
-import { 
-  ShieldAlert, 
-  Sparkles, 
-  Scale, 
-  FileCheck2, 
-  AlertCircle, 
-  Sliders, 
-  ChevronRight, 
-  ArrowRight, 
-  Layers, 
-  Info, 
-  CheckCircle2, 
-  XCircle, 
-  Eye, 
+import {
+  ShieldAlert,
+  Sparkles,
+  Scale,
+  FileCheck2,
+  AlertCircle,
+  Sliders,
+  ChevronRight,
+  ArrowRight,
+  Layers,
+  Info,
+  CheckCircle2,
+  XCircle,
+  Eye,
   HelpCircle,
   ExternalLink,
   Building,
@@ -21,10 +21,10 @@ import {
   BookOpen,
   FileSpreadsheet
 } from 'lucide-react';
-import { 
-  mockRecommendation, 
-  mockPolicyGates, 
-  mockScoreRuns 
+import {
+  mockRecommendation,
+  mockPolicyGates,
+  mockScoreRuns
 } from '../data/mockMethodologyData';
 import { Application, UserRole } from '../types';
 import { ActiveView } from '../components/Navbar';
@@ -41,7 +41,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
   onNavigate,
 }) => {
   const [activeTab, setActiveTab] = useState<'GATES' | 'REASONING' | 'WHAT_IF' | 'FOCUS'>('GATES');
-  
+
   // Interactive What-If slider states
   const [simulatedIntake, setSimulatedIntake] = useState<number>(50);
   const [simulatedVideo, setSimulatedVideo] = useState<number>(0);
@@ -52,21 +52,21 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
   // Dynamic simulation evaluation
   const computeSimulatedMode = (intake: number, video: number): { mode: string; reason: string; color: string } => {
     if (intake > 30) {
-      return { 
-        mode: 'PHYSICAL EVC', 
+      return {
+        mode: 'PHYSICAL EVC',
         reason: 'Mandatory physical verification triggered by GATE-001 (Intake increase > 30%)',
         color: 'var(--mode-physical)'
       };
     }
     if (video >= 30) {
-      return { 
-        mode: 'ONLINE EVC', 
+      return {
+        mode: 'ONLINE EVC',
         reason: 'Intake is within normal range and adequate 30+ min facility video is present',
         color: 'var(--mode-online)'
       };
     }
-    return { 
-      mode: 'HYBRID EVC', 
+    return {
+      mode: 'HYBRID EVC',
       reason: 'Intake is within normal range, but absent facility video necessitates on-site visit for flagged spaces',
       color: 'var(--mode-hybrid)'
     };
@@ -86,9 +86,9 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
 
   return (
     <div className="methodology-container" style={{ padding: '24px 32px 80px', maxWidth: '1380px', margin: '0 auto' }}>
-      
+
       {/* ── 1. Advisory Banner (1 slim line) ── */}
-      <div 
+      <div
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -106,7 +106,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
         <span>
           <strong>Advisory Methodology Recommendation:</strong> AI-computed methodology is decision-support only. Under AICTE regulations, the competent EVC coordinator retains final authority.
         </span>
-        <span 
+        <span
           style={{
             marginLeft: 'auto',
             background: 'rgba(212, 160, 52, 0.16)',
@@ -122,7 +122,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
       </div>
 
       {/* ── 2. HERO ELEMENT: Large Recommendation Mode Badge + Confidence Arc ── */}
-      <div 
+      <div
         style={{
           background: 'linear-gradient(135deg, #1b2f2b 0%, #263d39 60%, #1a2c29 100%)',
           borderRadius: '20px',
@@ -135,7 +135,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
         }}
       >
         {/* Ambient background glow ring */}
-        <div 
+        <div
           style={{
             position: 'absolute',
             top: '-50px',
@@ -149,11 +149,11 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
         />
 
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'center', gap: '28px', position: 'relative', zIndex: 1 }}>
-          
+
           {/* Left Hero Segment: Mode Badge & Case Meta */}
           <div style={{ flex: '1 1 540px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-              <span 
+              <span
                 style={{
                   background: 'rgba(212, 160, 52, 0.2)',
                   color: '#e5b854',
@@ -178,7 +178,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
             </div>
 
             <h1 style={{ fontSize: '32px', fontWeight: 800, margin: '0 0 12px 0', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '14px' }}>
-              <span 
+              <span
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',
@@ -203,7 +203,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
 
             {/* Quick Status Chips */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-              <div 
+              <div
                 style={{
                   background: 'rgba(0,0,0,0.25)',
                   border: '1px solid rgba(255,255,255,0.12)',
@@ -219,7 +219,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
                 <span style={{ fontWeight: 700, color: '#fbbf24' }}>PHYSICAL_EVC (GATE-001)</span>
               </div>
 
-              <div 
+              <div
                 style={{
                   background: 'rgba(0,0,0,0.25)',
                   border: '1px solid rgba(255,255,255,0.12)',
@@ -235,7 +235,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
                 <span style={{ fontWeight: 700, color: '#6ee7b7' }}>COMPUTED (Awaiting Review)</span>
               </div>
 
-              <div 
+              <div
                 style={{
                   background: 'rgba(0,0,0,0.25)',
                   border: '1px solid rgba(255,255,255,0.12)',
@@ -254,7 +254,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
           </div>
 
           {/* Right Hero Segment: Confidence Arc & Action Dock */}
-          <div 
+          <div
             style={{
               flex: '0 0 280px',
               background: 'rgba(0, 0, 0, 0.28)',
@@ -278,13 +278,13 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
 
             {/* Visual Confidence Bar */}
             <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden', marginBottom: '20px' }}>
-              <div 
-                style={{ 
-                  width: `${rec.confidence * 100}%`, 
-                  height: '100%', 
+              <div
+                style={{
+                  width: `${rec.confidence * 100}%`,
+                  height: '100%',
                   background: 'linear-gradient(90deg, #d4a034, #fbbf24)',
-                  borderRadius: '4px' 
-                }} 
+                  borderRadius: '4px'
+                }}
               />
             </div>
 
@@ -315,14 +315,14 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
 
             {/* Secondary links */}
             <div style={{ display: 'flex', justifyContent: 'center', gap: '16px', marginTop: '14px', fontSize: '12px' }}>
-              <button 
+              <button
                 onClick={() => onNavigate('BRIEF')}
                 style={{ background: 'none', border: 'none', color: '#93c5fd', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
               >
                 Pre-Visit Brief
               </button>
               <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
-              <button 
+              <button
                 onClick={() => onNavigate('MODE_COMPARE')}
                 style={{ background: 'none', border: 'none', color: '#93c5fd', cursor: 'pointer', textDecoration: 'underline', padding: 0 }}
               >
@@ -335,7 +335,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
       </div>
 
       {/* ── 3. TABS BAR: Clean, Breathing Room, Single-Click Inspection ── */}
-      <div 
+      <div
         style={{
           display: 'flex',
           gap: '8px',
@@ -375,7 +375,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
               <TabIcon size={16} color={isActive ? 'var(--accent-gold-dark)' : 'var(--text-secondary)'} />
               <span>{tab.label}</span>
               {tab.count !== undefined && (
-                <span 
+                <span
                   style={{
                     background: isActive ? 'var(--bg-pine)' : 'rgba(38, 61, 57, 0.08)',
                     color: isActive ? '#ffffff' : 'var(--text-secondary)',
@@ -403,15 +403,15 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
             const isFired = evalResult.fired;
 
             return (
-              <div 
+              <div
                 key={evalResult.gateId}
                 style={{
                   background: '#ffffff',
                   borderRadius: '14px',
                   padding: '20px 24px',
                   border: isFired ? '1.5px solid rgba(220, 38, 38, 0.4)' : '1px solid rgba(38, 61, 57, 0.08)',
-                  boxShadow: isFired 
-                    ? '0 6px 18px rgba(220, 38, 38, 0.08)' 
+                  boxShadow: isFired
+                    ? '0 6px 18px rgba(220, 38, 38, 0.08)'
                     : '0 4px 12px rgba(38, 61, 57, 0.04)',
                   position: 'relative'
                 }}
@@ -419,7 +419,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
                 {/* Header row */}
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px', marginBottom: '10px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <span 
+                    <span
                       style={{
                         padding: '4px 10px',
                         borderRadius: '6px',
@@ -437,7 +437,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
                     </span>
                   </div>
 
-                  <span 
+                  <span
                     style={{
                       background: 'rgba(212, 160, 52, 0.12)',
                       color: 'var(--text-accent)',
@@ -461,7 +461,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
                 </p>
 
                 {/* Technical Predicate & Inputs */}
-                <div 
+                <div
                   style={{
                     background: 'var(--bg-main)',
                     borderRadius: '8px',
@@ -512,7 +512,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
 
           {/* Stepper Pipeline */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px', marginBottom: '32px' }}>
-            
+
             {/* Step 1: Policy Gates */}
             <div style={{ background: 'rgba(217, 119, 6, 0.06)', borderRadius: '12px', padding: '20px', border: '1px solid rgba(217, 119, 6, 0.25)' }}>
               <div style={{ fontSize: '11px', fontWeight: 800, color: 'var(--mode-physical)', textTransform: 'uppercase', marginBottom: '6px' }}>
@@ -586,7 +586,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
             </h3>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
               {rec.topFeatures.map((feat, idx) => (
-                <div 
+                <div
                   key={idx}
                   style={{
                     background: 'var(--bg-main)',
@@ -613,7 +613,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
       {/* ── TAB 3: What-If Sensitivity Simulator ── */}
       {activeTab === 'WHAT_IF' && (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '28px' }}>
-          
+
           {/* Left: Counterfactual Cards */}
           <div>
             <div style={{ marginBottom: '18px' }}>
@@ -627,7 +627,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {rec.counterfactuals.map((cf, idx) => (
-                <div 
+                <div
                   key={idx}
                   style={{
                     background: '#ffffff',
@@ -639,7 +639,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                    <span 
+                    <span
                       style={{
                         background: 'rgba(212, 160, 52, 0.14)',
                         color: 'var(--accent-gold-dark)',
@@ -680,7 +680,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
           </div>
 
           {/* Right: Interactive Sliders Panel */}
-          <div 
+          <div
             style={{
               background: '#ffffff',
               borderRadius: '16px',
@@ -703,12 +703,12 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
                 <span>Intake Increase:</span>
                 <span style={{ color: simulatedIntake > 30 ? '#dc2626' : '#16a34a' }}>+{simulatedIntake}%</span>
               </div>
-              <input 
-                type="range" 
-                min="0" 
-                max="100" 
+              <input
+                type="range"
+                min="0"
+                max="100"
                 step="5"
-                value={simulatedIntake} 
+                value={simulatedIntake}
                 onChange={(e) => setSimulatedIntake(Number(e.target.value))}
                 style={{ width: '100%', accentColor: 'var(--accent-gold)' }}
               />
@@ -725,12 +725,12 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
                 <span>Facility Video:</span>
                 <span style={{ color: simulatedVideo >= 30 ? '#16a34a' : '#d97706' }}>{simulatedVideo} mins</span>
               </div>
-              <input 
-                type="range" 
-                min="0" 
-                max="60" 
+              <input
+                type="range"
+                min="0"
+                max="60"
                 step="5"
-                value={simulatedVideo} 
+                value={simulatedVideo}
                 onChange={(e) => setSimulatedVideo(Number(e.target.value))}
                 style={{ width: '100%', accentColor: 'var(--accent-gold)' }}
               />
@@ -742,7 +742,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
             </div>
 
             {/* Dynamic Result Box */}
-            <div 
+            <div
               style={{
                 background: 'var(--bg-main)',
                 borderRadius: '12px',
@@ -770,7 +770,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
       {activeTab === 'FOCUS' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
           {rec.focusAreas.map((area) => (
-            <div 
+            <div
               key={area.id}
               style={{
                 background: '#ffffff',
@@ -787,7 +787,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
             >
               {/* Left Column: Category icon + Item + Reason */}
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', flex: '1 1 500px' }}>
-                <div 
+                <div
                   style={{
                     width: '38px',
                     height: '38px',
@@ -804,7 +804,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
 
                 <div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                    <span 
+                    <span
                       style={{
                         fontSize: '11px',
                         fontWeight: 800,
@@ -815,7 +815,7 @@ export const MethodologyDecisionView: React.FC<MethodologyDecisionViewProps> = (
                     >
                       {area.category}
                     </span>
-                    <span 
+                    <span
                       style={{
                         background: area.priority === 'HIGH' ? 'rgba(220, 38, 38, 0.1)' : 'rgba(217, 119, 6, 0.1)',
                         color: area.priority === 'HIGH' ? '#dc2626' : '#d97706',

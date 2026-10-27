@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { 
-  Clock, 
-  Layers, 
-  ShieldCheck, 
-  CheckCircle2, 
-  History, 
-  Calendar, 
-  Building2, 
-  FileCheck, 
-  AlertTriangle, 
-  ArrowRight, 
-  Compass, 
-  TrendingUp, 
+import {
+  Clock,
+  Layers,
+  ShieldCheck,
+  CheckCircle2,
+  History,
+  Calendar,
+  Building2,
+  FileCheck,
+  AlertTriangle,
+  ArrowRight,
+  Compass,
+  TrendingUp,
   Search,
   ExternalLink,
   Sliders,
@@ -28,7 +28,7 @@ export const DigitalTwinView: React.FC = () => {
   const filteredAttributes = mockDigitalTwinAttributes.filter((attr) => {
     const matchesAY = selectedAY === 'ALL' || attr.academicYear === selectedAY;
     const matchesProv = provenanceFilter === 'ALL' || attr.sourceKind === provenanceFilter;
-    const matchesSearch = !searchQuery.trim() || 
+    const matchesSearch = !searchQuery.trim() ||
       attr.attributeKey.toLowerCase().includes(searchQuery.toLowerCase()) ||
       attr.attributeLabel.toLowerCase().includes(searchQuery.toLowerCase()) ||
       String(attr.value).toLowerCase().includes(searchQuery.toLowerCase());
@@ -37,10 +37,10 @@ export const DigitalTwinView: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '1440px', margin: '0 auto', width: '100%' }}>
-      
+
       {/* 1. LUMINOUS LIGHT HERO HEADER (No heavy dark container) */}
-      <div 
-        style={{ 
+      <div
+        style={{
           background: '#ffffff',
           borderRadius: '20px',
           padding: '28px 32px',
@@ -121,12 +121,12 @@ export const DigitalTwinView: React.FC = () => {
         </div>
 
         {/* 4 Light Metric Cards */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-          gap: '12px', 
-          paddingTop: '16px', 
-          borderTop: '1px solid #f1f5f9' 
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '12px',
+          paddingTop: '16px',
+          borderTop: '1px solid #f1f5f9'
         }}>
           <div style={{ background: '#f8fafc', borderRadius: '12px', padding: '14px 16px', border: '1px solid #e2e8f0' }}>
             <div style={{ fontSize: '10px', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 700 }}>
@@ -178,63 +178,70 @@ export const DigitalTwinView: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. PERSPECTIVE TABS STRIP */}
-      <div style={{
-        display: 'flex',
-        gap: '8px',
-        background: '#ffffff',
-        padding: '8px 12px',
-        borderRadius: '14px',
-        border: '1px solid #e2e8f0',
-        boxShadow: '0 2px 10px rgba(0, 0, 0, 0.03)'
-      }}>
-        {[
-          { id: 'DRIFT', label: 'Multi-Year Baseline & Drift Analysis', icon: TrendingUp },
-          { id: 'BASELINE', label: 'Historical Inspection Baseline', icon: Clock },
-          { id: 'LEDGER', label: 'Time-Aware Attribute Ledger', icon: History }
-        ].map((tab) => {
-          const Icon = tab.icon;
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id as any)}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                padding: '8px 16px',
-                borderRadius: '10px',
-                border: 'none',
-                background: isActive ? '#059669' : 'transparent',
-                color: isActive ? '#ffffff' : '#64748b',
-                fontSize: '12px',
-                fontWeight: 700,
-                cursor: 'pointer',
-                transition: 'all 0.16s ease'
-              }}
-            >
-              <Icon size={14} />
-              <span>{tab.label}</span>
-            </button>
-          );
-        })}
+      {/* 2. PERSPECTIVE TABS STRIP (CENTERED & COMPACT WITH PADDING) */}
+      <div style={{ display: 'flex', justifyContent: 'center', width: '100%', margin: '4px 0' }}>
+        <div style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '8px',
+          background: '#ffffff',
+          padding: '6px 10px',
+          borderRadius: '14px',
+          border: '1px solid #e2e8f0',
+          boxShadow: '0 2px 10px rgba(0, 0, 0, 0.03)',
+          width: 'fit-content'
+        }}>
+          {[
+            { id: 'DRIFT', label: 'Multi-Year Baseline & Drift Analysis', icon: TrendingUp },
+            { id: 'BASELINE', label: 'Historical Inspection Baseline', icon: Clock },
+            { id: 'LEDGER', label: 'Time-Aware Attribute Ledger', icon: History }
+          ].map((tab) => {
+            const Icon = tab.icon;
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '8px 16px',
+                  borderRadius: '10px',
+                  border: 'none',
+                  background: isActive ? '#059669' : 'transparent',
+                  color: isActive ? '#ffffff' : '#64748b',
+                  fontSize: '12px',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  transition: 'all 0.16s ease'
+                }}
+              >
+                <Icon size={14} />
+                <span>{tab.label}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* 3. TAB 1: DRIFT ANALYSIS (Modern Table Inspo Layout) */}
+      {/* 3. TAB 1: DRIFT ANALYSIS (Modern Table Inspo Layout - Fitted Width) */}
       {activeTab === 'DRIFT' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-          
-          {/* Modern Table Layout Card */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'center', width: '100%' }}>
+
+          {/* Modern Table Layout Card - Fitted Width with No Excess Whitespace */}
           <div style={{
             background: '#ffffff',
             borderRadius: '18px',
             border: '1px solid #e2e8f0',
             boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)',
-            padding: '24px',
+            padding: '22px 26px',
             display: 'flex',
             flexDirection: 'column',
-            gap: '16px'
+            gap: '16px',
+            width: '100%',
+            maxWidth: '1080px',
+            boxSizing: 'border-box'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px' }}>
               <div>
@@ -416,91 +423,93 @@ export const DigitalTwinView: React.FC = () => {
 
       {/* 4. TAB 2: HISTORICAL BASELINE */}
       {activeTab === 'BASELINE' && (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-          <div style={{
-            background: '#ffffff',
-            borderRadius: '16px',
-            padding: '24px',
-            border: '1px solid #e2e8f0',
-            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.03)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '16px'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
-                Last On-Site Inspection Report
-              </h3>
-              <span style={{ fontSize: '10px', fontWeight: 800, color: '#059669', background: '#ecfdf5', padding: '3px 8px', borderRadius: '4px' }}>
-                DIRECT AUDIT
-              </span>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-              <div style={{ background: '#f8fafc', padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                <span style={{ fontSize: '10px', color: '#64748b' }}>VISIT DATE</span>
-                <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a', marginTop: '2px' }}>15-Nov-2023</div>
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', width: '100%', maxWidth: '1080px' }}>
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              padding: '24px',
+              border: '1px solid #e2e8f0',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.03)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                  Last On-Site Inspection Report
+                </h3>
+                <span style={{ fontSize: '10px', fontWeight: 800, color: '#059669', background: '#ecfdf5', padding: '3px 8px', borderRadius: '4px' }}>
+                  DIRECT AUDIT
+                </span>
               </div>
-              <div style={{ background: '#f8fafc', padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                <span style={{ fontSize: '10px', color: '#64748b' }}>COMMITTEE CHAIR</span>
-                <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a', marginTop: '2px' }}>Prof. R. K. Shrivastava</div>
-              </div>
-              <div style={{ background: '#f8fafc', padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                <span style={{ fontSize: '10px', color: '#64748b' }}>INSPECTION SCOPE</span>
-                <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a', marginTop: '2px' }}>Full Campus & Labs</div>
-              </div>
-              <div style={{ background: '#f8fafc', padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                <span style={{ fontSize: '10px', color: '#64748b' }}>OUTCOME</span>
-                <div style={{ fontSize: '13px', fontWeight: 800, color: '#059669', marginTop: '2px' }}>Approved with Minor Cues</div>
-              </div>
-            </div>
 
-            <p style={{ fontSize: '12px', color: '#475569', lineHeight: 1.5, margin: 0 }}>
-              The committee verified boundary demarcations, barrier-free access ramps, and laboratory equipment sets for Mechanical and Civil disciplines. Re-inspection interval threshold is 3 years per handbook norms.
-            </p>
-          </div>
-
-          <div style={{
-            background: '#ffffff',
-            borderRadius: '16px',
-            padding: '24px',
-            border: '1px solid #e2e8f0',
-            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.03)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '16px'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
-                Prior Inspection Deficiencies Tracker
-              </h3>
-              <span style={{ fontSize: '10px', fontWeight: 800, color: '#d97706', background: '#fef3c7', padding: '3px 8px', borderRadius: '4px' }}>
-                2 ITEMS TRACKED
-              </span>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              <div style={{ border: '1px solid #fed7aa', background: '#fffaf5', borderRadius: '10px', padding: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <strong style={{ fontSize: '12px', color: '#9a3412' }}>DEF-2023-01: Barrier-Free Restrooms</strong>
-                  <span style={{ fontSize: '10px', fontWeight: 800, color: '#059669', background: '#ecfdf5', padding: '2px 6px', borderRadius: '4px' }}>
-                    RECTIFIED IN 2026
-                  </span>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                <div style={{ background: '#f8fafc', padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                  <span style={{ fontSize: '10px', color: '#64748b' }}>VISIT DATE</span>
+                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a', marginTop: '2px' }}>15-Nov-2023</div>
                 </div>
-                <div style={{ fontSize: '11px', color: '#7c2d12', marginTop: '4px' }}>
-                  Floor 2 accessibility elevator and grab bars installed. Verified in architectural drawing.
+                <div style={{ background: '#f8fafc', padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                  <span style={{ fontSize: '10px', color: '#64748b' }}>COMMITTEE CHAIR</span>
+                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a', marginTop: '2px' }}>Prof. R. K. Shrivastava</div>
+                </div>
+                <div style={{ background: '#f8fafc', padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                  <span style={{ fontSize: '10px', color: '#64748b' }}>INSPECTION SCOPE</span>
+                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a', marginTop: '2px' }}>Full Campus & Labs</div>
+                </div>
+                <div style={{ background: '#f8fafc', padding: '12px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                  <span style={{ fontSize: '10px', color: '#64748b' }}>OUTCOME</span>
+                  <div style={{ fontSize: '13px', fontWeight: 800, color: '#059669', marginTop: '2px' }}>Approved with Minor Cues</div>
                 </div>
               </div>
 
-              <div style={{ border: '1px solid #fecdd3', background: '#fff5f5', borderRadius: '10px', padding: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <strong style={{ fontSize: '12px', color: '#9f1239' }}>DEF-2023-02: CAD Simulation Software Licenses</strong>
-                  <span style={{ fontSize: '10px', fontWeight: 800, color: '#b45309', background: '#fef3c7', padding: '2px 6px', borderRadius: '4px' }}>
-                    SPOT-CHECK REQUIRED
-                  </span>
+              <p style={{ fontSize: '12px', color: '#475569', lineHeight: 1.5, margin: 0 }}>
+                The committee verified boundary demarcations, barrier-free access ramps, and laboratory equipment sets for Mechanical and Civil disciplines. Re-inspection interval threshold is 3 years per handbook norms.
+              </p>
+            </div>
+
+            <div style={{
+              background: '#ffffff',
+              borderRadius: '16px',
+              padding: '24px',
+              border: '1px solid #e2e8f0',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.03)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '16px'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                  Prior Inspection Deficiencies Tracker
+                </h3>
+                <span style={{ fontSize: '10px', fontWeight: 800, color: '#d97706', background: '#fef3c7', padding: '3px 8px', borderRadius: '4px' }}>
+                  2 ITEMS TRACKED
+                </span>
+              </div>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ border: '1px solid #fed7aa', background: '#fffaf5', borderRadius: '10px', padding: '12px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <strong style={{ fontSize: '12px', color: '#9a3412' }}>DEF-2023-01: Barrier-Free Restrooms</strong>
+                    <span style={{ fontSize: '10px', fontWeight: 800, color: '#059669', background: '#ecfdf5', padding: '2px 6px', borderRadius: '4px' }}>
+                      RECTIFIED IN 2026
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '11px', color: '#7c2d12', marginTop: '4px' }}>
+                    Floor 2 accessibility elevator and grab bars installed. Verified in architectural drawing.
+                  </div>
                 </div>
-                <div style={{ fontSize: '11px', color: '#881337', marginTop: '4px' }}>
-                  Need physical spot check of 60 perpetual multi-user license keys during next visit.
+
+                <div style={{ border: '1px solid #fecdd3', background: '#fff5f5', borderRadius: '10px', padding: '12px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <strong style={{ fontSize: '12px', color: '#9f1239' }}>DEF-2023-02: CAD Simulation Software Licenses</strong>
+                    <span style={{ fontSize: '10px', fontWeight: 800, color: '#b45309', background: '#fef3c7', padding: '2px 6px', borderRadius: '4px' }}>
+                      SPOT-CHECK REQUIRED
+                    </span>
+                  </div>
+                  <div style={{ fontSize: '11px', color: '#881337', marginTop: '4px' }}>
+                    Need physical spot check of 60 perpetual multi-user license keys during next visit.
+                  </div>
                 </div>
               </div>
             </div>
@@ -508,18 +517,22 @@ export const DigitalTwinView: React.FC = () => {
         </div>
       )}
 
-      {/* 5. TAB 3: ATTRIBUTE LEDGER (Modern Table Inspo Layout) */}
+      {/* 5. TAB 3: ATTRIBUTE LEDGER (Modern Table Inspo Layout - Fitted Width) */}
       {activeTab === 'LEDGER' && (
-        <div style={{
-          background: '#ffffff',
-          borderRadius: '18px',
-          border: '1px solid #e2e8f0',
-          boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)',
-          padding: '24px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '16px'
-        }}>
+        <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+          <div style={{
+            background: '#ffffff',
+            borderRadius: '18px',
+            border: '1px solid #e2e8f0',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)',
+            padding: '22px 26px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '16px',
+            width: '100%',
+            maxWidth: '1080px',
+            boxSizing: 'border-box'
+          }}>
           {/* Controls */}
           <div style={{
             display: 'flex',
@@ -662,7 +675,8 @@ export const DigitalTwinView: React.FC = () => {
             </table>
           </div>
         </div>
-      )}
-    </div>
-  );
+      </div>
+    )}
+  </div>
+);
 };

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { 
-  Copy, 
-  ShieldCheck, 
-  AlertCircle, 
-  GitMerge, 
-  FileCheck, 
-  Camera, 
-  Hash, 
-  ExternalLink, 
-  Eye, 
-  CheckCircle2, 
+import {
+  Copy,
+  ShieldCheck,
+  AlertCircle,
+  GitMerge,
+  FileCheck,
+  Camera,
+  Hash,
+  ExternalLink,
+  Eye,
+  CheckCircle2,
   ArrowRight,
   ShieldAlert,
   Search,
@@ -29,10 +29,10 @@ export const DuplicatesView: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '1440px', margin: '0 auto', width: '100%' }}>
-      
+
       {/* 1. LUMINOUS LIGHT EXECUTIVE HEADER */}
-      <div 
-        style={{ 
+      <div
+        style={{
           background: '#ffffff',
           borderRadius: '16px',
           padding: '24px 28px',
@@ -99,13 +99,13 @@ export const DuplicatesView: React.FC = () => {
         </div>
 
         {/* 4 Light Summary Stat Badges */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-          gap: '12px', 
-          marginTop: '20px', 
-          paddingTop: '18px', 
-          borderTop: '1px solid #f1f5f9' 
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '12px',
+          marginTop: '20px',
+          paddingTop: '18px',
+          borderTop: '1px solid #f1f5f9'
         }}>
           <div style={{ background: '#f8fafc', borderRadius: '10px', padding: '12px 14px', border: '1px solid #e2e8f0' }}>
             <div style={{ fontSize: '10px', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 700 }}>
@@ -198,7 +198,7 @@ export const DuplicatesView: React.FC = () => {
 
       {/* 3. CORE INVESTIGATION PANELS */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        
+
         {/* Module 1: Perceptual Visual Similarity Deep Dive */}
         {(activeTab === 'ALL' || activeTab === 'PERCEPTUAL') && (
           <div style={{

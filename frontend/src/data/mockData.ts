@@ -1,13 +1,13 @@
-import { 
-  Application, 
-  Institution, 
-  RulePack, 
-  DigitalTwinAttribute, 
-  EvidenceNode, 
-  EvidenceEdge, 
-  BulkJob, 
-  AuditEvent, 
-  NotificationItem 
+import {
+  Application,
+  Institution,
+  RulePack,
+  DigitalTwinAttribute,
+  EvidenceNode,
+  EvidenceEdge,
+  BulkJob,
+  AuditEvent,
+  NotificationItem
 } from '../types';
 
 export const mockInstitutions: Institution[] = [

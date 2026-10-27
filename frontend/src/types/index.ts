@@ -1,32 +1,32 @@
-export type UserRole = 
-  | 'APPLICANT' 
-  | 'SCRUTINY_OFFICER' 
-  | 'SENIOR_APPROVER' 
-  | 'INSPECTOR' 
-  | 'RULE_ADMIN' 
+export type UserRole =
+  | 'APPLICANT'
+  | 'SCRUTINY_OFFICER'
+  | 'SENIOR_APPROVER'
+  | 'INSPECTOR'
+  | 'RULE_ADMIN'
   | 'AUDITOR'
   | 'EVC_COORDINATOR'
   | 'EVC_EXPERT';
 
-export type CheckResult = 
-  | 'PASS' 
-  | 'REVIEW' 
-  | 'INSUFFICIENT_EVIDENCE' 
-  | 'NOT_APPLICABLE' 
+export type CheckResult =
+  | 'PASS'
+  | 'REVIEW'
+  | 'INSUFFICIENT_EVIDENCE'
+  | 'NOT_APPLICABLE'
   | 'ERROR';
 
-export type FindingStatus = 
-  | 'OPEN' 
-  | 'ACKNOWLEDGED' 
-  | 'UNDER_REVIEW' 
-  | 'RESOLVED' 
-  | 'DISMISSED' 
-  | 'ESCALATED' 
+export type FindingStatus =
+  | 'OPEN'
+  | 'ACKNOWLEDGED'
+  | 'UNDER_REVIEW'
+  | 'RESOLVED'
+  | 'DISMISSED'
+  | 'ESCALATED'
   | 'SUPERSEDED';
 
 export type FindingSeverity = 'INFO' | 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
 
-export type ApplicationStatus = 
+export type ApplicationStatus =
   | 'DRAFT'
   | 'SUBMITTED'
   | 'QUEUED'
@@ -40,7 +40,7 @@ export type ApplicationStatus =
   | 'PROCESSING_FAILED'
   | 'CANCELLED';
 
-export type DocumentVersionStatus = 
+export type DocumentVersionStatus =
   | 'UPLOADED'
   | 'QUARANTINED'
   | 'QUEUED'
@@ -51,14 +51,14 @@ export type DocumentVersionStatus =
   | 'REJECTED_FILE'
   | 'ARCHIVED';
 
-export type SourceKind = 
+export type SourceKind =
   | 'APPLICANT_DECLARED'
   | 'AI_EXTRACTED'
   | 'REVIEWER_CONFIRMED'
   | 'AUTHORIZED_EXTERNAL'
   | 'SYNTHETIC_FIXTURE';
 
-export type VerificationStatus = 
+export type VerificationStatus =
   | 'VERIFIED_MATCH'
   | 'VERIFIED_MISMATCH'
   | 'NOT_FOUND'
@@ -322,20 +322,20 @@ export interface NotificationItem {
 
 // ─── PRD v2.0 Lane 2: Methodology Intelligence Types ───
 
-export type RecommendationState = 
-  | 'NOT_COMPUTED' 
-  | 'COMPUTED' 
-  | 'UNDER_OFFICIAL_REVIEW' 
-  | 'ACCEPTED' 
-  | 'MODIFIED' 
-  | 'REJECTED' 
+export type RecommendationState =
+  | 'NOT_COMPUTED'
+  | 'COMPUTED'
+  | 'UNDER_OFFICIAL_REVIEW'
+  | 'ACCEPTED'
+  | 'MODIFIED'
+  | 'REJECTED'
   | 'SUPERSEDED';
 
-export type MethodologyMode = 
-  | 'DESK_ONLY' 
-  | 'ONLINE_EVC' 
-  | 'HYBRID_EVC' 
-  | 'PHYSICAL_EVC' 
+export type MethodologyMode =
+  | 'DESK_ONLY'
+  | 'ONLINE_EVC'
+  | 'HYBRID_EVC'
+  | 'PHYSICAL_EVC'
   | 'DEFER_INSUFFICIENT_CONTEXT';
 
 export type CoverageState = 'OBSERVED' | 'NOT_AVAILABLE' | 'NOT_APPLICABLE' | 'SIMULATED';

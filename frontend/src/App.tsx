@@ -20,13 +20,13 @@ import { MethodologyDecisionView } from './views/MethodologyDecisionView';
 import { PreVisitBriefView } from './views/PreVisitBriefView';
 import { ModeComparisonView } from './views/ModeComparisonView';
 import { OfficialReviewView } from './views/OfficialReviewView';
-import { 
-  mockApplications, 
-  mockInstitutions, 
-  mockNotifications, 
-  mockAuditEvents, 
-  mockEvidenceNodes, 
-  mockEvidenceEdges 
+import {
+  mockApplications,
+  mockInstitutions,
+  mockNotifications,
+  mockAuditEvents,
+  mockEvidenceNodes,
+  mockEvidenceEdges
 } from './data/mockData';
 import { Application, UserRole, NotificationItem } from './types';
 import { SupportedLanguage } from './data/translations';
@@ -35,11 +35,11 @@ export const App: React.FC = () => {
   const [currentRole, setCurrentRole] = useState<UserRole>('SCRUTINY_OFFICER');
   const [currentLang, setCurrentLang] = useState<SupportedLanguage>('en');
   const [activeView, setActiveView] = useState<ActiveView>('QUEUE');
-  
+
   const [applications, setApplications] = useState<Application[]>(mockApplications);
   const [selectedAppId, setSelectedAppId] = useState<string>('DEMO-EOA-2026-001');
   const [notifications, setNotifications] = useState<NotificationItem[]>(mockNotifications);
-  
+
   const [isCopilotOpen, setIsCopilotOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [decisionModalApp, setDecisionModalApp] = useState<Application | null>(null);
@@ -60,7 +60,7 @@ export const App: React.FC = () => {
   const selectedApp = applications.find((a) => a.id === selectedAppId) || applications[0];
   const unreadAlerts = notifications.filter((n) => !n.acknowledged).length;
   const totalOpenFindings = applications.reduce(
-    (acc, a) => acc + a.findings.filter((f) => f.status !== 'RESOLVED').length, 
+    (acc, a) => acc + a.findings.filter((f) => f.status !== 'RESOLVED').length,
     0
   );
 
@@ -70,12 +70,12 @@ export const App: React.FC = () => {
   };
 
   const handleResolveFinding = (findingId: string, reason: string) => {
-    setApplications((prev) => 
+    setApplications((prev) =>
       prev.map((app) => ({
         ...app,
-        findings: app.findings.map((f) => 
-          f.id === findingId 
-            ? { ...f, status: 'RESOLVED', resolutionReason: reason, resolvedBy: currentRole, resolvedAt: new Date().toISOString() } 
+        findings: app.findings.map((f) =>
+          f.id === findingId
+            ? { ...f, status: 'RESOLVED', resolutionReason: reason, resolvedBy: currentRole, resolvedAt: new Date().toISOString() }
             : f
         )
       }))
@@ -101,17 +101,17 @@ export const App: React.FC = () => {
   }) => {
     if (!decisionModalApp) return;
 
-    setApplications((prev) => 
-      prev.map((app) => 
-        app.id === decisionModalApp.id 
+    setApplications((prev) =>
+      prev.map((app) =>
+        app.id === decisionModalApp.id
           ? {
-              ...app,
-              status: 'DECISION_RECORDED',
-              decision: {
-                ...decision,
-                recordedAt: new Date().toISOString()
-              }
+            ...app,
+            status: 'DECISION_RECORDED',
+            decision: {
+              ...decision,
+              recordedAt: new Date().toISOString()
             }
+          }
           : app
       )
     );
@@ -129,7 +129,7 @@ export const App: React.FC = () => {
   };
 
   const handleAcknowledgeNotification = (id: string) => {
-    setNotifications((prev) => 
+    setNotifications((prev) =>
       prev.map((n) => n.id === id ? { ...n, acknowledged: true } : n)
     );
   };
@@ -137,7 +137,7 @@ export const App: React.FC = () => {
   return (
     <div className="app-container">
       {/* Top Universal Horizontal Navigation Bar */}
-      <Navbar 
+      <Navbar
         currentRole={currentRole}
         onRoleChange={setCurrentRole}
         currentLang={currentLang}
@@ -150,7 +150,7 @@ export const App: React.FC = () => {
       />
 
       {/* Main App Workspace */}
-      <div 
+      <div
         className="main-layout"
         style={{
           marginRight: isCopilotOpen ? '450px' : '0',
@@ -160,7 +160,7 @@ export const App: React.FC = () => {
         {/* View Content Canvas */}
         <main className="content-area">
           {activeView === 'QUEUE' && (
-            <ReviewerQueueView 
+            <ReviewerQueueView
               applications={applications}
               onSelectApplication={handleSelectApplication}
               onOpenDecisionModal={(app) => setDecisionModalApp(app)}
@@ -176,7 +176,7 @@ export const App: React.FC = () => {
           )}
 
           {activeView === 'DETAIL' && selectedApp && (
-            <ApplicationDetailView 
+            <ApplicationDetailView
               application={selectedApp}
               initialSplitPaneFinding={activeSplitFinding}
               onClearSplitPaneFinding={() => setActiveSplitFinding(null)}
@@ -190,7 +190,7 @@ export const App: React.FC = () => {
           )}
 
           {activeView === 'APPLICANT' && (
-            <ApplicantPortalView 
+            <ApplicantPortalView
               institution={mockInstitutions[0]}
               currentRole={currentRole}
               currentLang={currentLang}
@@ -198,7 +198,7 @@ export const App: React.FC = () => {
           )}
 
           {activeView === 'GRAPH' && (
-            <AccessibleGraph 
+            <AccessibleGraph
               initialFocusedCluster={graphFocusedCluster}
               initialFocusedInstitutionId={graphFocusedInstitutionId}
               onOpenCaseReview={(finding) => {
@@ -234,7 +234,7 @@ export const App: React.FC = () => {
           )}
 
           {activeView === 'CONTEXT' && (
-            <ContextIntelligenceView 
+            <ContextIntelligenceView
               application={selectedApp}
               currentRole={currentRole}
               onNavigate={(view) => setActiveView(view)}
@@ -242,7 +242,7 @@ export const App: React.FC = () => {
           )}
 
           {activeView === 'SCORING' && (
-            <VerificationScoringView 
+            <VerificationScoringView
               application={selectedApp}
               currentRole={currentRole}
               onNavigate={(view) => setActiveView(view)}
@@ -250,7 +250,7 @@ export const App: React.FC = () => {
           )}
 
           {activeView === 'METHODOLOGY' && (
-            <MethodologyDecisionView 
+            <MethodologyDecisionView
               application={selectedApp}
               currentRole={currentRole}
               onNavigate={(view) => setActiveView(view)}
@@ -258,7 +258,7 @@ export const App: React.FC = () => {
           )}
 
           {activeView === 'BRIEF' && (
-            <PreVisitBriefView 
+            <PreVisitBriefView
               application={selectedApp}
               currentRole={currentRole}
               onNavigate={(view) => setActiveView(view)}
@@ -266,7 +266,7 @@ export const App: React.FC = () => {
           )}
 
           {activeView === 'MODE_COMPARE' && (
-            <ModeComparisonView 
+            <ModeComparisonView
               application={selectedApp}
               currentRole={currentRole}
               onNavigate={(view) => setActiveView(view)}
@@ -274,7 +274,7 @@ export const App: React.FC = () => {
           )}
 
           {activeView === 'OFFICIAL_REVIEW' && (
-            <OfficialReviewView 
+            <OfficialReviewView
               application={selectedApp}
               currentRole={currentRole}
               onNavigate={(view) => setActiveView(view)}
@@ -284,19 +284,19 @@ export const App: React.FC = () => {
       </div>
 
       {/* Floating Bottom-Right Kokonut / Bklit Copilot Button */}
-      <CopilotButton 
-        isOpen={isCopilotOpen} 
-        onToggle={handleToggleCopilot} 
+      <CopilotButton
+        isOpen={isCopilotOpen}
+        onToggle={handleToggleCopilot}
       />
 
       {/* Slide-out Grounded Regulatory Copilot Drawer */}
-      <CopilotDrawer 
-        isOpen={isCopilotOpen} 
-        onClose={handleCloseCopilot} 
+      <CopilotDrawer
+        isOpen={isCopilotOpen}
+        onClose={handleCloseCopilot}
       />
 
       {/* Deadline & Expiry Alerts Modal */}
-      <NotificationCenter 
+      <NotificationCenter
         isOpen={isNotificationsOpen}
         onClose={() => setIsNotificationsOpen(false)}
         notifications={notifications}
@@ -305,7 +305,7 @@ export const App: React.FC = () => {
 
       {/* Official Human Decision Protected Modal */}
       {decisionModalApp && (
-        <DecisionModal 
+        <DecisionModal
           isOpen={!!decisionModalApp}
           onClose={() => setDecisionModalApp(null)}
           application={decisionModalApp}

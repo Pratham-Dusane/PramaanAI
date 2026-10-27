@@ -1,15 +1,15 @@
 import React from 'react';
-import { 
-  Inbox, 
-  FileText, 
-  UploadCloud, 
-  GitFork, 
-  Clock, 
-  Building2, 
-  Copy, 
-  ScrollText, 
-  Layers, 
-  ShieldCheck, 
+import {
+  Inbox,
+  FileText,
+  UploadCloud,
+  GitFork,
+  Clock,
+  Building2,
+  Copy,
+  ScrollText,
+  Layers,
+  ShieldCheck,
   HelpCircle,
   Compass,
   PanelLeftOpen,
@@ -18,16 +18,16 @@ import {
 import { SupportedLanguage, translations } from '../data/translations';
 import { UserRole } from '../types';
 
-export type ActiveView = 
-  | 'QUEUE' 
-  | 'DETAIL' 
-  | 'APPLICANT' 
-  | 'GRAPH' 
-  | 'TWIN' 
-  | 'INFRA' 
-  | 'DUPLICATES' 
-  | 'RULES' 
-  | 'BULK' 
+export type ActiveView =
+  | 'QUEUE'
+  | 'DETAIL'
+  | 'APPLICANT'
+  | 'GRAPH'
+  | 'TWIN'
+  | 'INFRA'
+  | 'DUPLICATES'
+  | 'RULES'
+  | 'BULK'
   | 'AUDIT';
 
 interface SidebarProps {
@@ -101,9 +101,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* User Profile Header from Inspiration */}
       <div className="sidebar-profile" title={user.name}>
         <div className="sidebar-avatar-wrapper">
-          <img 
-            src={user.avatar} 
-            alt={user.name} 
+          <img
+            src={user.avatar}
+            alt={user.name}
             className="sidebar-avatar-img"
             onError={(e) => {
               // fallback if network image fails
@@ -117,8 +117,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Navigation Sections */}
       <div className="sidebar-heading">Case Management</div>
-      
-      <button 
+
+      <button
         className={`sidebar-nav-item ${activeView === 'QUEUE' ? 'active' : ''}`}
         onClick={() => onSelectView('QUEUE')}
         title={t.navQueue}
@@ -126,8 +126,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <Inbox size={18} />
         <span>{t.navQueue}</span>
         {openFindingsCount > 0 && (
-          <span 
-            className="badge badge-gold" 
+          <span
+            className="badge badge-gold"
             style={{ marginLeft: 'auto', fontSize: '10px', padding: '2px 8px', fontWeight: 800 }}
           >
             {openFindingsCount}
@@ -135,7 +135,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
       </button>
 
-      <button 
+      <button
         className={`sidebar-nav-item ${activeView === 'DETAIL' ? 'active' : ''}`}
         onClick={() => onSelectView('DETAIL')}
         title={t.navDetail}
@@ -146,7 +146,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       <div className="sidebar-heading">Applicant Workflows</div>
 
-      <button 
+      <button
         className={`sidebar-nav-item ${activeView === 'APPLICANT' ? 'active' : ''}`}
         onClick={() => onSelectView('APPLICANT')}
         title={t.navApplicant}
@@ -160,7 +160,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       <div className="sidebar-heading">Compliance Intelligence</div>
 
-      <button 
+      <button
         className={`sidebar-nav-item ${activeView === 'GRAPH' ? 'active' : ''}`}
         onClick={() => onSelectView('GRAPH')}
         title={t.navGraph}
@@ -169,7 +169,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <span>{t.navGraph}</span>
       </button>
 
-      <button 
+      <button
         className={`sidebar-nav-item ${activeView === 'TWIN' ? 'active' : ''}`}
         onClick={() => onSelectView('TWIN')}
         title={t.navTwin}
@@ -178,7 +178,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <span>{t.navTwin}</span>
       </button>
 
-      <button 
+      <button
         className={`sidebar-nav-item ${activeView === 'INFRA' ? 'active' : ''}`}
         onClick={() => onSelectView('INFRA')}
         title={t.navInfra}
@@ -187,7 +187,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <span>{t.navInfra}</span>
       </button>
 
-      <button 
+      <button
         className={`sidebar-nav-item ${activeView === 'DUPLICATES' ? 'active' : ''}`}
         onClick={() => onSelectView('DUPLICATES')}
         title={t.navDuplicates}
@@ -198,7 +198,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       <div className="sidebar-heading">Governance & Platform</div>
 
-      <button 
+      <button
         className={`sidebar-nav-item ${activeView === 'RULES' ? 'active' : ''}`}
         onClick={() => onSelectView('RULES')}
         title={t.navRules}
@@ -210,7 +210,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         )}
       </button>
 
-      <button 
+      <button
         className={`sidebar-nav-item ${activeView === 'BULK' ? 'active' : ''}`}
         onClick={() => onSelectView('BULK')}
         title={t.navBulk}
@@ -219,7 +219,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <span>{t.navBulk}</span>
       </button>
 
-      <button 
+      <button
         className={`sidebar-nav-item ${activeView === 'AUDIT' ? 'active' : ''}`}
         onClick={() => onSelectView('AUDIT')}
         title={t.navAudit}
@@ -233,25 +233,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="sidebar-active-label">Active Scrutiny Officers</div>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <div className="avatar-stack">
-            <img 
-              className="stack-avatar" 
-              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&auto=format&fit=crop&q=80" 
-              alt="Officer 1" 
+            <img
+              className="stack-avatar"
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&auto=format&fit=crop&q=80"
+              alt="Officer 1"
             />
-            <img 
-              className="stack-avatar" 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&auto=format&fit=crop&q=80" 
-              alt="Officer 2" 
+            <img
+              className="stack-avatar"
+              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&auto=format&fit=crop&q=80"
+              alt="Officer 2"
             />
-            <img 
-              className="stack-avatar" 
-              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&auto=format&fit=crop&q=80" 
-              alt="Officer 3" 
+            <img
+              className="stack-avatar"
+              src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=60&auto=format&fit=crop&q=80"
+              alt="Officer 3"
             />
-            <img 
-              className="stack-avatar" 
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=60&auto=format&fit=crop&q=80" 
-              alt="Officer 4" 
+            <img
+              className="stack-avatar"
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=60&auto=format&fit=crop&q=80"
+              alt="Officer 4"
             />
             <div className="stack-more">+70</div>
           </div>
@@ -268,21 +268,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
             <circle cx="140" cy="10" r="2.5" fill="#587972" />
             <circle cx="180" cy="26" r="3" fill="var(--accent-gold)" />
             {/* Golden Arc lines connecting nodes */}
-            <path 
-              d="M 20 24 Q 55 4 95 18 T 180 26" 
-              stroke="var(--accent-gold)" 
-              strokeWidth="1.5" 
+            <path
+              d="M 20 24 Q 55 4 95 18 T 180 26"
+              stroke="var(--accent-gold)"
+              strokeWidth="1.5"
               strokeDasharray="3 3"
-              fill="none" 
-              opacity="0.85" 
+              fill="none"
+              opacity="0.85"
             />
-            <path 
-              d="M 50 12 Q 110 0 140 10" 
-              stroke="#8ba6a0" 
-              strokeWidth="1" 
+            <path
+              d="M 50 12 Q 110 0 140 10"
+              stroke="#8ba6a0"
+              strokeWidth="1"
               strokeDasharray="2 2"
-              fill="none" 
-              opacity="0.5" 
+              fill="none"
+              opacity="0.5"
             />
           </svg>
         </div>
@@ -291,7 +291,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Safety Invariant Notice & Bottom Toggle Controls */}
       {isCollapsed ? (
         <div style={{ marginTop: 'auto', paddingTop: '16px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <button 
+          <button
             onClick={onToggleCollapse}
             title="Open navigation (closes Copilot)"
             aria-label="Open navigation and close Copilot"
@@ -315,8 +315,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
       ) : (
         <div style={{ marginTop: 'auto', paddingTop: '14px', marginRight: '18px' }}>
-          <div className="sidebar-safety-notice" style={{ 
-            background: 'rgba(0, 0, 0, 0.2)', 
+          <div className="sidebar-safety-notice" style={{
+            background: 'rgba(0, 0, 0, 0.2)',
             border: '1px solid rgba(255, 255, 255, 0.06)',
             borderRadius: 'var(--radius-sm)',
             padding: '10px 12px',

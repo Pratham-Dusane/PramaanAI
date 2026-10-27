@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { 
-  ShieldCheck, 
-  Sparkles, 
-  AlertTriangle, 
-  CheckCircle2, 
-  XCircle, 
-  FileText, 
-  Clock, 
-  UserCheck, 
+import {
+  ShieldCheck,
+  Sparkles,
+  AlertTriangle,
+  CheckCircle2,
+  XCircle,
+  FileText,
+  Clock,
+  UserCheck,
   ArrowRight,
   ExternalLink,
   ChevronDown,
@@ -59,11 +59,11 @@ export const OfficialReviewView: React.FC<OfficialReviewViewProps> = ({
 
   return (
     <div className="review-container" style={{ padding: '24px 32px 80px', maxWidth: '1380px', margin: '0 auto' }}>
-      
+
       {/* 1. Header */}
       <div style={{ marginBottom: '20px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-          <span 
+          <span
             style={{
               background: 'rgba(212, 160, 52, 0.16)',
               color: 'var(--accent-gold-dark)',
@@ -88,7 +88,7 @@ export const OfficialReviewView: React.FC<OfficialReviewViewProps> = ({
       </div>
 
       {/* Advisory Banner */}
-      <div 
+      <div
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -110,7 +110,7 @@ export const OfficialReviewView: React.FC<OfficialReviewViewProps> = ({
 
       {/* Submission Success State */}
       {isSubmitted ? (
-        <div 
+        <div
           style={{
             background: 'rgba(16, 185, 129, 0.08)',
             border: '1.5px solid rgba(16, 185, 129, 0.35)',
@@ -120,7 +120,7 @@ export const OfficialReviewView: React.FC<OfficialReviewViewProps> = ({
             marginBottom: '32px'
           }}
         >
-          <div 
+          <div
             style={{
               width: '56px',
               height: '56px',
@@ -179,7 +179,7 @@ export const OfficialReviewView: React.FC<OfficialReviewViewProps> = ({
         </div>
       ) : (
         /* 2. HERO: 2-Column Split (AI Card vs Official Form) */
-        <div 
+        <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'minmax(340px, 420px) 1fr',
@@ -188,9 +188,9 @@ export const OfficialReviewView: React.FC<OfficialReviewViewProps> = ({
             alignItems: 'start'
           }}
         >
-          
+
           {/* Left Column: AI Recommendation Summary (Read-Only Dark Card) */}
-          <div 
+          <div
             style={{
               background: 'linear-gradient(135deg, #1b2f2b 0%, #263d39 60%, #1e3531 100%)',
               borderRadius: '20px',
@@ -200,7 +200,7 @@ export const OfficialReviewView: React.FC<OfficialReviewViewProps> = ({
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-              <span 
+              <span
                 style={{
                   background: 'rgba(212, 160, 52, 0.2)',
                   color: '#fbbf24',
@@ -271,7 +271,7 @@ export const OfficialReviewView: React.FC<OfficialReviewViewProps> = ({
           </div>
 
           {/* Right Column: Official Decision Form (Clean Purposeful Card) */}
-          <div 
+          <div
             style={{
               background: '#ffffff',
               borderRadius: '20px',
@@ -288,7 +288,7 @@ export const OfficialReviewView: React.FC<OfficialReviewViewProps> = ({
             </p>
 
             <form onSubmit={handleSubmit}>
-              
+
               {/* Action Radio Group */}
               <div style={{ marginBottom: '24px' }}>
                 <label style={{ display: 'block', fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: '10px' }}>
@@ -334,7 +334,7 @@ export const OfficialReviewView: React.FC<OfficialReviewViewProps> = ({
               {/* Conditional Fields: When MODIFY is selected */}
               {reviewAction === 'MODIFY' && (
                 <div style={{ background: 'var(--bg-main)', borderRadius: '12px', padding: '20px', marginBottom: '24px' }}>
-                  
+
                   {/* Target Mode Dropdown */}
                   <div style={{ marginBottom: '16px' }}>
                     <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: 'var(--text-main)', marginBottom: '6px' }}>
@@ -364,7 +364,7 @@ export const OfficialReviewView: React.FC<OfficialReviewViewProps> = ({
 
                   {/* Below-Floor Warning Banner */}
                   {isBelowFloor && (
-                    <div 
+                    <div
                       style={{
                         background: 'rgba(239, 68, 68, 0.08)',
                         border: '1.5px solid rgba(239, 68, 68, 0.35)',
@@ -500,7 +500,7 @@ export const OfficialReviewView: React.FC<OfficialReviewViewProps> = ({
       )}
 
       {/* 3. Review History Timeline (Collapsed Accordion) */}
-      <div 
+      <div
         style={{
           background: '#ffffff',
           borderRadius: '14px',
@@ -534,7 +534,7 @@ export const OfficialReviewView: React.FC<OfficialReviewViewProps> = ({
           <div style={{ padding: '0 24px 20px', borderTop: '1px solid rgba(38, 61, 57, 0.08)' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '16px' }}>
               {mockReviews.map((rev, idx) => (
-                <div 
+                <div
                   key={idx}
                   style={{
                     padding: '14px 18px',
@@ -555,7 +555,7 @@ export const OfficialReviewView: React.FC<OfficialReviewViewProps> = ({
                       <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
                         ({rev.actorRole})
                       </span>
-                      <span 
+                      <span
                         style={{
                           background: rev.action === 'ACCEPT' ? 'rgba(16, 185, 129, 0.12)' : 'rgba(217, 119, 6, 0.12)',
                           color: rev.action === 'ACCEPT' ? '#047857' : '#b45309',

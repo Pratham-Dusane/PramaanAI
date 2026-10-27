@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { 
-  Sliders, 
-  Sparkles, 
-  CheckCircle2, 
-  Layers, 
-  Table, 
-  LayoutGrid, 
-  ExternalLink, 
+import {
+  Sliders,
+  Sparkles,
+  CheckCircle2,
+  Layers,
+  Table,
+  LayoutGrid,
+  ExternalLink,
   ArrowRight,
   ShieldCheck,
   Search,
@@ -47,8 +47,8 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
   // Filter features
   const filteredFeatures = currentSnapshot.features.filter(f => {
     const matchesFamily = selectedFamilyFilter === 'ALL' || f.family === selectedFamilyFilter;
-    const matchesSearch = searchQuery === '' || 
-      f.featureLabel.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    const matchesSearch = searchQuery === '' ||
+      f.featureLabel.toLowerCase().includes(searchQuery.toLowerCase()) ||
       f.featureId.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesFamily && matchesSearch;
   });
@@ -59,9 +59,9 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
 
   return (
     <div className="context-container" style={{ padding: '24px 32px 80px', maxWidth: '1380px', margin: '0 auto' }}>
-      
+
       {/* 1. Slim Header Bar and Snapshot Switcher */}
-      <div 
+      <div
         style={{
           display: 'flex',
           flexWrap: 'wrap',
@@ -73,7 +73,7 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
       >
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-            <span 
+            <span
               style={{
                 background: 'rgba(212, 160, 52, 0.16)',
                 color: 'var(--accent-gold-dark)',
@@ -128,7 +128,7 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
       </div>
 
       {/* Advisory Banner */}
-      <div 
+      <div
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -149,7 +149,7 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
       </div>
 
       {/* 2. HERO: Animated Coverage Orbit and Metrics */}
-      <div 
+      <div
         style={{
           background: 'linear-gradient(135deg, #1b2f2b 0%, #263d39 60%, #1e3531 100%)',
           borderRadius: '24px',
@@ -166,9 +166,9 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
         {/* Animated Orbit Visualizer */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
           <div style={{ position: 'relative', width: '220px', height: '220px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            
+
             {/* Outer Rotating Ring */}
-            <div 
+            <div
               style={{
                 position: 'absolute',
                 width: '210px',
@@ -180,7 +180,7 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
             />
 
             {/* Middle Rotating Ring */}
-            <div 
+            <div
               style={{
                 position: 'absolute',
                 width: '160px',
@@ -192,7 +192,7 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
             />
 
             {/* Inner Ring */}
-            <div 
+            <div
               style={{
                 position: 'absolute',
                 width: '110px',
@@ -203,7 +203,7 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
             />
 
             {/* Center Nucleus */}
-            <div 
+            <div
               style={{
                 width: '74px',
                 height: '74px',
@@ -235,7 +235,7 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
               const isSelected = selectedFamilyFilter === fam.id;
 
               return (
-                <div 
+                <div
                   key={fam.id}
                   onClick={() => setSelectedFamilyFilter(selectedFamilyFilter === fam.id ? 'ALL' : fam.id)}
                   title={`${fam.code}: ${fam.name}`}
@@ -310,7 +310,7 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
       </div>
 
       {/* 3. TABS: Summary (2x3 Family Grid) vs Features (Table) */}
-      <div 
+      <div
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -396,7 +396,7 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span 
+                    <span
                       style={{
                         background: fam.color,
                         color: '#ffffff',
@@ -413,7 +413,7 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
                     </h3>
                   </div>
 
-                  <span 
+                  <span
                     style={{
                       fontSize: '11px',
                       fontWeight: 700,
@@ -434,7 +434,7 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
                 {/* Micro Features chips */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   {famFeatures.map(feat => (
-                    <div 
+                    <div
                       key={feat.featureId}
                       style={{
                         display: 'flex',
@@ -515,7 +515,7 @@ export const ContextIntelligenceView: React.FC<ContextIntelligenceViewProps> = (
                       {typeof feat.value === 'number' ? (feat.value <= 1 && feat.value > 0 ? `${Math.round(feat.value * 100)}%` : feat.value) : feat.value}
                     </td>
                     <td style={{ padding: '10px 12px' }}>
-                      <span 
+                      <span
                         style={{
                           padding: '2px 8px',
                           borderRadius: '4px',

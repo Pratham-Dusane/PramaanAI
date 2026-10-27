@@ -155,168 +155,168 @@ export const RulesAdminView: React.FC = () => {
                 VERSIONED RULE PACKS ({mockRulePacks.length})
               </h3>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            {mockRulePacks.map((pack) => {
-              const isSelected = pack.rulePackId === selectedPack.rulePackId;
-              return (
-                <div
-                  key={pack.rulePackId}
-                  onClick={() => setSelectedPackId(pack.rulePackId)}
-                  style={{
-                    background: isSelected ? 'var(--bg-surface-elevated)' : 'rgba(255, 255, 255, 0.02)',
-                    border: '1px solid',
-                    borderColor: isSelected ? 'var(--primary-500)' : 'var(--border-subtle)',
-                    borderRadius: 'var(--radius-md)',
-                    padding: '12px',
-                    cursor: 'pointer'
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)' }}>
-                      {pack.rulePackId}
-                    </span>
-                    <span className={`badge ${pack.status === 'PUBLISHED' ? 'badge-pass' : 'badge-review'}`} style={{ fontSize: '9px', padding: '1px 6px' }}>
-                      {pack.status}
-                    </span>
-                  </div>
-                  <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
-                    Version {pack.version} • AY {pack.academicYear} • Category: {pack.applicationCategory}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          <div style={{
-            marginTop: '12px',
-            background: 'var(--bg-surface-elevated)',
-            padding: '12px',
-            borderRadius: 'var(--radius-md)',
-            fontSize: '11px',
-            color: 'var(--text-secondary)'
-          }}>
-            <strong>Source Provenance Disclaimer:</strong>
-            <p style={{ marginTop: '4px' }}>{selectedPack.sourceDisclaimer}</p>
-          </div>
-
-          {/* Simulation Replay Button */}
-          <button
-            className="btn btn-primary"
-            onClick={handleRunReplay}
-            disabled={isReplaying}
-            style={{ marginTop: '8px' }}
-          >
-            <Play size={14} /> {isReplaying ? 'Replaying Simulation...' : 'Run Simulation Replay Diff'}
-          </button>
-        </div>
-
-        {/* Selected Rule Pack Predicates */}
-        <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-          <div className="panel-header" style={{ marginBottom: 0 }}>
-            <div>
-              <h3 style={{ fontSize: '15px', fontWeight: 700 }}>
-                {selectedPack.rulePackId} (Version {selectedPack.version})
-              </h3>
-              <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
-                Effective Window: {selectedPack.effectiveFrom} to {selectedPack.effectiveTo}
-              </p>
-            </div>
-            <span className="badge badge-info">{selectedPack.rules.length} Rules Defined</span>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            {selectedPack.rules.map((rule) => (
-              <div
-                key={rule.ruleId}
-                style={{
-                  background: 'var(--bg-surface-elevated)',
-                  border: '1px solid var(--border-subtle)',
-                  borderRadius: 'var(--radius-md)',
-                  padding: '14px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '8px'
-                }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <code style={{ fontSize: '12px', color: 'var(--accent-cyan)' }}>{rule.ruleId}</code>
-                    <span className="badge badge-info" style={{ fontSize: '9px', padding: '1px 6px' }}>
-                      Severity: {rule.severity}
-                    </span>
-                  </div>
-                  <span className="badge badge-pass" style={{ fontSize: '9px', padding: '1px 6px' }}>
-                    {rule.status}
-                  </span>
-                </div>
-
-                <h4 style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)' }}>{rule.title}</h4>
-                <p style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{rule.description}</p>
-
-                {/* Allowlisted Predicate JSON */}
-                <div style={{
-                  background: 'var(--bg-pine)',
-                  padding: '10px 14px',
-                  borderRadius: 'var(--radius-md)',
-                  fontSize: '11px',
-                  fontFamily: 'var(--font-mono)',
-                  color: 'var(--text-on-pine-secondary)'
-                }}>
-                  <span style={{ color: 'var(--accent-gold)' }}>// Declarative AST Predicate:</span>
-                  <div>{JSON.stringify(rule.predicate, null, 2)}</div>
-                </div>
-
-                <div style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <BookOpen size={12} />
-                  <span>Cites: {rule.source.title} - {rule.source.clause} (Page {rule.source.page})</span>
-                </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {mockRulePacks.map((pack) => {
+                  const isSelected = pack.rulePackId === selectedPack.rulePackId;
+                  return (
+                    <div
+                      key={pack.rulePackId}
+                      onClick={() => setSelectedPackId(pack.rulePackId)}
+                      style={{
+                        background: isSelected ? 'var(--bg-surface-elevated)' : 'rgba(255, 255, 255, 0.02)',
+                        border: '1px solid',
+                        borderColor: isSelected ? 'var(--primary-500)' : 'var(--border-subtle)',
+                        borderRadius: 'var(--radius-md)',
+                        padding: '12px',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)' }}>
+                          {pack.rulePackId}
+                        </span>
+                        <span className={`badge ${pack.status === 'PUBLISHED' ? 'badge-pass' : 'badge-review'}`} style={{ fontSize: '9px', padding: '1px 6px' }}>
+                          {pack.status}
+                        </span>
+                      </div>
+                      <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
+                        Version {pack.version} • AY {pack.academicYear} • Category: {pack.applicationCategory}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            ))}
-          </div>
-        </div>
-      </div>
 
-      {/* Non-Destructive Replay Diff Results */}
-      {replayDiff && (
-        <div className="glass-panel fade-in" style={{ borderLeft: '4px solid var(--accent-cyan)' }}>
-          <div className="panel-header">
-            <div className="panel-title">
-              <CheckCircle2 size={18} color="var(--accent-cyan)" />
-              <span>Simulation Replay Outcome: {replayDiff.oldPack} vs {replayDiff.newPack}</span>
+              <div style={{
+                marginTop: '12px',
+                background: 'var(--bg-surface-elevated)',
+                padding: '12px',
+                borderRadius: 'var(--radius-md)',
+                fontSize: '11px',
+                color: 'var(--text-secondary)'
+              }}>
+                <strong>Source Provenance Disclaimer:</strong>
+                <p style={{ marginTop: '4px' }}>{selectedPack.sourceDisclaimer}</p>
+              </div>
+
+              {/* Simulation Replay Button */}
+              <button
+                className="btn btn-primary"
+                onClick={handleRunReplay}
+                disabled={isReplaying}
+                style={{ marginTop: '8px' }}
+              >
+                <Play size={14} /> {isReplaying ? 'Replaying Simulation...' : 'Run Simulation Replay Diff'}
+              </button>
             </div>
-            <span className="badge badge-info">{replayDiff.diffDetails.length} Potential Discrepancy Shift</span>
-          </div>
 
-          <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '14px' }}>
-            Simulated historical replay executed at {new Date(replayDiff.timestamp).toLocaleTimeString()}. Historical validation runs and human decisions remain strictly untouched.
-          </p>
+            {/* Selected Rule Pack Predicates */}
+            <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              <div className="panel-header" style={{ marginBottom: 0 }}>
+                <div>
+                  <h3 style={{ fontSize: '15px', fontWeight: 700 }}>
+                    {selectedPack.rulePackId} (Version {selectedPack.version})
+                  </h3>
+                  <p style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                    Effective Window: {selectedPack.effectiveFrom} to {selectedPack.effectiveTo}
+                  </p>
+                </div>
+                <span className="badge badge-info">{selectedPack.rules.length} Rules Defined</span>
+              </div>
 
-          <div className="table-wrapper">
-            <table className="data-table" aria-label="Replay Comparison Table">
-              <thead>
-                <tr>
-                  <th scope="col">Application Under Simulation</th>
-                  <th scope="col">Evaluated Rule Key</th>
-                  <th scope="col">Old Pack Outcome</th>
-                  <th scope="col">New Pack Outcome</th>
-                  <th scope="col">Projected Impact</th>
-                </tr>
-              </thead>
-              <tbody>
-                {replayDiff.diffDetails.map((item: any, i: number) => (
-                  <tr key={i}>
-                    <td><strong>{item.applicationId}</strong></td>
-                    <td><code>{item.ruleKey}</code></td>
-                    <td style={{ color: 'var(--text-muted)', fontSize: '12px' }}>{item.oldResult}</td>
-                    <td style={{ color: 'var(--accent-rose)', fontSize: '12px' }}>{item.newResult}</td>
-                    <td style={{ fontSize: '12px' }}>{item.impact}</td>
-                  </tr>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                {selectedPack.rules.map((rule) => (
+                  <div
+                    key={rule.ruleId}
+                    style={{
+                      background: 'var(--bg-surface-elevated)',
+                      border: '1px solid var(--border-subtle)',
+                      borderRadius: 'var(--radius-md)',
+                      padding: '14px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: '8px'
+                    }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <code style={{ fontSize: '12px', color: 'var(--accent-cyan)' }}>{rule.ruleId}</code>
+                        <span className="badge badge-info" style={{ fontSize: '9px', padding: '1px 6px' }}>
+                          Severity: {rule.severity}
+                        </span>
+                      </div>
+                      <span className="badge badge-pass" style={{ fontSize: '9px', padding: '1px 6px' }}>
+                        {rule.status}
+                      </span>
+                    </div>
+
+                    <h4 style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)' }}>{rule.title}</h4>
+                    <p style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{rule.description}</p>
+
+                    {/* Allowlisted Predicate JSON */}
+                    <div style={{
+                      background: 'var(--bg-pine)',
+                      padding: '10px 14px',
+                      borderRadius: 'var(--radius-md)',
+                      fontSize: '11px',
+                      fontFamily: 'var(--font-mono)',
+                      color: 'var(--text-on-pine-secondary)'
+                    }}>
+                      <span style={{ color: 'var(--accent-gold)' }}>// Declarative AST Predicate:</span>
+                      <div>{JSON.stringify(rule.predicate, null, 2)}</div>
+                    </div>
+
+                    <div style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <BookOpen size={12} />
+                      <span>Cites: {rule.source.title} - {rule.source.clause} (Page {rule.source.page})</span>
+                    </div>
+                  </div>
                 ))}
-              </tbody>
-            </table>
+              </div>
+            </div>
           </div>
-        </div>
-      )}
+
+          {/* Non-Destructive Replay Diff Results */}
+          {replayDiff && (
+            <div className="glass-panel fade-in" style={{ borderLeft: '4px solid var(--accent-cyan)' }}>
+              <div className="panel-header">
+                <div className="panel-title">
+                  <CheckCircle2 size={18} color="var(--accent-cyan)" />
+                  <span>Simulation Replay Outcome: {replayDiff.oldPack} vs {replayDiff.newPack}</span>
+                </div>
+                <span className="badge badge-info">{replayDiff.diffDetails.length} Potential Discrepancy Shift</span>
+              </div>
+
+              <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginBottom: '14px' }}>
+                Simulated historical replay executed at {new Date(replayDiff.timestamp).toLocaleTimeString()}. Historical validation runs and human decisions remain strictly untouched.
+              </p>
+
+              <div className="table-wrapper">
+                <table className="data-table" aria-label="Replay Comparison Table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Application Under Simulation</th>
+                      <th scope="col">Evaluated Rule Key</th>
+                      <th scope="col">Old Pack Outcome</th>
+                      <th scope="col">New Pack Outcome</th>
+                      <th scope="col">Projected Impact</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {replayDiff.diffDetails.map((item: any, i: number) => (
+                      <tr key={i}>
+                        <td><strong>{item.applicationId}</strong></td>
+                        <td><code>{item.ruleKey}</code></td>
+                        <td style={{ color: 'var(--text-muted)', fontSize: '12px' }}>{item.oldResult}</td>
+                        <td style={{ color: 'var(--accent-rose)', fontSize: '12px' }}>{item.newResult}</td>
+                        <td style={{ fontSize: '12px' }}>{item.impact}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </>
       )}
     </div>

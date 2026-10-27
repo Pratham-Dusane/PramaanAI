@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { 
-  ShieldAlert, 
-  Sparkles, 
-  Info, 
-  Activity, 
-  ExternalLink, 
-  ChevronUp, 
-  ChevronDown, 
-  ArrowUpRight, 
-  TrendingUp, 
-  TrendingDown, 
+import {
+  ShieldAlert,
+  Sparkles,
+  Info,
+  Activity,
+  ExternalLink,
+  ChevronUp,
+  ChevronDown,
+  ArrowUpRight,
+  TrendingUp,
+  TrendingDown,
   Layers,
   X
 } from 'lucide-react';
@@ -30,7 +30,7 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
 }) => {
   const scoreRun = mockScoreRuns[0];
   const dimensions = scoreRun.dimensions;
-  
+
   // Selected dimension for drill-down (default: D5 which has highest need 82)
   const [selectedDimension, setSelectedDimension] = useState<DimensionScore>(
     dimensions.find(d => d.dimension === 'D5') || dimensions[0]
@@ -69,9 +69,9 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
 
   return (
     <div className="scoring-container" style={{ padding: '24px 32px 80px', maxWidth: '1380px', margin: '0 auto' }}>
-      
+
       {/* ── 1. Advisory Banner (1 slim line) ── */}
-      <div 
+      <div
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -89,7 +89,7 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
         <span>
           <strong>Operational Prioritisation Signal:</strong> Verification Need Index (VNI) and dimension scores guide inspection depth and channel allocation. They do not constitute an evaluation of institutional merit or compliance.
         </span>
-        <span 
+        <span
           style={{
             marginLeft: 'auto',
             background: 'rgba(212, 160, 52, 0.16)',
@@ -105,7 +105,7 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
       </div>
 
       {/* ── 2. HERO ELEMENT: Radar Visualizer & VNI Pulse Card ── */}
-      <div 
+      <div
         style={{
           background: 'linear-gradient(135deg, #1b2f2b 0%, #263d39 60%, #1e3531 100%)',
           borderRadius: '24px',
@@ -121,7 +121,7 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
       >
         {/* Left Column: Interactive 7-Axis SVG Radar */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', position: 'relative' }}>
-          
+
           <svg width={size} height={size} style={{ overflow: 'visible' }}>
             <defs>
               <radialGradient id="radarFill" cx="50%" cy="50%" r="50%">
@@ -225,7 +225,7 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
         {/* Right Column: VNI Compound Need Hero Metric & Spec Info */}
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-            <span 
+            <span
               style={{
                 background: 'rgba(212, 160, 52, 0.18)',
                 color: '#fbbf24',
@@ -252,7 +252,7 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
             <span style={{ fontSize: '20px', color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>
               / 100
             </span>
-            <span 
+            <span
               style={{
                 background: 'rgba(239, 68, 68, 0.2)',
                 color: '#fca5a5',
@@ -322,7 +322,7 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
         <div style={{ fontSize: '12px', fontWeight: 800, textTransform: 'uppercase', color: 'var(--text-muted)', letterSpacing: '0.05em', marginBottom: '10px' }}>
           Explore Verification Dimensions
         </div>
-        
+
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
           {dimensions.map((dim) => {
             const isSelected = selectedDimension.dimension === dim.dimension;
@@ -341,14 +341,14 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
                   background: isSelected ? 'var(--bg-pine)' : '#ffffff',
                   color: isSelected ? '#ffffff' : 'var(--text-main)',
                   border: isSelected ? '2px solid var(--accent-gold)' : '1px solid rgba(38, 61, 57, 0.12)',
-                  boxShadow: isSelected 
-                    ? '0 6px 18px rgba(38, 61, 57, 0.18)' 
+                  boxShadow: isSelected
+                    ? '0 6px 18px rgba(38, 61, 57, 0.18)'
                     : '0 2px 6px rgba(38, 61, 57, 0.04)',
                   cursor: 'pointer',
                   transition: 'all 0.15s ease'
                 }}
               >
-                <span 
+                <span
                   style={{
                     fontWeight: 800,
                     fontSize: '13px',
@@ -362,7 +362,7 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
                   {dim.label}
                 </span>
 
-                <span 
+                <span
                   style={{
                     background: isSelected ? 'rgba(255,255,255,0.15)' : 'rgba(38, 61, 57, 0.06)',
                     color: isSelected ? '#fbbf24' : scoreColor,
@@ -382,7 +382,7 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
 
       {/* ── 4. DRILL-DOWN PANEL: Feature Contribution Waterfall ── */}
       {isDrilldownOpen && selectedDimension && (
-        <div 
+        <div
           style={{
             background: '#ffffff',
             borderRadius: '18px',
@@ -396,7 +396,7 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '16px' }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
-                <span 
+                <span
                   style={{
                     background: 'var(--bg-pine)',
                     color: '#fbbf24',
@@ -424,7 +424,7 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
                   {selectedDimension.score} / 100
                 </div>
               </div>
-              <button 
+              <button
                 onClick={() => setIsDrilldownOpen(false)}
                 style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: '4px' }}
                 title="Collapse drill-down"
@@ -447,7 +447,7 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
                 const widthPct = Math.min(absContrib * 2.5, 100);
 
                 return (
-                  <div 
+                  <div
                     key={feat.featureId}
                     style={{
                       display: 'grid',
@@ -470,7 +470,7 @@ export const VerificationScoringView: React.FC<VerificationScoringViewProps> = (
 
                     {/* Bar visualization */}
                     <div style={{ width: '100%', height: '8px', background: 'rgba(38, 61, 57, 0.08)', borderRadius: '4px', overflow: 'hidden' }}>
-                      <div 
+                      <div
                         style={{
                           width: `${widthPct}%`,
                           height: '100%',

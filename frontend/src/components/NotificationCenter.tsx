@@ -19,7 +19,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
 
   return (
     <div className="modal-backdrop fade-in" onClick={onClose}>
-      <div 
+      <div
         className="modal-content"
         onClick={(e) => e.stopPropagation()}
         style={{ maxWidth: '580px' }}
@@ -40,16 +40,16 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           {notifications.map((item) => (
-            <div 
+            <div
               key={item.id}
               style={{
                 background: item.acknowledged ? 'rgba(255, 255, 255, 0.02)' : 'var(--bg-surface-elevated)',
                 border: '1px solid',
-                borderColor: item.daysRemaining <= 1 
-                  ? 'rgba(244, 63, 94, 0.4)' 
-                  : item.daysRemaining <= 7 
-                  ? 'rgba(245, 158, 11, 0.35)' 
-                  : 'var(--border-subtle)',
+                borderColor: item.daysRemaining <= 1
+                  ? 'rgba(244, 63, 94, 0.4)'
+                  : item.daysRemaining <= 7
+                    ? 'rgba(245, 158, 11, 0.35)'
+                    : 'var(--border-subtle)',
                 borderRadius: 'var(--radius-md)',
                 padding: '14px',
                 display: 'flex',
@@ -75,7 +75,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
                 </div>
 
                 {!item.acknowledged ? (
-                  <button 
+                  <button
                     className="btn btn-secondary btn-sm"
                     onClick={() => onAcknowledge(item.id)}
                     style={{ fontSize: '11px', padding: '3px 8px' }}

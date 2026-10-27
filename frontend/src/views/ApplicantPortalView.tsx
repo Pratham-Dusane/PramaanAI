@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { 
-  UploadCloud, 
-  CheckCircle2, 
-  AlertTriangle, 
-  FileText, 
-  ArrowRight, 
-  RefreshCw, 
-  ShieldCheck, 
+import {
+  UploadCloud,
+  CheckCircle2,
+  AlertTriangle,
+  FileText,
+  ArrowRight,
+  RefreshCw,
+  ShieldCheck,
   Building2,
   Clock,
   Sparkles,
@@ -47,43 +47,43 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
 
   // Carry Forward Attributes State
   const [carryForwardItems, setCarryForwardItems] = useState([
-    { 
-      key: 'land_area', 
-      label: 'Continuous Campus Land Title (14.50 Acres)', 
-      value: 'Cadastre Survey No. 44/2, Mauje Wagholi', 
-      confirmed: true, 
+    {
+      key: 'land_area',
+      label: 'Continuous Campus Land Title (14.50 Acres)',
+      value: 'Cadastre Survey No. 44/2, Mauje Wagholi',
+      confirmed: true,
       source: 'AY 2025-26 Scrutiny Committee Confirmed',
       category: 'LAND & INFRASTRUCTURE',
       status: 'SAFE',
       badge: 'SAFE TO CARRY FORWARD'
     },
-    { 
-      key: 'principal_name', 
-      label: 'Principal / Director National Profile', 
-      value: 'Dr. Ramesh Joshi (Bio-ID: AICTE-FAC-19283)', 
-      confirmed: true, 
+    {
+      key: 'principal_name',
+      label: 'Principal / Director National Profile',
+      value: 'Dr. Ramesh Joshi (Bio-ID: AICTE-FAC-19283)',
+      confirmed: true,
       source: 'Aadhaar Biometric Authenticated',
       category: 'GOVERNANCE & LEADERSHIP',
       status: 'SAFE',
       badge: 'VERIFIED CREDENTIAL'
     },
-    { 
-      key: 'fire_safety_noc', 
-      label: 'Municipal Fire Safety NOC Certificate', 
-      value: 'Expired on 31-03-2026 (Pune Municipal Corporation)', 
-      confirmed: false, 
-      source: 'Stale / Validity Date Lapsed', 
+    {
+      key: 'fire_safety_noc',
+      label: 'Municipal Fire Safety NOC Certificate',
+      value: 'Expired on 31-03-2026 (Pune Municipal Corporation)',
+      confirmed: false,
+      source: 'Stale / Validity Date Lapsed',
       category: 'SAFETY & STATUTORY APPROVALS',
       status: 'BLOCKED',
       blocked: true,
       badge: 'BLOCKED: MUST UPLOAD RENEWED NOC'
     },
-    { 
-      key: 'structural_stability', 
-      label: 'Architectural Structural Stability Certificate', 
-      value: 'Issued 12-05-2023 (Valid 5 Years up to 2028)', 
-      confirmed: true, 
-      source: 'Registered Municipal Architect Key', 
+    {
+      key: 'structural_stability',
+      label: 'Architectural Structural Stability Certificate',
+      value: 'Issued 12-05-2023 (Valid 5 Years up to 2028)',
+      confirmed: true,
+      source: 'Registered Municipal Architect Key',
       category: 'BUILDING & CIVIL COMPLIANCE',
       status: 'SAFE',
       badge: 'VALID WITHIN 5-YR WINDOW'
@@ -160,7 +160,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
 
   const toggleCarryForward = (index: number) => {
     if (carryForwardItems[index].blocked) return;
-    setCarryForwardItems((prev) => 
+    setCarryForwardItems((prev) =>
       prev.map((item, i) => i === index ? { ...item, confirmed: !item.confirmed } : item)
     );
   };
@@ -169,10 +169,10 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
 
   return (
     <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '24px', maxWidth: '1440px', margin: '0 auto', width: '100%' }}>
-      
+
       {/* 1. ULTRA-PREMIUM INSTITUTIONAL HERO COMMAND BAR */}
-      <div 
-        style={{ 
+      <div
+        style={{
           background: 'radial-gradient(120% 120% at 90% 10%, rgba(212, 160, 52, 0.12) 0%, rgba(13, 40, 34, 0.98) 60%, #081d18 100%)',
           borderRadius: '20px',
           padding: '28px 32px',
@@ -303,16 +303,16 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
             <div style={{ position: 'relative', width: '60px', height: '60px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <svg width="60" height="60" viewBox="0 0 60 60" style={{ transform: 'rotate(-90deg)' }}>
                 <circle cx="30" cy="30" r="24" stroke="rgba(255, 255, 255, 0.1)" strokeWidth="6" fill="none" />
-                <circle 
-                  cx="30" 
-                  cy="30" 
-                  r="24" 
-                  stroke="#fbbf24" 
-                  strokeWidth="6" 
-                  strokeDasharray="150" 
-                  strokeDashoffset="18" 
-                  strokeLinecap="round" 
-                  fill="none" 
+                <circle
+                  cx="30"
+                  cy="30"
+                  r="24"
+                  stroke="#fbbf24"
+                  strokeWidth="6"
+                  strokeDasharray="150"
+                  strokeDashoffset="18"
+                  strokeLinecap="round"
+                  fill="none"
                 />
               </svg>
               <div style={{ position: 'absolute', fontSize: '13px', fontWeight: 900, color: '#fbbf24' }}>
@@ -343,13 +343,13 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
           gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
           gap: '14px'
         }}>
-          <div style={{ 
-            background: 'rgba(255, 255, 255, 0.04)', 
-            border: '1px solid rgba(255, 255, 255, 0.08)', 
-            borderRadius: '12px', 
-            padding: '12px 16px', 
-            display: 'flex', 
-            alignItems: 'center', 
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.04)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            borderRadius: '12px',
+            padding: '12px 16px',
+            display: 'flex',
+            alignItems: 'center',
             gap: '14px',
             backdropFilter: 'blur(6px)'
           }}>
@@ -362,13 +362,13 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
             </div>
           </div>
 
-          <div style={{ 
-            background: 'rgba(255, 255, 255, 0.04)', 
-            border: '1px solid rgba(255, 255, 255, 0.08)', 
-            borderRadius: '12px', 
-            padding: '12px 16px', 
-            display: 'flex', 
-            alignItems: 'center', 
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.04)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            borderRadius: '12px',
+            padding: '12px 16px',
+            display: 'flex',
+            alignItems: 'center',
             gap: '14px',
             backdropFilter: 'blur(6px)'
           }}>
@@ -381,13 +381,13 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
             </div>
           </div>
 
-          <div style={{ 
-            background: 'rgba(255, 255, 255, 0.04)', 
-            border: '1px solid rgba(239, 68, 68, 0.25)', 
-            borderRadius: '12px', 
-            padding: '12px 16px', 
-            display: 'flex', 
-            alignItems: 'center', 
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.04)',
+            border: '1px solid rgba(239, 68, 68, 0.25)',
+            borderRadius: '12px',
+            padding: '12px 16px',
+            display: 'flex',
+            alignItems: 'center',
             gap: '14px',
             backdropFilter: 'blur(6px)'
           }}>
@@ -400,13 +400,13 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
             </div>
           </div>
 
-          <div style={{ 
-            background: 'rgba(255, 255, 255, 0.04)', 
-            border: '1px solid rgba(255, 255, 255, 0.08)', 
-            borderRadius: '12px', 
-            padding: '12px 16px', 
-            display: 'flex', 
-            alignItems: 'center', 
+          <div style={{
+            background: 'rgba(255, 255, 255, 0.04)',
+            border: '1px solid rgba(255, 255, 255, 0.08)',
+            borderRadius: '12px',
+            padding: '12px 16px',
+            display: 'flex',
+            alignItems: 'center',
             gap: '14px',
             backdropFilter: 'blur(6px)'
           }}>
@@ -422,10 +422,10 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
       </div>
 
       {/* 2. SUB-PORTAL WORKFLOW TABS */}
-      <div style={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        gap: '12px', 
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px',
         background: '#ffffff',
         padding: '8px 12px',
         borderRadius: '14px',
@@ -549,7 +549,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
                 <label style={{ fontSize: '11px', fontWeight: 800, color: '#475569', display: 'block', marginBottom: '6px', textTransform: 'uppercase' }}>
                   Filing Category
                 </label>
-                <select 
+                <select
                   className="select-control"
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
@@ -565,7 +565,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
                 <label style={{ fontSize: '11px', fontWeight: 800, color: '#475569', display: 'block', marginBottom: '6px', textTransform: 'uppercase' }}>
                   Cycle Academic Year
                 </label>
-                <select 
+                <select
                   className="select-control"
                   value={selectedYear}
                   onChange={(e) => setSelectedYear(e.target.value)}
@@ -578,7 +578,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
             </div>
 
             {/* Interactive Drag & Drop Box */}
-            <div 
+            <div
               style={{
                 border: '2px dashed #059669',
                 borderRadius: '16px',
@@ -631,15 +631,15 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
 
               {uploadProgress !== null && (
                 <div style={{ marginTop: '18px', maxWidth: '360px', margin: '18px auto 0' }}>
-                  <div style={{ 
-                    height: '8px', 
-                    background: '#e2e8f0', 
+                  <div style={{
+                    height: '8px',
+                    background: '#e2e8f0',
                     borderRadius: '4px',
                     overflow: 'hidden'
                   }}>
-                    <div style={{ 
-                      height: '100%', 
-                      width: `${uploadProgress}%`, 
+                    <div style={{
+                      height: '100%',
+                      width: `${uploadProgress}%`,
                       background: 'linear-gradient(90deg, #10b981 0%, #059669 100%)',
                       transition: 'width 0.2s ease'
                     }} />
@@ -656,7 +656,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
               <span style={{ fontSize: '12px', color: '#64748b' }}>
                 <strong>3 Draft documents</strong> staged for pre-submission checks
               </span>
-              <button 
+              <button
                 onClick={handleRunDiagnosticScan}
                 disabled={isScanning}
                 style={{
@@ -814,7 +814,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
                     <strong>Deficiency:</strong> PMC Certificate expires 31-03-2026. Academic term commences 15-07-2026. Scrutiny board requires renewed certificate or official municipal renewal receipt.
                   </p>
                   <div style={{ marginTop: '10px' }}>
-                    <button 
+                    <button
                       onClick={handleSimulateUpload}
                       style={{
                         fontSize: '11px',
@@ -915,25 +915,25 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
           {/* Floating Cards Grid with Generous Spacing */}
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(380px, 1fr))', gap: '24px' }}>
             {carryForwardItems.map((item, idx) => (
-              <div 
+              <div
                 key={item.key}
                 style={{
                   background: item.blocked ? '#ffffff' : item.confirmed ? '#ffffff' : '#ffffff',
                   border: '1.5px solid',
-                  borderColor: item.blocked 
-                    ? '#fca5a5' 
-                    : item.confirmed 
-                      ? '#86efac' 
+                  borderColor: item.blocked
+                    ? '#fca5a5'
+                    : item.confirmed
+                      ? '#86efac'
                       : '#cbd5e1',
                   borderRadius: '16px',
                   padding: '22px',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '14px',
-                  boxShadow: item.blocked 
-                    ? '0 8px 24px rgba(239, 68, 68, 0.08)' 
-                    : item.confirmed 
-                      ? '0 8px 24px rgba(16, 185, 129, 0.09)' 
+                  boxShadow: item.blocked
+                    ? '0 8px 24px rgba(239, 68, 68, 0.08)'
+                    : item.confirmed
+                      ? '0 8px 24px rgba(16, 185, 129, 0.09)'
                       : '0 6px 18px rgba(0, 0, 0, 0.04)',
                   transition: 'all 0.22s ease'
                 }}
@@ -989,7 +989,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
                     {item.blocked ? 'Requires Fresh Upload' : item.confirmed ? 'Confirmed for AY 2026-27' : 'Pending Confirmation'}
                   </span>
                   <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: item.blocked ? 'not-allowed' : 'pointer' }}>
-                    <input 
+                    <input
                       type="checkbox"
                       checked={item.confirmed}
                       onChange={() => toggleCarryForward(idx)}
@@ -1006,10 +1006,10 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
           </div>
 
           {/* Floating Action Row */}
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'space-between', 
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
             padding: '16px 20px',
             background: '#ffffff',
             borderRadius: '14px',
@@ -1019,7 +1019,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
             <span style={{ fontSize: '12px', color: '#64748b' }}>
               Audit Log Record: <code>AUD-CARRY-FWD-2026</code> will record applicant confirmation timestamp.
             </span>
-            <button 
+            <button
               onClick={() => {
                 alert(`Successfully carried forward ${confirmedCount} verified institutional attributes to AY 2026-27 filing draft.`);
               }}
@@ -1095,7 +1095,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '16px' }}>
             {uploadedFiles.map(file => (
-              <div 
+              <div
                 key={file.id}
                 style={{
                   background: '#f8fafc',
@@ -1238,7 +1238,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
                 <span>Registrar Official Clarification Statement:</span>
                 <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 500 }}>Audit timestamped</span>
               </label>
-              
+
               <textarea
                 rows={3}
                 placeholder="E.g., Municipal renewal inspection completed on 14th Oct; official payment receipt and verification challan attached..."
@@ -1258,7 +1258,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
               />
 
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '4px' }}>
-                <button 
+                <button
                   onClick={handleSimulateUpload}
                   style={{
                     background: '#f1f5f9',
@@ -1276,17 +1276,17 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
                 >
                   <UploadCloud size={14} color="#059669" /> Attach Municipal Receipt PDF
                 </button>
-                <button 
+                <button
                   onClick={() => {
                     setIsResponseSent(true);
                     alert('Clarification response submitted to Scrutiny Officer Dr. S. K. Raman with audit log timestamp.');
                   }}
                   disabled={!queryResponse.trim() || isResponseSent}
                   style={{
-                    background: isResponseSent 
-                      ? '#16a34a' 
-                      : !queryResponse.trim() 
-                        ? '#cbd5e1' 
+                    background: isResponseSent
+                      ? '#16a34a'
+                      : !queryResponse.trim()
+                        ? '#cbd5e1'
                         : 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
                     color: '#ffffff',
                     border: 'none',

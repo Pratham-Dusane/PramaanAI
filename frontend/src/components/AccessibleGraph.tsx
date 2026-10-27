@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import ForceGraph2D, { ForceGraphMethods } from 'react-force-graph-2d';
-import { 
-  GitFork, 
-  Table, 
-  Search, 
-  Play, 
-  Pause, 
-  RotateCcw, 
-  AlertTriangle, 
-  X, 
+import {
+  GitFork,
+  Table,
+  Search,
+  Play,
+  Pause,
+  RotateCcw,
+  AlertTriangle,
+  X,
   Sparkles,
   ArrowRight,
   ShieldAlert,
@@ -17,11 +17,11 @@ import {
   CheckCircle2,
   Share2
 } from 'lucide-react';
-import { 
-  GRAPH_NODES, 
-  GRAPH_LINKS, 
-  GraphNode, 
-  OVERLAP_COLORS 
+import {
+  GRAPH_NODES,
+  GRAPH_LINKS,
+  GraphNode,
+  OVERLAP_COLORS
 } from '../data/graphData';
 import { EvidenceNode, EvidenceEdge } from '../types';
 
@@ -203,10 +203,10 @@ export const AccessibleGraph: React.FC<AccessibleGraphProps> = ({
 
       // Border
       ctx.lineWidth = isSelected ? 3.5 : isHovered ? 2.5 : 2;
-      ctx.strokeStyle = isSelected 
-        ? '#fbbf24' 
-        : isHighRisk 
-          ? '#ef4444' 
+      ctx.strokeStyle = isSelected
+        ? '#fbbf24'
+        : isHighRisk
+          ? '#ef4444'
           : '#34d399';
       ctx.stroke();
 
@@ -228,10 +228,10 @@ export const AccessibleGraph: React.FC<AccessibleGraphProps> = ({
     } else {
       // 2. Shared Document: Diamond
       const size = isSelected ? 18 : isHovered ? 16 : 13;
-      const color = node.category === 'land_deed' 
-        ? OVERLAP_COLORS.land_deed 
-        : node.category === 'faculty' 
-          ? OVERLAP_COLORS.faculty 
+      const color = node.category === 'land_deed'
+        ? OVERLAP_COLORS.land_deed
+        : node.category === 'faculty'
+          ? OVERLAP_COLORS.faculty
           : OVERLAP_COLORS.fire_noc;
 
       // Outer glow
@@ -374,7 +374,7 @@ export const AccessibleGraph: React.FC<AccessibleGraphProps> = ({
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: 'auto' }}>
-          <button 
+          <button
             className={`btn btn-sm ${viewMode === 'VISUAL' ? 'btn-pine' : 'btn-outline'}`}
             onClick={() => setViewMode('VISUAL')}
             style={{ borderRadius: 'var(--radius-full)' }}
@@ -382,7 +382,7 @@ export const AccessibleGraph: React.FC<AccessibleGraphProps> = ({
             <GitFork size={13} color={viewMode === 'VISUAL' ? 'var(--accent-gold)' : undefined} />
             <span>Interactive Graph</span>
           </button>
-          <button 
+          <button
             className={`btn btn-sm ${viewMode === 'ACCESSIBLE_TABLE' ? 'btn-pine' : 'btn-outline'}`}
             onClick={() => setViewMode('ACCESSIBLE_TABLE')}
             title="WCAG 2.2 AA compliant tabular view (ADR-009)"
@@ -403,11 +403,11 @@ export const AccessibleGraph: React.FC<AccessibleGraphProps> = ({
           alignItems: 'stretch'
         }}>
           {/* LEFT: Force Graph Canvas & Overlay Controls */}
-          <div 
-            ref={canvasWrapperRef} 
-            style={{ 
-              position: 'relative', 
-              borderRadius: '14px', 
+          <div
+            ref={canvasWrapperRef}
+            style={{
+              position: 'relative',
+              borderRadius: '14px',
               overflow: 'hidden',
               border: '1.5px solid rgba(22, 101, 74, 0.4)',
               boxShadow: '0 16px 36px -10px rgba(0, 0, 0, 0.4)',
@@ -501,7 +501,7 @@ export const AccessibleGraph: React.FC<AccessibleGraphProps> = ({
                     }}
                   />
                   {searchQuery && (
-                    <button 
+                    <button
                       onClick={() => setSearchQuery('')}
                       style={{ background: 'none', border: 'none', color: '#94a3b8', cursor: 'pointer', padding: 0 }}
                     >
@@ -637,11 +637,11 @@ export const AccessibleGraph: React.FC<AccessibleGraphProps> = ({
                       key={chip.id}
                       onClick={() => setActiveFilter(chip.id as any)}
                       style={{
-                        background: isActive 
-                          ? chip.color ? `${chip.color}33` : 'rgba(212, 160, 52, 0.25)' 
+                        background: isActive
+                          ? chip.color ? `${chip.color}33` : 'rgba(212, 160, 52, 0.25)'
                           : 'rgba(255, 255, 255, 0.06)',
-                        border: isActive 
-                          ? `1.5px solid ${chip.color || 'var(--accent-gold)'}` 
+                        border: isActive
+                          ? `1.5px solid ${chip.color || 'var(--accent-gold)'}`
                           : '1px solid rgba(255, 255, 255, 0.12)',
                         color: isActive ? '#ffffff' : '#cbd5e1',
                         padding: '3px 9px',
@@ -757,7 +757,7 @@ export const AccessibleGraph: React.FC<AccessibleGraphProps> = ({
           </div>
 
           {/* RIGHT: Dedicated Permanent Inspector Box */}
-          <div 
+          <div
             style={{
               background: 'var(--bg-surface-elevated)',
               border: '1.5px solid var(--border-subtle)',
@@ -820,8 +820,8 @@ export const AccessibleGraph: React.FC<AccessibleGraphProps> = ({
                 Plain-English Observation:
               </span>
               <p style={{ fontSize: '12px', color: 'var(--text-main)', lineHeight: 1.5, margin: 0 }}>
-                {activeFinding 
-                  ? activeFinding.plainEnglish 
+                {activeFinding
+                  ? activeFinding.plainEnglish
                   : `Active entity in regulatory topology. Linked to ${selectedNode.academicYear || 'AY 2026-27'} compliance verification dossiers.`}
               </p>
             </div>
@@ -851,8 +851,8 @@ export const AccessibleGraph: React.FC<AccessibleGraphProps> = ({
                       <div style={{
                         width: `${factor.confidence}%`,
                         height: '100%',
-                        background: factor.confidence >= 95 
-                          ? 'linear-gradient(90deg, #ef4444 0%, #dc2626 100%)' 
+                        background: factor.confidence >= 95
+                          ? 'linear-gradient(90deg, #ef4444 0%, #dc2626 100%)'
                           : 'linear-gradient(90deg, #f59e0b 0%, #d97706 100%)',
                         borderRadius: '3px'
                       }} />

@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { 
-  ShieldCheck, 
-  Search, 
-  Lock, 
-  CheckCircle2, 
-  Hash, 
-  Clock, 
-  UserCheck, 
-  FileCode, 
-  ChevronDown, 
-  ChevronUp, 
+import {
+  ShieldCheck,
+  Search,
+  Lock,
+  CheckCircle2,
+  Hash,
+  Clock,
+  UserCheck,
+  FileCode,
+  ChevronDown,
+  ChevronUp,
   RefreshCw,
   ExternalLink,
   Shield,
@@ -27,7 +27,7 @@ export const AuditLogView: React.FC = () => {
 
   const filteredEvents = mockAuditEvents.filter((e) => {
     const matchesAction = filterAction === 'ALL' || e.action === filterAction;
-    const matchesQuery = !searchQuery.trim() || 
+    const matchesQuery = !searchQuery.trim() ||
       e.actor.toLowerCase().includes(searchQuery.toLowerCase()) ||
       e.action.toLowerCase().includes(searchQuery.toLowerCase()) ||
       e.correlationId.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -45,10 +45,10 @@ export const AuditLogView: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '20px', maxWidth: '1440px', margin: '0 auto', width: '100%' }}>
-      
+
       {/* 1. LUMINOUS LIGHT EXECUTIVE HEADER */}
-      <div 
-        style={{ 
+      <div
+        style={{
           background: '#ffffff',
           borderRadius: '16px',
           padding: '24px 28px',
@@ -130,13 +130,13 @@ export const AuditLogView: React.FC = () => {
         </div>
 
         {/* 4 Light Crisp Metric Cards */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-          gap: '12px', 
-          marginTop: '20px', 
-          paddingTop: '18px', 
-          borderTop: '1px solid #f1f5f9' 
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '12px',
+          marginTop: '20px',
+          paddingTop: '18px',
+          borderTop: '1px solid #f1f5f9'
         }}>
           <div style={{ background: '#f8fafc', borderRadius: '10px', padding: '12px 14px', border: '1px solid #e2e8f0' }}>
             <div style={{ fontSize: '10px', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em', fontWeight: 700 }}>
@@ -176,19 +176,15 @@ export const AuditLogView: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. FILTER & SEARCH COMMAND STRIP */}
-      <div 
+      {/* 2. FILTER & SEARCH COMMAND STRIP (UNBOXED) */}
+      <div
         style={{
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: '12px',
-          background: '#ffffff',
-          borderRadius: '12px',
-          padding: '12px 18px',
-          border: '1px solid #e2e8f0',
-          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.02)'
+          padding: '4px 0'
         }}
       >
         <div style={{ position: 'relative', flex: '1 1 280px', maxWidth: '380px' }}>
@@ -325,9 +321,9 @@ export const AuditLogView: React.FC = () => {
 
               return (
                 <React.Fragment key={evt.id}>
-                  <tr 
-                    style={{ 
-                      borderBottom: '1px dotted #cbd5e1', 
+                  <tr
+                    style={{
+                      borderBottom: '1px dotted #cbd5e1',
                       background: isExpanded ? '#f8fafc' : '#ffffff',
                       transition: 'background 0.12s ease'
                     }}
@@ -417,7 +413,7 @@ export const AuditLogView: React.FC = () => {
                   {isExpanded && (
                     <tr style={{ background: '#f8fafc', borderBottom: '1px dotted #cbd5e1' }}>
                       <td colSpan={6} style={{ padding: '12px 20px 16px 20px' }}>
-                        <div 
+                        <div
                           style={{
                             background: '#071f1a',
                             borderRadius: '8px',

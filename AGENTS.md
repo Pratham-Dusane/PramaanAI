@@ -1,4 +1,4 @@
-# AGENTS.md — mandatory rules for every coding agent
+# AGENTS.md - mandatory rules for every coding agent
 
 ## 1. Mission
 
@@ -101,7 +101,7 @@ Only `TODO`, `IN_PROGRESS`, `BLOCKED`, `IN_REVIEW`, `DONE`.
 Append, never replace:
 
 ```md
-### YYYY-MM-DD HH:MM UTC — <ticket-id> — <agent/owner>
+### YYYY-MM-DD HH:MM UTC - <ticket-id> - <agent/owner>
 - Status: IN_PROGRESS | DONE | BLOCKED | IN_REVIEW
 - Changed: paths and interfaces
 - Tests: exact commands and outcomes

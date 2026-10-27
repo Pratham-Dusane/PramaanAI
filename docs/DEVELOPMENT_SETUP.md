@@ -66,7 +66,7 @@ npm test
 npm run build
 ```
 
-Actual command names must be kept consistent with `README.md`, CI and the ticket handoff. If a frontend test script is not installed, the foundation agent must add one or document the alternative—never leave a command knowingly broken.
+Actual command names must be kept consistent with `README.md`, CI and the ticket handoff. If a frontend test script is not installed, the foundation agent must add one or document the alternative-never leave a command knowingly broken.
 
 ## Integration modes
 

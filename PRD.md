@@ -8,7 +8,7 @@
 
 Build a secure, explainable workspace that helps reviewers process AICTE approval-related applications, including Extension of Approval and other configured application categories. The system ingests submitted documents, classifies them, extracts fields using OCR/document parsing, checks category-specific requirements against versioned rules, compares values across documents and authorized reference records, flags anomalies or potentially manipulated evidence, assists with infrastructure evidence review, and presents traceable findings on a human-review dashboard.
 
-The base problem-statement functionality is mandatory. The requested extras—institutional digital twin, evidence graph, cross-year intelligence, regulatory copilot, infrastructure visual checks, document fingerprints, rule versioning, deadline/expiry alerts, bulk processing, BHASHINI multilingual support, duplicate detection, RBAC, accessibility, cross-institution relationship intelligence and next-application assistance—are additive layers. They must reuse common data and validation services rather than become disconnected demos.
+The base problem-statement functionality is mandatory. The requested extras-institutional digital twin, evidence graph, cross-year intelligence, regulatory copilot, infrastructure visual checks, document fingerprints, rule versioning, deadline/expiry alerts, bulk processing, BHASHINI multilingual support, duplicate detection, RBAC, accessibility, cross-institution relationship intelligence and next-application assistance-are additive layers. They must reuse common data and validation services rather than become disconnected demos.
 
 > **Non-negotiable:** The platform is advisory. It must not autonomously approve/reject an application, pronounce fraud, or substitute for an official inspection or decision. Competent officials retain final authority.
 
@@ -154,13 +154,13 @@ RBAC is permission-based plus institution/case-scope checks. A role does not its
 
 ## 7. Functional requirements
 
-### FR-01 — Institution and application management [P0]
+### FR-01 - Institution and application management [P0]
 - Model institution identity, contacts/location (sensitive), application type/category/year, prior applications and authorized source references.
 - Lifecycle: `DRAFT`, `SUBMITTED`, `QUEUED`, `PROCESSING`, `READY_FOR_REVIEW`, `UNDER_REVIEW`, `CLARIFICATION_REQUESTED`, `RESUBMITTED`, `DECISION_RECORDED`, `CLOSED`, `PROCESSING_FAILED`, `CANCELLED`.
 - Keep official decision separate from processing state.
 - Every state transition is server-enforced and audited; resubmission creates a new immutable application version.
 
-### FR-02 — Document intake, classification and OCR [P0]
+### FR-02 - Document intake, classification and OCR [P0]
 - Accept configured PDF/PNG/JPEG; default local-demo file-size target is 25 MB and configurable.
 - Validate magic bytes/content, MIME, parser outcome, page/pixel limits and resource budgets. Reject unapproved archives/executables.
 - Use random storage keys; never use untrusted filename as file path.
@@ -168,84 +168,84 @@ RBAC is permission-based plus institution/case-scope checks. A role does not its
 - Extract fields with source page, confidence and provenance. Low confidence cannot silently become verified truth.
 - Manual corrections create separate reviewed values; raw extraction remains preserved.
 
-### FR-03 — Rules/checklists [P0]
+### FR-03 - Rules/checklists [P0]
 - Rules are declarative, versioned and category/year/effective-date scoped.
 - Each rule stores identifier, title, severity, applicability, required evidence, deterministic predicate, explanation, source citation/edition/clause/page, owner, test cases and publication metadata.
 - Results: `PASS`, `REVIEW`, `INSUFFICIENT_EVIDENCE`, `NOT_APPLICABLE`, `ERROR`.
 - Never execute arbitrary code/SQL in rules. Missing evidence is not proof of non-compliance.
 
-### FR-04 — Cross-document consistency [P0]
+### FR-04 - Cross-document consistency [P0]
 - Compare form, roster, certificates, profile, historical snapshots and authorized source records.
 - Each comparator declares field paths, normalization, units/tolerance, severity and missing-data behaviour.
 - Persist both compared values, normalization result, page/source anchors and triggering rule.
 
-### FR-05 — Authorized source verification [P0]
+### FR-05 - Authorized source verification [P0]
 - Connector statuses: `VERIFIED_MATCH`, `VERIFIED_MISMATCH`, `NOT_FOUND`, `NOT_SUPPORTED`, `UNAVAILABLE`, `UNAUTHORIZED`, `TIMEOUT`, `ERROR`, `SIMULATED_MATCH`, `SIMULATED_MISMATCH`.
 - A live verified response requires an authorized source result, timestamp, provider identity, source reference and minimal response fingerprint. Fixtures are always simulated.
 - Provider downtime/missing credentials are not a mismatch. Keep payloads and identifiers minimized.
 
-### FR-06 — Reviewer dashboard and audit [P0]
+### FR-06 - Reviewer dashboard and audit [P0]
 - Filter by type, year, status, institution/scope, assigned reviewer and finding category.
 - Queue priorities use transparent urgency factors (deadline proximity, missing evidence, unresolved findings, age), not an opaque approval-likelihood score.
 - Detail view shows checklist, documents, fields, source anchors, findings, rule version, history, clarification and authorized review actions.
 - Finding view explains what was observed, why it matters, applicable rule/version, source evidence, limitations and next action.
 - Audit history is append-only for normal users.
 
-### FR-07 — Institutional digital twin [P1]
+### FR-07 - Institutional digital twin [P1]
 - Time-aware, source-attributed institution snapshots from declarations, extraction, reviewer-confirmed facts and authorized sources.
 - Attribute stores value, effective year/date, source kind/ID, review state, last verified date, extraction confidence and supersession link.
 - Distinguish `APPLICANT_DECLARED`, `AI_EXTRACTED`, `REVIEWER_CONFIRMED`, `AUTHORIZED_EXTERNAL`, `SYNTHETIC_FIXTURE`.
 - Show timeline and differences. Do not imply the twin is an official registry without authoritative source data.
 
-### FR-08 — Evidence graph / explainability [P1]
+### FR-08 - Evidence graph / explainability [P1]
 - Model nodes for institution, application, document/version, extracted field, rule/version, source record, validation run, finding and review action.
 - Findings link to evidence and rule nodes or explicitly state why evidence is absent.
 - UI offers interactive graph plus a complete accessible list/table fallback.
 - Graph traversal respects tenant/case scope.
 
-### FR-09 — Cross-year change/anomaly intelligence [P1]
+### FR-09 - Cross-year change/anomaly intelligence [P1]
 - Compare current data with prior application and reviewer-confirmed snapshots.
 - Distinguish expected change, unexplained difference, expired/stale data, missing expected continuation and possible reuse. Do not mark every change suspicious.
 - Any anomaly score is a prioritization signal only with contributing features and caveat.
 - Show old/new values, source evidence, time gap, applicable expected-change rule and human resolution.
 
-### FR-10 — Regulatory copilot [P1]
+### FR-10 - Regulatory copilot [P1]
 - RAG Q&A only over an approved, curated, versioned corpus and accessible rule metadata.
 - Every regulatory claim cites source document/version and section/page/clause when available.
 - When source support is missing, abstain and say the corpus does not establish an answer. No guessing.
 - Retrieval obeys RBAC; uploaded documents are untrusted input and may contain prompt injection.
 - Copilot cannot publish rules, mutate decisions or replace authoritative text.
 
-### FR-11 — Infrastructure evidence checker [P1]
+### FR-11 - Infrastructure evidence checker [P1]
 - Check metadata where present, image/floor-plan duplicates/similarity, visible labels via OCR and consistency with declared facility records.
 - Show signals such as duplicated images, conflicting dates/labels or missing evidence as `REVIEW` cues; do not conclude a building is absent/non-compliant from an image.
 - No face recognition, sensitive-trait inference, or unsupported satellite-based verdict.
 - Allow inspector observations and further evidence upload; link observations to the graph.
 
-### FR-12 — Fingerprinting/provenance [P1]
+### FR-12 - Fingerprinting/provenance [P1]
 - Compute SHA-256 server-side on upload; store byte length, detected MIME, uploader, timestamp, document version and algorithm.
 - Optional pHash/text-normalized fingerprint may surface similar evidence. Record algorithm/version/threshold.
 - Replacement creates a new version and fingerprint; never mutate originals silently.
 - UI says “exact byte match” or “similarity candidate”, never “authentic/fraudulent” from hashes alone.
 
-### FR-13 — Rule versioning/replay [P1]
+### FR-13 - Rule versioning/replay [P1]
 - Lifecycle: `DRAFT` → `TESTED` → `PUBLISHED` → `SUPERSEDED` or `RETIRED`; published versions immutable.
 - Each pack specifies year, category, effective window and source citations. Every validation run pins exact rule pack/version and engine version.
 - Changes support non-destructive replay/simulation with old/new outcome comparison. Never rewrite historical runs or human decisions.
 - AI may suggest drafts; only authorized Rule Administrator publishes after tests and explicit review.
 
-### FR-14 — Deadline/expiry alerts [P1]
+### FR-14 - Deadline/expiry alerts [P1]
 - Track application, clarification and document expiry deadlines with configurable reminder windows (e.g., 30/14/7/1 days for demo).
 - Alert includes related entity, recipient, due date, urgency, delivery status, deduplication key, acknowledgment/snooze history.
 - Scheduled jobs are idempotent. Use UTC internally and configured display timezone; model date-only values as dates.
 
-### FR-15 — Bulk processing [P1]
+### FR-15 - Bulk processing [P1]
 - Select multiple applications or submit a manifest. ZIP ingestion is optional and, if implemented, must safely unpack and individually validate every file; manifest-based batch is acceptable for MVP.
 - Durable batch with queued/running/succeeded/failed/skipped/partial counts, per-item outcome, progress, cancellation and retry failed.
 - One item failing cannot roll back successful items. Retry must be idempotent.
 - Apply scope checks, batch limits, rate limits and audit. Provide failed-item export without revealing out-of-scope data.
 
-### FR-16 — Multilingual support using BHASHINI [P1]
+### FR-16 - Multilingual support using BHASHINI [P1]
 - Localize all interface strings; provide English and at least one Indian language (Hindi as default target, Marathi optional if translations are reviewed).
 - Implement a backend `TranslationProvider` adapter; use BHASHINI only when the selected service/API is available, configured, authorized and permitted by project policy.
 - Never expose keys to frontend. Preserve original file/text and store translation separately with source/target language, provider/service/version, timestamp and status.
@@ -253,32 +253,32 @@ RBAC is permission-based plus institution/case-scope checks. A role does not its
 - Legal/rule citations remain linked to original source; machine-translated summaries show a caveat.
 - Do not send institutional/personal document text to external providers by default. Mock translations are labelled `MOCK_TRANSLATED` and are test-only.
 
-### FR-17 — Duplicate applications [P1]
+### FR-17 - Duplicate applications [P1]
 - Exact doc duplicate via SHA-256; application candidate using institution/category/year/reference and submission/idempotency metadata.
 - Fuzzy similarity creates a candidate only; retain reason features and compared evidence.
 - Status: `EXACT_MATCH`, `LIKELY_DUPLICATE`, `POSSIBLE_REUSE`, `NO_MATCH`.
 - Never auto-delete, merge, reject or accuse. Reviewer confirms/dismisses/defers.
 - Cross-institution shared material uses stricter access checks; never expose protected source files to unrelated applicants.
 
-### FR-18 — RBAC and scope [P0]
+### FR-18 - RBAC and scope [P0]
 - Server-enforce permissions on every route/service operation.
 - Example permissions: `application.read_assigned`, `application.submit_own`, `finding.resolve`, `decision.record`, `rule.draft`, `rule.publish`, `audit.read`, `user.manage`, `integration.configure`, `bulk.process`.
 - Applicant is institution-scoped; reviewer is assignment-scoped unless assigned broader scope. Rule admin has no document-content access by default.
 - Prevent IDOR; audit document access, exports, role changes and rule publication.
 
-### FR-19 — Accessibility [P1]
+### FR-19 - Accessibility [P1]
 - Target WCAG 2.2 AA for core flows: landmarks, labels, keyboard access, visible focus, sufficient contrast, zoom/reflow, accessible tables and clear errors.
 - Job progress and status changes are screen-reader perceivable without excessive announcements.
 - Graph has textual/table alternative; images have neutral descriptions/captions, not claims of certainty.
 - No core path requires drag-and-drop, hover-only controls or pointer gestures.
 
-### FR-20 — Cross-institution relationships [P1]
+### FR-20 - Cross-institution relationships [P1]
 - Surface candidate shared attributes via reused hashes, authorized identifiers, declared cross-appointments and conservative overlaps in names/contact/address/facility evidence.
 - Store type, match method, compared fields, evidence edges, confidence and limitations.
 - Display only restricted summaries that recipient is authorized to see.
 - Use language “potential shared attribute/relationship for review”; avoid labels such as shell institution, collusion or fraud.
 
-### FR-21 — Make next application easier [P1]
+### FR-21 - Make next application easier [P1]
 - Pre-submission simulator runs checklist/rules for selected category/year.
 - Offer prior verified/reviewed fields with provenance and last-reviewed time; applicant confirms every prefilled field.
 - Exclude or clearly block expired, disputed, unverified or superseded fields from silent carry-forward.
@@ -379,10 +379,10 @@ Each extraction run stores provider/model/version/config/language/confidence met
 | T11 | Frontend/reviewer dashboard/accessibility | Scaffold early using typed mocks; integrate APIs later. |
 | T12 | Evaluation/security/demo | Prepare harness early; final gate after tracks integrate. |
 
-- **Gate A — foundation:** clean boot, migration, synthetic seed users, health checks, typed API.
-- **Gate B — base PS:** create → upload → extract → validate → explain → audit → human review works end-to-end.
-- **Gate C — enhancement:** each P1 feature has a credible, testable slice; external integrations clearly marked live/mock/unavailable.
-- **Gate D — evaluation/demo:** repeatable dataset metrics, a11y/security checks, limitations statement and setup docs.
+- **Gate A - foundation:** clean boot, migration, synthetic seed users, health checks, typed API.
+- **Gate B - base PS:** create → upload → extract → validate → explain → audit → human review works end-to-end.
+- **Gate C - enhancement:** each P1 feature has a credible, testable slice; external integrations clearly marked live/mock/unavailable.
+- **Gate D - evaluation/demo:** repeatable dataset metrics, a11y/security checks, limitations statement and setup docs.
 
 ## 14. Whole-product acceptance checklist
 
@@ -405,13 +405,13 @@ Each extraction run stores provider/model/version/config/language/confidence met
 
 These references inform design but do not grant access or establish a live integration. The target prototype budget is ₹0 recurring API/service cost: no paid or metered endpoint may be enabled unless explicitly approved. BHASHINI must remain mock/local-fallback when a free, permitted API path and quota cannot be confirmed. The 2024–2027 handbook is a starting reference, not an assumption that no later circular/amendment applies:
 
-- AICTE Approval Process Handbook 2024–2027: https://aicte-qa.aicte-india.org/sites/default/files/APH%20Final.pdf — check applicable edition/amendments for every rule.
-- BHASHINI portal: https://bhashini.gov.in/en/ — confirm exact service/API, access, terms, supported languages and limits before enabling.
-- BHASHINI service API reference: https://tts.bhashini.ai/openapi/ui/ — visible translation/OCR/TTS/STT API schema; confirm exact endpoint access, price/quota and terms. The project does not rely on paid credits.
-- DigiLocker partner portal / API Setu: https://api.apisetu.gov.in/ — access and record coverage require the applicable onboarding/authorization.
-- National Academic Depository: https://www.nad.gov.in/ — only records/services supported by the issuing institution and authorized access can be checked.
-- Entity Locker: https://entity.digilocker.gov.in/ — optional future organizational exchange.
-- AIKosh: https://aikosh.indiaai.gov.in/ — dataset/model discovery, not a source of AICTE institutional truth by itself.
+- AICTE Approval Process Handbook 2024–2027: https://aicte-qa.aicte-india.org/sites/default/files/APH%20Final.pdf - check applicable edition/amendments for every rule.
+- BHASHINI portal: https://bhashini.gov.in/en/ - confirm exact service/API, access, terms, supported languages and limits before enabling.
+- BHASHINI service API reference: https://tts.bhashini.ai/openapi/ui/ - visible translation/OCR/TTS/STT API schema; confirm exact endpoint access, price/quota and terms. The project does not rely on paid credits.
+- DigiLocker partner portal / API Setu: https://api.apisetu.gov.in/ - access and record coverage require the applicable onboarding/authorization.
+- National Academic Depository: https://www.nad.gov.in/ - only records/services supported by the issuing institution and authorized access can be checked.
+- Entity Locker: https://entity.digilocker.gov.in/ - optional future organizational exchange.
+- AIKosh: https://aikosh.indiaai.gov.in/ - dataset/model discovery, not a source of AICTE institutional truth by itself.
 - OWASP File Upload guidance: https://cheatsheetseries.owasp.org/cheatsheets/File_Upload_Cheat_Sheet.html
 - OWASP Logging guidance: https://cheatsheetseries.owasp.org/cheatsheets/Logging_Cheat_Sheet.html
 - W3C WCAG 2.2: https://www.w3.org/TR/WCAG22/

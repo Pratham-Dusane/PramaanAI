@@ -38,6 +38,11 @@ export const App: React.FC = () => {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [decisionModalApp, setDecisionModalApp] = useState<Application | null>(null);
 
+  // Deep-linking state between Reviewer Queue, Evidence Graph, and Split-Pane Case Review
+  const [graphFocusedCluster, setGraphFocusedCluster] = useState<string | null>('cluster-pune-land');
+  const [graphFocusedInstitutionId, setGraphFocusedInstitutionId] = useState<string | null>(null);
+  const [activeSplitFinding, setActiveSplitFinding] = useState<any>(null);
+
   const handleToggleCopilot = () => {
     setIsCopilotOpen(!isCopilotOpen);
   };
@@ -153,6 +158,12 @@ export const App: React.FC = () => {
               applications={applications}
               onSelectApplication={handleSelectApplication}
               onOpenDecisionModal={(app) => setDecisionModalApp(app)}
+              onOpenGraphForCase={(appId, clusterId) => {
+                setSelectedAppId(appId);
+                setGraphFocusedCluster(clusterId || 'cluster-pune-land');
+                setGraphFocusedInstitutionId(appId === 'DEMO-EOA-2026-001' ? 'INST-AK' : 'INST-SP');
+                setActiveView('GRAPH');
+              }}
               currentRole={currentRole}
               currentLang={currentLang}
             />
@@ -161,6 +172,9 @@ export const App: React.FC = () => {
           {activeView === 'DETAIL' && selectedApp && (
             <ApplicationDetailView 
               application={selectedApp}
+              initialSplitPaneFinding={activeSplitFinding}
+              onClearSplitPaneFinding={() => setActiveSplitFinding(null)}
+              onNavigateToGraph={() => setActiveView('GRAPH')}
               onBackToQueue={() => setActiveView('QUEUE')}
               onOpenDecisionModal={(app) => setDecisionModalApp(app)}
               onResolveFinding={handleResolveFinding}
@@ -179,8 +193,13 @@ export const App: React.FC = () => {
 
           {activeView === 'GRAPH' && (
             <AccessibleGraph 
-              nodes={mockEvidenceNodes} 
-              edges={mockEvidenceEdges} 
+              initialFocusedCluster={graphFocusedCluster}
+              initialFocusedInstitutionId={graphFocusedInstitutionId}
+              onOpenCaseReview={(finding) => {
+                setActiveSplitFinding(finding);
+                setSelectedAppId('DEMO-EOA-2026-001');
+                setActiveView('DETAIL');
+              }}
             />
           )}
 

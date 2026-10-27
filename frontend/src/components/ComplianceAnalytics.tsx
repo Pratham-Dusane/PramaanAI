@@ -85,15 +85,15 @@ export const ComplianceAnalytics: React.FC = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      
+
       {/* 1. Interactive Compliance Distribution Donut Card (Bklit / Kokonut UI style) */}
       <div className="glass-panel" style={{ padding: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px' }}>
           <div>
-            <h3 style={{ 
-              fontSize: '13px', 
-              fontWeight: 800, 
-              letterSpacing: '0.06em', 
+            <h3 style={{
+              fontSize: '13px',
+              fontWeight: 800,
+              letterSpacing: '0.06em',
               textTransform: 'uppercase',
               color: 'var(--text-main)',
               display: 'flex',
@@ -118,21 +118,21 @@ export const ComplianceAnalytics: React.FC = () => {
             <svg width="130" height="130" viewBox="0 0 130 130" style={{ overflow: 'visible' }}>
               {/* Outer Track (soft neutral) */}
               <circle cx="65" cy="65" r="48" stroke="#d5e2de" strokeWidth="18" fill="none" opacity="0.3" />
-              
+
               {/* Slices with 100% full 360deg coverage and hover animation */}
               {slices.map((slice) => {
                 const isHovered = hoveredSlice?.key === slice.key;
                 return (
-                  <circle 
+                  <circle
                     key={slice.key}
-                    cx="65" 
-                    cy="65" 
-                    r="48" 
-                    stroke={slice.color} 
-                    strokeWidth={isHovered ? 24 : 18} 
-                    fill="none" 
-                    strokeDasharray={slice.dashArray} 
-                    strokeDashoffset={slice.dashOffset} 
+                    cx="65"
+                    cy="65"
+                    r="48"
+                    stroke={slice.color}
+                    strokeWidth={isHovered ? 24 : 18}
+                    fill="none"
+                    strokeDasharray={slice.dashArray}
+                    strokeDashoffset={slice.dashOffset}
                     transform="rotate(-90 65 65)"
                     onMouseEnter={() => setHoveredSlice(slice)}
                     onMouseLeave={() => setHoveredSlice(null)}
@@ -184,7 +184,7 @@ export const ComplianceAnalytics: React.FC = () => {
             {slices.map((slice) => {
               const isHovered = hoveredSlice?.key === slice.key;
               return (
-                <div 
+                <div
                   key={slice.key}
                   onMouseEnter={() => setHoveredSlice(slice)}
                   onMouseLeave={() => setHoveredSlice(null)}
@@ -220,10 +220,10 @@ export const ComplianceAnalytics: React.FC = () => {
       <div className="glass-panel" style={{ padding: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
           <div>
-            <h3 style={{ 
-              fontSize: '13px', 
-              fontWeight: 800, 
-              letterSpacing: '0.06em', 
+            <h3 style={{
+              fontSize: '13px',
+              fontWeight: 800,
+              letterSpacing: '0.06em',
               textTransform: 'uppercase',
               color: 'var(--text-main)',
               display: 'flex',
@@ -231,7 +231,7 @@ export const ComplianceAnalytics: React.FC = () => {
               gap: '8px'
             }}>
               <BarChart3 size={15} color="var(--bg-pine)" />
-              <span>Statistics — Monthly Volume</span>
+              <span>Statistics - Monthly Volume</span>
             </h3>
             <p style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>
               Intake vs. Verified & Cleared Scrutinies (Jan–Jun)
@@ -249,10 +249,10 @@ export const ComplianceAnalytics: React.FC = () => {
 
         {/* Interactive Bar Chart Graphic */}
         <div style={{ position: 'relative', marginTop: '16px' }}>
-          
+
           {/* Floating Kokonut Tooltip on Bar Hover */}
           {hoveredMonth && (
-            <div 
+            <div
               style={{
                 position: 'absolute',
                 top: '-32px',
@@ -275,15 +275,15 @@ export const ComplianceAnalytics: React.FC = () => {
               }}
             >
               <span>{hoveredMonth.month}:</span>
-              <span>{hoveredMonth.received} Intake</span> • 
+              <span>{hoveredMonth.received} Intake</span> •
               <span style={{ color: 'var(--accent-gold)' }}>{hoveredMonth.verified} Cleared ({hoveredMonth.rate})</span>
             </div>
           )}
 
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'flex-end', 
-            justifyContent: 'space-between', 
+          <div style={{
+            display: 'flex',
+            alignItems: 'flex-end',
+            justifyContent: 'space-between',
             height: '110px',
             paddingTop: '10px',
             borderBottom: '1.5px solid #d1dedb',
@@ -295,7 +295,7 @@ export const ComplianceAnalytics: React.FC = () => {
               const hVerified = Math.round((item.verified / 100) * 85);
 
               return (
-                <div 
+                <div
                   key={item.month}
                   onMouseEnter={() => setHoveredMonth(item)}
                   onMouseLeave={() => setHoveredMonth(null)}
@@ -308,17 +308,17 @@ export const ComplianceAnalytics: React.FC = () => {
                     cursor: 'pointer'
                   }}
                 >
-                  <div style={{ 
-                    display: 'flex', 
-                    alignItems: 'flex-end', 
-                    gap: '4px', 
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                    gap: '4px',
                     height: '85px',
                     transform: isHovered ? 'scaleY(1.06)' : 'none',
                     transformOrigin: 'bottom',
                     transition: 'transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1)'
                   }}>
                     {/* Deep Pine Bar: Intake */}
-                    <div 
+                    <div
                       style={{
                         width: '8px',
                         height: `${hReceived}px`,
@@ -329,7 +329,7 @@ export const ComplianceAnalytics: React.FC = () => {
                       title={`${item.month} Intake: ${item.received}`}
                     />
                     {/* Warm Gold Bar: Verified */}
-                    <div 
+                    <div
                       style={{
                         width: '8px',
                         height: `${hVerified}px`,
@@ -341,10 +341,10 @@ export const ComplianceAnalytics: React.FC = () => {
                       title={`${item.month} Verified: ${item.verified}`}
                     />
                   </div>
-                  <span style={{ 
-                    fontSize: '10px', 
-                    fontWeight: isHovered ? 800 : 600, 
-                    color: isHovered ? 'var(--text-main)' : 'var(--text-muted)' 
+                  <span style={{
+                    fontSize: '10px',
+                    fontWeight: isHovered ? 800 : 600,
+                    color: isHovered ? 'var(--text-main)' : 'var(--text-muted)'
                   }}>
                     {item.month}
                   </span>
@@ -359,10 +359,10 @@ export const ComplianceAnalytics: React.FC = () => {
       <div className="glass-panel" style={{ padding: '24px' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
           <div>
-            <h3 style={{ 
-              fontSize: '13px', 
-              fontWeight: 800, 
-              letterSpacing: '0.06em', 
+            <h3 style={{
+              fontSize: '13px',
+              fontWeight: 800,
+              letterSpacing: '0.06em',
               textTransform: 'uppercase',
               color: 'var(--text-main)',
               display: 'flex',
@@ -376,13 +376,13 @@ export const ComplianceAnalytics: React.FC = () => {
               Hover along trajectory nodes for monthly throughput
             </p>
           </div>
-          <span style={{ 
-            background: 'var(--bg-pine)', 
-            color: '#ffffff', 
-            fontSize: '11px', 
-            fontWeight: 800, 
-            padding: '4px 10px', 
-            borderRadius: 'var(--radius-full)' 
+          <span style={{
+            background: 'var(--bg-pine)',
+            color: '#ffffff',
+            fontSize: '11px',
+            fontWeight: 800,
+            padding: '4px 10px',
+            borderRadius: 'var(--radius-full)'
           }}>
             3,500 Decisions
           </span>
@@ -399,17 +399,17 @@ export const ComplianceAnalytics: React.FC = () => {
             </defs>
 
             {/* Spline Area Fill */}
-            <path 
-              d={`${splinePath} L 245 68 L 20 68 Z`} 
-              fill="url(#velocityGoldGrad)" 
+            <path
+              d={`${splinePath} L 245 68 L 20 68 Z`}
+              fill="url(#velocityGoldGrad)"
             />
 
             {/* Spline Line */}
-            <path 
-              d={splinePath} 
-              stroke="var(--accent-gold)" 
-              strokeWidth="2.5" 
-              fill="none" 
+            <path
+              d={splinePath}
+              stroke="var(--accent-gold)"
+              strokeWidth="2.5"
+              fill="none"
             />
 
             {/* Baseline axis */}
@@ -417,13 +417,13 @@ export const ComplianceAnalytics: React.FC = () => {
 
             {/* Month labels along X axis */}
             {splinePoints.map((pt) => (
-              <text 
+              <text
                 key={`lbl-${pt.month}`}
-                x={pt.x} 
-                y="84" 
-                textAnchor="middle" 
-                fill="var(--text-muted)" 
-                fontSize="10" 
+                x={pt.x}
+                y="84"
+                textAnchor="middle"
+                fill="var(--text-muted)"
+                fontSize="10"
                 fontWeight="700"
                 style={{ userSelect: 'none' }}
               >
@@ -438,33 +438,33 @@ export const ComplianceAnalytics: React.FC = () => {
                 <g key={pt.month}>
                   {/* Vertical Guideline when hovered */}
                   {isHovered && (
-                    <line 
-                      x1={pt.x} 
-                      y1={pt.y} 
-                      x2={pt.x} 
-                      y2={68} 
-                      stroke="var(--accent-gold)" 
-                      strokeWidth="1.5" 
-                      strokeDasharray="2 2" 
+                    <line
+                      x1={pt.x}
+                      y1={pt.y}
+                      x2={pt.x}
+                      y2={68}
+                      stroke="var(--accent-gold)"
+                      strokeWidth="1.5"
+                      strokeDasharray="2 2"
                     />
                   )}
                   {/* Outer breathing ring */}
-                  <circle 
-                    cx={pt.x} 
-                    cy={pt.y} 
-                    r={isHovered ? 9 : 6} 
-                    fill="var(--accent-gold)" 
-                    opacity={isHovered ? 0.35 : 0.15} 
+                  <circle
+                    cx={pt.x}
+                    cy={pt.y}
+                    r={isHovered ? 9 : 6}
+                    fill="var(--accent-gold)"
+                    opacity={isHovered ? 0.35 : 0.15}
                     style={{ transition: 'all 0.2s' }}
                   />
                   {/* Core Node Circle */}
-                  <circle 
-                    cx={pt.x} 
-                    cy={pt.y} 
-                    r={isHovered ? 5.5 : 4} 
-                    fill="var(--accent-gold)" 
-                    stroke="#ffffff" 
-                    strokeWidth="2" 
+                  <circle
+                    cx={pt.x}
+                    cy={pt.y}
+                    r={isHovered ? 5.5 : 4}
+                    fill="var(--accent-gold)"
+                    stroke="#ffffff"
+                    strokeWidth="2"
                     onMouseEnter={() => setHoveredSplineIdx(i)}
                     onMouseLeave={() => setHoveredSplineIdx(null)}
                     style={{ cursor: 'pointer', transition: 'all 0.2s' }}
@@ -476,7 +476,7 @@ export const ComplianceAnalytics: React.FC = () => {
 
           {/* Kokonut Interactive Floating Point Tooltip */}
           {hoveredSplineIdx !== null && (
-            <div 
+            <div
               style={{
                 position: 'absolute',
                 top: `${splinePoints[hoveredSplineIdx].y - 36}px`,

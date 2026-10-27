@@ -1,4 +1,4 @@
-# API Contracts — v1 Baseline
+# API Contracts - v1 Baseline
 
 Shared frontend/backend boundary. Implement under `/api/v1`. Generate TypeScript types from OpenAPI where possible. If route names evolve, update this document before a second track consumes changed semantics.
 

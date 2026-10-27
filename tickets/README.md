@@ -31,64 +31,64 @@ This is a suggested allocation, not a requirement for ten people. One agent can 
 
 ## Ticket index
 
-### T00 — Foundation and contracts
+### T00 - Foundation and contracts
 - [T00-01 Repository scaffold and runnable baseline](T00-01-repo-scaffold.md)
 - [T00-02 Canonical DTOs, API contracts and schema ownership](T00-02-contracts.md)
 - [T00-03 Synthetic seed data and demo reset](T00-03-demo-seed.md)
 
-### T01 — Identity, RBAC, audit and decision boundary
+### T01 - Identity, RBAC, audit and decision boundary
 - [T01-01 Authentication and effective permission model](T01-01-auth-permissions.md)
 - [T01-02 Scope enforcement and append-only audit](T01-02-scope-audit.md)
 - [T01-03 Human decision workflow and protected state transitions](T01-03-human-decision.md)
 
-### T02 — Application, document ingestion, extraction and external source interface
+### T02 - Application, document ingestion, extraction and external source interface
 - [T02-01 Institution/application lifecycle](T02-01-application-lifecycle.md)
 - [T02-02 Secure upload, versioning and SHA-256](T02-02-secure-upload.md)
 - [T02-03 OCR, classification and field extraction](T02-03-ocr-extraction.md)
 - [T02-04 Typed source verification connector and mock](T02-04-source-connector.md)
 
-### T03 — Regulatory rules
+### T03 - Regulatory rules
 - [T03-01 Rule schema, lifecycle and source provenance](T03-01-rule-schema.md)
 - [T03-02 Deterministic evaluation and checklist](T03-02-rule-engine.md)
 - [T03-03 Rule test, publish and replay comparison](T03-03-rule-publish-replay.md)
 
-### T04 — Evidence graph and explainable findings
+### T04 - Evidence graph and explainable findings
 - [T04-01 Evidence graph and finding builder](T04-01-evidence-graph.md)
 - [T04-02 Finding details and accessible graph view](T04-02-explainability-ui.md)
 
-### T05 — Institutional intelligence
+### T05 - Institutional intelligence
 - [T05-01 Provenance-aware institutional digital twin](T05-01-digital-twin.md)
 - [T05-02 Cross-year change and anomaly intelligence](T05-02-cross-year.md)
 
-### T06 — Fingerprints, duplicates and relationships
+### T06 - Fingerprints, duplicates and relationships
 - [T06-01 Fingerprint service and similarity candidates](T06-01-fingerprints.md)
 - [T06-02 Duplicate application/document detection](T06-02-duplicates.md)
 - [T06-03 Cross-institution relationship intelligence](T06-03-relationships.md)
 
-### T07 — Infrastructure evidence
+### T07 - Infrastructure evidence
 - [T07-01 Metadata, OCR and image-similarity signals](T07-01-infrastructure-signals.md)
 - [T07-02 Infrastructure reviewer panel and observations](T07-02-infrastructure-ui.md)
 
-### T08 — Multilingual and provider UX
+### T08 - Multilingual and provider UX
 - [T08-01 UI internationalization](T08-01-i18n.md)
 - [T08-02 BHASHINI adapter and graceful fallback](T08-02-bhashini-adapter.md)
 - [T08-03 Provider settings and truthful source status UI](T08-03-provider-status-ui.md)
 
-### T09 — Regulatory copilot
+### T09 - Regulatory copilot
 - [T09-01 Approved regulatory corpus and retrieval](T09-01-corpus-retrieval.md)
 - [T09-02 Cited answers, abstention and injection safety](T09-02-copilot-safety.md)
 
-### T10 — Workflow intelligence
+### T10 - Workflow intelligence
 - [T10-01 Deadline and expiry alerts](T10-01-deadline-alerts.md)
 - [T10-02 Bulk application processing](T10-02-bulk-processing.md)
 - [T10-03 Next-application preflight and carry-forward](T10-03-next-application.md)
 
-### T11 — Frontend and accessible user experience
+### T11 - Frontend and accessible user experience
 - [T11-01 Frontend shell and typed API client](T11-01-frontend-shell.md)
 - [T11-02 Applicant and reviewer workflows](T11-02-workflows-ui.md)
 - [T11-03 Accessibility and language switching](T11-03-accessibility.md)
 
-### T12 — Evaluation, release and security hardening
+### T12 - Evaluation, release and security hardening
 - [T12-01 Synthetic evaluation harness](T12-01-evaluation.md)
 - [T12-02 Security, privacy and RBAC regression suite](T12-02-security-tests.md)
 - [T12-03 Integrated demo, performance and release gate](T12-03-release-demo.md)

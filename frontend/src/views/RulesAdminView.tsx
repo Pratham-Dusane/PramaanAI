@@ -103,7 +103,7 @@ export const RulesAdminView: React.FC = () => {
           </div>
 
           {/* Simulation Replay Button */}
-          <button 
+          <button
             className="btn btn-primary"
             onClick={handleRunReplay}
             disabled={isReplaying}
@@ -129,7 +129,7 @@ export const RulesAdminView: React.FC = () => {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {selectedPack.rules.map((rule) => (
-              <div 
+              <div
                 key={rule.ruleId}
                 style={{
                   background: 'var(--bg-surface-elevated)',
@@ -171,7 +171,7 @@ export const RulesAdminView: React.FC = () => {
 
                 <div style={{ fontSize: '11px', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <BookOpen size={12} />
-                  <span>Cites: {rule.source.title} — {rule.source.clause} (Page {rule.source.page})</span>
+                  <span>Cites: {rule.source.title} - {rule.source.clause} (Page {rule.source.page})</span>
                 </div>
               </div>
             ))}

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { 
-  X, 
-  Send, 
-  Sparkles, 
-  BookOpen, 
-  AlertTriangle, 
-  ShieldAlert, 
-  CheckCircle2, 
-  HelpCircle 
+import {
+  X,
+  Send,
+  Sparkles,
+  BookOpen,
+  AlertTriangle,
+  ShieldAlert,
+  CheckCircle2,
+  HelpCircle
 } from 'lucide-react';
 import { mockCopilotCorpus } from '../data/mockData';
 
@@ -76,8 +76,8 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
           text: matched.answer,
           citations: matched.citations,
           limitations: matched.limitations,
-          status: matched.queryMatch === 'injection' 
-            ? 'INJECTION_DEFENSE_TRIGGERED' 
+          status: matched.queryMatch === 'injection'
+            ? 'INJECTION_DEFENSE_TRIGGERED'
             : 'ANSWERED_WITH_CITATIONS'
         };
       } else {
@@ -96,7 +96,7 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
   };
 
   return (
-    <aside 
+    <aside
       className="copilot-drawer fade-in"
       style={{
         position: 'fixed',
@@ -143,7 +143,7 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
           </div>
         </div>
 
-        <button 
+        <button
           className="btn btn-outline btn-sm"
           onClick={onClose}
           aria-label="Close Copilot"
@@ -163,7 +163,7 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
         gap: '14px'
       }}>
         {messages.map((m) => (
-          <div 
+          <div
             key={m.id}
             style={{
               display: 'flex',
@@ -173,14 +173,14 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
             }}
           >
             <div style={{
-              background: m.sender === 'user' 
-                ? 'var(--bg-pine)' 
+              background: m.sender === 'user'
+                ? 'var(--bg-pine)'
                 : '#ffffff',
               color: m.sender === 'user' ? '#ffffff' : 'var(--text-main)',
               padding: '14px 18px',
               borderRadius: 'var(--radius-xl)',
-              border: m.sender === 'user' 
-                ? 'none' 
+              border: m.sender === 'user'
+                ? 'none'
                 : '1px solid var(--border-subtle)',
               boxShadow: m.sender === 'copilot' ? 'var(--shadow-sm)' : '0 4px 14px rgba(38, 61, 57, 0.15)',
               fontSize: '13px',
@@ -200,12 +200,12 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
                   flexDirection: 'column',
                   gap: '8px'
                 }}>
-                  <div style={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    gap: '6px', 
-                    fontSize: '11px', 
-                    fontWeight: 800, 
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    fontSize: '11px',
+                    fontWeight: 800,
                     color: 'var(--accent-gold-dark)',
                     letterSpacing: '0.04em'
                   }}>
@@ -221,14 +221,14 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
                       color: 'var(--text-secondary)'
                     }}>
                       <div style={{ fontWeight: 700, color: 'var(--text-main)' }}>
-                        {c.sourceTitle} — {c.clause} (Page {c.page})
+                        {c.sourceTitle} - {c.clause} (Page {c.page})
                       </div>
                       <div style={{ fontSize: '10px', color: 'var(--text-muted)', margin: '2px 0' }}>
                         {c.section}
                       </div>
-                      <blockquote style={{ 
-                        borderLeft: '2px solid var(--accent-gold)', 
-                        paddingLeft: '8px', 
+                      <blockquote style={{
+                        borderLeft: '2px solid var(--accent-gold)',
+                        paddingLeft: '8px',
                         fontStyle: 'italic',
                         color: 'var(--text-main)',
                         marginTop: '4px'
@@ -242,9 +242,9 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
 
               {/* Limitations Note */}
               {m.limitations && (
-                <div style={{ 
-                  marginTop: '8px', 
-                  fontSize: '11px', 
+                <div style={{
+                  marginTop: '8px',
+                  fontSize: '11px',
                   color: 'var(--text-muted)',
                   display: 'flex',
                   alignItems: 'center',
@@ -283,7 +283,7 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
         borderTop: '1px solid var(--border-subtle)',
         background: '#f4f8f7'
       }}>
-        <form 
+        <form
           onSubmit={(e) => { e.preventDefault(); handleSend(); }}
           style={{
             position: 'relative',
@@ -298,7 +298,7 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
           }}
           className="kokonut-input-wrapper"
         >
-          <input 
+          <input
             type="text"
             placeholder="Ask AICTE approval rules, cadre norms, land policies..."
             value={inputValue}
@@ -331,8 +331,8 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
             ↵ Enter
           </span>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="btn btn-primary"
             disabled={!inputValue.trim()}
             style={{
@@ -354,11 +354,11 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
           </button>
         </form>
 
-        <div style={{ 
-          fontSize: '10px', 
+        <div style={{
+          fontSize: '10px',
           fontWeight: 600,
-          color: 'var(--text-muted)', 
-          marginTop: '8px', 
+          color: 'var(--text-muted)',
+          marginTop: '8px',
           textAlign: 'center',
           letterSpacing: '0.02em'
         }}>

@@ -1,6 +1,6 @@
 # Canonical Demo Scenario
 
-The demo must run with seeded synthetic data and no external credentials. Use fictional institutions and identifiers; visible screens should carry a banner: **Demonstration environment — synthetic records; not an official AICTE system.**
+The demo must run with seeded synthetic data and no external credentials. Use fictional institutions and identifiers; visible screens should carry a banner: **Demonstration environment - synthetic records; not an official AICTE system.**
 
 ## Cast and seeded records
 

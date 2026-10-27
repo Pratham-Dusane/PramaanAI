@@ -4,7 +4,7 @@ Append-only summary of repository changes, tests, blockers and handoffs. Never s
 
 ## Project bootstrap
 
-### 2026-10-26 — PRD bootstrap — specification author
+### 2026-10-26 - PRD bootstrap - specification author
 - Status: DONE
 - Changed: product requirements, agent rules, architecture/data/API/provider contracts, track backlog, schemas and synthetic examples.
 - Tests: documentation-only package; implementation tests are to be created and run by ticket owners.
@@ -15,24 +15,24 @@ Append-only summary of repository changes, tests, blockers and handoffs. Never s
 
 Append entries below using the format in `AGENTS.md`. If a previous entry is wrong, append a correction referencing it rather than deleting it.
 
-### 2026-10-26 09:30 UTC — PACK-QA — specification author
+### 2026-10-26 09:30 UTC - PACK-QA - specification author
 - Status: DONE
 - Changed: added free-only provider policy, integration capability matrix, release checklist, JSON schemas, synthetic demo examples, and 36 ticket files; reconciled relative Markdown links and BHASHINI environment variable names.
 - Tests: Markdown relative-link scan passed; JSON syntax validation passed; `finding.schema.json` validated `sample_finding.json`; `rule_definition.schema.json` validated both sample demo rules. Full application tests do not yet exist because implementation is the next phase.
 - Decisions: retain modular-monolith and local/mock-first defaults; live API integration remains conditional on cost, permission and data-handling review.
 - Handoff: agents begin with `AGENTS.md`, then `PRD.md`, `docs/FREE_TIER_POLICY.md`, `tickets/README.md` and T00-01.
 
-### 2026-10-27 03:15 UTC — T11-UI-REDESIGN — frontend-designer
+### 2026-10-27 03:15 UTC - T11-UI-REDESIGN - frontend-designer
 - Status: DONE
 - Changed: Complete UI redesign of the frontend application transitioning from generic dark mode to Scandinavian editorial light mode directly inspired by reference flight-dashboard mockups. Updated `src/index.css` with a curated palette (soft sage alabaster `--bg-main: #ebf1ef`, crisp white cards `--bg-card: #ffffff`, deep pine spruce `--bg-pine: #263d39`, warm mustard gold accents `--accent-gold: #d4a034`), organic corner radii (20-26px), and micro-animations. Redesigned `Sidebar.tsx` with user profile avatar, golden ring border, scooped active pill navigation, active user stack (+70), and regional network arc graphic. Redesigned `Navbar.tsx` with modern pill controls and clean advisory strip. Overhauled `ReviewerQueueView.tsx` with top flight-search capsule, top contoured metric cards, boarding-pass application cards with perforated dividers and gold action buttons, and a signature right rail featuring an animated deep pine radar card and compliance distribution donut and velocity spline charts. Updated `ApplicationDetailView.tsx`, `ApplicantPortalView.tsx`, `DuplicatesView.tsx`, `InfrastructureView.tsx`, `RulesAdminView.tsx`, `AccessibleGraph.tsx`, `CopilotDrawer.tsx`, `DecisionModal.tsx`, and `NotificationCenter.tsx` for cohesive light mode typography and accessibility.
 - Tests: `npm run build` (`tsc -b && vite build`) passed with 0 errors. Vite dev server running on `http://localhost:5173/`.
 - Decisions: None (UI overhaul strictly within assigned styling scope).
-### 2026-10-27 03:35 UTC — T11-UI-POLISH — frontend-designer
+### 2026-10-27 03:35 UTC - T11-UI-POLISH - frontend-designer
 - Status: DONE
 - Changed: Addressed targeted user feedback: (1) Relocated Copilot trigger from top navbar to a floating circular button in the bottom right corner with Kokonut UI / Bklit styling, breathing gold ring animation, and hover tooltip pill (`CopilotButton.tsx`); (2) Removed topmost demo-banner and provider status badges from `Navbar.tsx`; (3) Removed unneeded flight radar card ("FROM DEL TO BOM") from `ReviewerQueueView.tsx`; (4) Built interactive Kokonut / Bklit animated charts in `ComplianceAnalytics.tsx` featuring an interactive donut chart with hover slice expand and center dynamic details, monthly scrutiny volume dual-bar chart with hover tooltip badge, and velocity spline chart with snapped guidelines; (5) Implemented seamless concave fillet scooped transition from the left sidebar active button directly into the main canvas using radial gradient pseudo-elements (`.sidebar-nav-item.active::before/::after`); (6) Replaced the dual-destination flight search bar with a spacious institutional search bar with academic session, category, and reviewer tier filters; (7) Formatted boarding-pass cards to display actual institution locations (`Pune, Maharashtra`, `Ahmedabad, Gujarat`, `Bangalore, Karnataka`, `Chennai, Tamil Nadu`), eliminated text overlaps, and added a dynamic mathematically accurate progress bar (`present / total * 100%`).
 - Tests: `npm run build` (`tsc -b && vite build`) passed with 0 errors. Vite dev server active on `http://localhost:5174/`.
 - Decisions: None.
-### 2026-10-27 03:55 UTC — T11-UI-LAYOUT-POLISH — frontend-designer
+### 2026-10-27 03:55 UTC - T11-UI-LAYOUT-POLISH - frontend-designer
 - Status: DONE
 - Changed: Addressed comprehensive user feedback:
   1. `ReviewerQueueView.tsx`: Removed redundant cylinder badge (`DEMO_EOA`) below application ID. Rebalanced card grid layout and outer column proportions (`1.85fr`) to give ample room so the `EVALUATE CASE` button is cleanly contained inside the card without clipping.
@@ -43,13 +43,13 @@ Append entries below using the format in `AGENTS.md`. If a previous entry is wro
   6. `CopilotDrawer.tsx`, `index.css`: Removed the "TEST SCENARIOS" section. Upgraded the chat typefield to Kokonut UI / Bklit styling with high-contrast borders, clean white container, `↵ Enter` badge, and gold send button.
   7. `Navbar.tsx`, `App.tsx`: Removed the `v1.0` badge from the brand section. Made the top-left brand section clickable to return directly to the dashboard (`QUEUE` view) from any page.
 - Tests: `npm run build` (`tsc -b && vite build`) passed with 0 errors.
-### 2026-10-27 07:45 UTC — T11-HORIZONTAL-NAVBAR — frontend-designer
+### 2026-10-27 07:45 UTC - T11-HORIZONTAL-NAVBAR - frontend-designer
 - Status: DONE
 - Changed: Migrated navigation from vertical left sidebar to horizontal two-tier header navbar matching reference mockup:
   1. `Navbar.tsx`: Overhauled to a two-tier horizontal navigation header. Top tier features the official Government of India State Emblem (Ashoka Lion Capital with "सत्यमेव जयते" in gold at `/india-emblem-gold.jpg`), AICTE system titles, language selector ("English (EN) ⌵"), notification bell with unread badge, and user profile on the far right (monogram avatar "SR", "Dr. S. K. Raman ⌵", "Scrutiny Officer (Reviewer)" with interactive role-switching popover). Bottom tier features horizontal tabs: `Dashboard` (`QUEUE`), `Case Management` (`DETAIL`), `Applicant Portal` (`APPLICANT`), `Evidence & Documents` (`GRAPH`/`TWIN`), `Analytics` (`INFRA`/`DUPLICATES`), `Reports` (`AUDIT`), and `Administration` (`RULES`/`BULK`), with active gold icon, gold text, and 3px gold bottom indicator bar.
   2. `App.tsx`: Removed `<Sidebar />`, connected horizontal `Navbar` directly to `activeView` and `onSelectView`, and removed all left-navbar auto-collapse triggers and state previously associated with Copilot drawer.
   3. `index.css`: Added styles for `.horizontal-header`, `.top-brand-bar`, `.brand-container`, `.emblem-img`, `.header-actions`, `.lang-pill-container`, `.user-profile-trigger`, `.user-monogram-circle`, `.horizontal-nav-bar`, `.horizontal-tab-btn` (with active state border-bottom: 3px solid #e5b842), and `.horizontal-submenu-popover`.
-### 2026-10-27 08:30 UTC — T11-DROPDOWN-FIX — frontend-designer
+### 2026-10-27 08:30 UTC - T11-DROPDOWN-FIX - frontend-designer
 - Status: DONE
 - Changed: Fixed horizontal navigation dropdown menus (`Evidence & Documents`, `Analytics`, `Administration`, and User Profile):
   1. `src/index.css`: Fixed CSS overflow clipping on `.horizontal-nav-scroll` by removing `overflow-x: auto` and enforcing `overflow: visible !important` across all header and nav wrappers (`.horizontal-header`, `.top-brand-bar`, `.horizontal-nav-bar`, `.horizontal-tab-container`). Added pseudo-element invisible bridge (`::before`) to `.horizontal-submenu-popover` and set `z-index: 99999` with rich drop shadow and `min-width: 280px`.

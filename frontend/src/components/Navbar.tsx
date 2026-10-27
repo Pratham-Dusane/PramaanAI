@@ -58,18 +58,22 @@ export const Navbar: React.FC<NavbarProps> = ({
 }) => {
   const t = translations[currentLang];
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   const userMenuRef = useRef<HTMLDivElement>(null);
+  const langMenuRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const openedByHoverRef = useRef<boolean>(false);
 
   // Close menus when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
         setIsUserMenuOpen(false);
+      }
+      if (langMenuRef.current && !langMenuRef.current.contains(event.target as Node)) {
+        setIsLangMenuOpen(false);
       }
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setActiveDropdown(null);
@@ -84,18 +88,14 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const handleMouseEnter = (tabId: string) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    openedByHoverRef.current = true;
     setActiveDropdown(tabId);
-    setTimeout(() => {
-      openedByHoverRef.current = false;
-    }, 300);
   };
 
   const handleMouseLeave = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       setActiveDropdown(null);
-    }, 250);
+    }, 220);
   };
 
   const roleLabels: Record<UserRole, string> = {
@@ -266,20 +266,60 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         {/* Right: Controls & User Profile Pill */}
         <div className="header-actions">
-          {/* Language Selector Pill from Reference Image */}
-          <div className="lang-pill-container">
-            <Globe size={13} color="rgba(255,255,255,0.75)" />
-            <select
-              value={currentLang}
-              onChange={(e) => onLangChange(e.target.value as SupportedLanguage)}
-              className="lang-select-input"
+          {/* Fluid Language Dropdown (Kokonut UI / Fluid Style) */}
+          <div className="fluid-dropdown-container" ref={langMenuRef}>
+            <button
+              type="button"
+              className={`fluid-lang-trigger ${isLangMenuOpen ? 'active' : ''}`}
+              onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
+              aria-expanded={isLangMenuOpen}
               aria-label="Select Language"
             >
-              <option value="en">English (EN)</option>
-              <option value="hi">हिन्दी (HI)</option>
-              <option value="mr">मराठी (MR)</option>
-            </select>
-            <ChevronDown size={12} color="rgba(255,255,255,0.7)" style={{ pointerEvents: 'none' }} />
+              <Globe size={13} color="rgba(255,255,255,0.85)" />
+              <span className="fluid-lang-label">
+                {currentLang === 'en' ? 'English (EN)' : currentLang === 'hi' ? 'हिन्दी (HI)' : 'मराठी (MR)'}
+              </span>
+              <ChevronDown 
+                size={12} 
+                className="fluid-chevron"
+                style={{
+                  transform: isLangMenuOpen ? 'rotate(180deg)' : 'none',
+                  transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
+                }} 
+              />
+            </button>
+
+            {isLangMenuOpen && (
+              <div className="fluid-lang-popover">
+                {[
+                  { code: 'en' as SupportedLanguage, label: 'English', sub: 'Default (EN)', tag: 'EN' },
+                  { code: 'hi' as SupportedLanguage, label: 'हिन्दी', sub: 'Official Hindi (HI)', tag: 'HI' },
+                  { code: 'mr' as SupportedLanguage, label: 'मराठी', sub: 'Regional Marathi (MR)', tag: 'MR' }
+                ].map(item => {
+                  const isSelected = currentLang === item.code;
+                  return (
+                    <button
+                      key={item.code}
+                      type="button"
+                      className={`fluid-lang-option ${isSelected ? 'selected' : ''}`}
+                      onClick={() => {
+                        onLangChange(item.code);
+                        setIsLangMenuOpen(false);
+                      }}
+                    >
+                      <span className="lang-code-pill">{item.tag}</span>
+                      <div className="lang-text-col">
+                        <span className="lang-primary-text">{item.label}</span>
+                        <span className="lang-secondary-text">{item.sub}</span>
+                      </div>
+                      {isSelected && (
+                        <span className="lang-checkmark">✓</span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Notification Bell with Badge */}
@@ -396,19 +436,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                 }}
               >
                 <button
-                  className={`horizontal-tab-btn ${tab.isActive ? 'active' : ''}`}
+                  className={`horizontal-tab-btn ${tab.isActive ? 'active' : ''} ${isMenuOpen ? 'menu-open' : ''}`}
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     if (hasSubmenu) {
                       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-                      if (openedByHoverRef.current) {
-                        // User hovered and immediately clicked: ensure it stays open
-                        setActiveDropdown(tab.id);
-                      } else {
-                        // Intentional click toggle
-                        setActiveDropdown(prev => prev === tab.id ? null : tab.id);
-                      }
+                      setActiveDropdown(prev => prev === tab.id ? null : tab.id);
                     } else if (tab.onClick) {
                       tab.onClick();
                       setActiveDropdown(null);

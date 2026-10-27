@@ -48,14 +48,14 @@ export const DecisionModal: React.FC<DecisionModalProps> = ({
   };
 
   const toggleFindingSelection = (id: string) => {
-    setSelectedFindings((prev) => 
+    setSelectedFindings((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
     );
   };
 
   return (
     <div className="modal-backdrop fade-in" onClick={onClose}>
-      <div 
+      <div
         className="modal-content"
         onClick={(e) => e.stopPropagation()}
         style={{ maxWidth: '640px' }}
@@ -122,7 +122,7 @@ export const DecisionModal: React.FC<DecisionModalProps> = ({
               padding: '10px 14px',
               fontSize: '13px'
             }}>
-              <strong>{application.id}</strong> — {application.institutionName} ({application.academicYear})
+              <strong>{application.id}</strong> - {application.institutionName} ({application.academicYear})
             </div>
           </div>
 
@@ -165,7 +165,7 @@ export const DecisionModal: React.FC<DecisionModalProps> = ({
             <label style={{ fontSize: '12px', fontWeight: 600, display: 'block', marginBottom: '6px' }}>
               Approving Official Signature / Identity
             </label>
-            <input 
+            <input
               type="text"
               className="input-control"
               value={officerName}
@@ -197,7 +197,7 @@ export const DecisionModal: React.FC<DecisionModalProps> = ({
             </label>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', maxHeight: '160px', overflowY: 'auto' }}>
               {application.findings.map((f) => (
-                <label 
+                <label
                   key={f.id}
                   style={{
                     display: 'flex',
@@ -211,7 +211,7 @@ export const DecisionModal: React.FC<DecisionModalProps> = ({
                     cursor: isAuthorized ? 'pointer' : 'not-allowed'
                   }}
                 >
-                  <input 
+                  <input
                     type="checkbox"
                     checked={selectedFindings.includes(f.id)}
                     onChange={() => toggleFindingSelection(f.id)}
@@ -229,8 +229,8 @@ export const DecisionModal: React.FC<DecisionModalProps> = ({
             <button type="button" className="btn btn-outline" onClick={onClose}>
               Cancel
             </button>
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="btn btn-primary"
               disabled={!isAuthorized || !justification.trim()}
             >

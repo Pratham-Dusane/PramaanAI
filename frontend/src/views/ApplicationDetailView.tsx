@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import { 
-  FileText, 
-  CheckCircle, 
-  AlertTriangle, 
-  GitFork, 
-  Clock, 
-  Building2, 
-  ExternalLink, 
-  ShieldCheck, 
-  Globe, 
-  Edit3, 
-  Check, 
-  X, 
+import React, { useState, useEffect } from 'react';
+import {
+  FileText,
+  CheckCircle,
+  CheckCircle2,
+  AlertTriangle,
+  GitFork,
+  Clock,
+  Building2,
+  ExternalLink,
+  ShieldCheck,
+  Globe,
+  Edit3,
+  Check,
+  X,
   HelpCircle,
   Eye,
   Layers,
@@ -20,10 +21,14 @@ import {
 import { Application, ApplicationDocument, ExtractedField, UserRole } from '../types';
 import { SupportedLanguage, translations } from '../data/translations';
 import { AccessibleGraph } from '../components/AccessibleGraph';
+import { SplitPaneDocumentReview } from '../components/SplitPaneDocumentReview';
 import { mockDigitalTwinAttributes, mockEvidenceNodes, mockEvidenceEdges } from '../data/mockData';
 
 interface ApplicationDetailViewProps {
   application: Application;
+  initialSplitPaneFinding?: any;
+  onClearSplitPaneFinding?: () => void;
+  onNavigateToGraph?: () => void;
   onBackToQueue: () => void;
   onOpenDecisionModal: (app: Application) => void;
   onResolveFinding: (findingId: string, reason: string) => void;
@@ -33,6 +38,9 @@ interface ApplicationDetailViewProps {
 
 export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
   application,
+  initialSplitPaneFinding,
+  onClearSplitPaneFinding,
+  onNavigateToGraph,
   onBackToQueue,
   onOpenDecisionModal,
   onResolveFinding,
@@ -43,6 +51,17 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
   const [activeTab, setActiveTab] = useState<
     'DOCUMENTS' | 'CHECKLIST' | 'FINDINGS' | 'GRAPH' | 'TWIN_DIFF' | 'INFRA' | 'VERIFICATION'
   >('DOCUMENTS');
+
+  const [isSplitPaneOpen, setIsSplitPaneOpen] = useState(!!initialSplitPaneFinding);
+  const [splitPaneFinding, setSplitPaneFinding] = useState(initialSplitPaneFinding);
+
+  useEffect(() => {
+    if (initialSplitPaneFinding) {
+      setSplitPaneFinding(initialSplitPaneFinding);
+      setIsSplitPaneOpen(true);
+      setActiveTab('DOCUMENTS');
+    }
+  }, [initialSplitPaneFinding]);
 
   const [selectedDocId, setSelectedDocId] = useState<string>(
     application.documents[0]?.id || ''
@@ -61,120 +80,258 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
   };
 
   return (
-    <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      {/* Top Breadcrumb & Metadata Bar */}
-      <div className="glass-panel" style={{ padding: '16px 20px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <button 
-              className="btn btn-outline btn-sm"
-              onClick={onBackToQueue}
-              style={{ padding: '6px 10px' }}
-            >
-              <ArrowLeft size={14} /> Back to Queue
-            </button>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <h2 style={{ fontSize: '16px', fontWeight: 800 }}>{application.id}</h2>
-                <span className="badge badge-info">{application.applicationCategory}</span>
-                <span className="badge badge-simulated">AY {application.academicYear}</span>
-                <span className="badge badge-review">{application.status}</span>
-              </div>
-              <p style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '2px' }}>
-                {application.institutionName} ({application.institutionId})
-              </p>
+    <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '28px', maxWidth: '1680px', margin: '0 auto', width: '100%', paddingTop: '16px' }}>
+      
+      {/* 1. LEAN EXECUTIVE WORKSPACE TOOLBAR (WITH GENEROUS BLANK SPACE) */}
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '16px',
+        padding: '10px 4px',
+        marginBottom: '6px'
+      }}>
+        {/* Left: Queue Back Button + Case Identification */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+          <button
+            onClick={onBackToQueue}
+            style={{
+              background: '#ffffff',
+              border: '1.5px solid #cbd5e1',
+              color: '#0f172a',
+              borderRadius: '10px',
+              padding: '8px 14px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontSize: '12px',
+              fontWeight: 800,
+              cursor: 'pointer',
+              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.04)',
+              transition: 'all 0.16s ease'
+            }}
+          >
+            <ArrowLeft size={14} color="#15803d" />
+            <span>Review Queue</span>
+          </button>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
+            <h1 style={{ fontSize: '20px', fontWeight: 800, color: '#0f172a', margin: 0, letterSpacing: '-0.02em' }}>
+              {application.institutionName}
+            </h1>
+            
+            <span style={{
+              background: '#f1f5f9',
+              color: '#334155',
+              border: '1px solid #cbd5e1',
+              borderRadius: '6px',
+              fontSize: '11px',
+              fontWeight: 800,
+              padding: '2px 8px'
+            }}>
+              {application.id}
+            </span>
+
+            <span style={{
+              background: '#e0f2fe',
+              color: '#0369a1',
+              border: '1px solid #bae6fd',
+              borderRadius: '6px',
+              fontSize: '11px',
+              fontWeight: 800,
+              padding: '2px 8px'
+            }}>
+              {application.applicationCategory}
+            </span>
+
+            <span style={{
+              background: '#fef3c7',
+              color: '#92400e',
+              border: '1px solid #fde68a',
+              borderRadius: '6px',
+              fontSize: '11px',
+              fontWeight: 800,
+              padding: '2px 8px'
+            }}>
+              AY {application.academicYear}
+            </span>
+
+            <span style={{
+              background: application.status === 'DECISION_RECORDED' ? '#dcfce7' : '#fee2e2',
+              color: application.status === 'DECISION_RECORDED' ? '#15803d' : '#b91c1c',
+              border: application.status === 'DECISION_RECORDED' ? '1px solid #86efac' : '1px solid #fca5a5',
+              borderRadius: '6px',
+              fontSize: '11px',
+              fontWeight: 800,
+              padding: '2px 8px'
+            }}>
+              {application.status}
+            </span>
+          </div>
+        </div>
+
+        {/* Right: Decision CTA or Signed Badge */}
+        <div>
+          {application.decision ? (
+            <div style={{
+              background: '#f0fdf4',
+              border: '1.5px solid #86efac',
+              borderRadius: '10px',
+              padding: '8px 16px',
+              fontSize: '12px',
+              color: '#15803d',
+              fontWeight: 800,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              boxShadow: '0 2px 8px rgba(22, 101, 52, 0.08)'
+            }}>
+              <ShieldCheck size={16} color="#16a34a" />
+              <span>
+                DECISION RECORDED: {application.decision.decisionType} (by {application.decision.recordedBy})
+              </span>
             </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            {application.decision ? (
-              <div style={{
-                background: 'rgba(16, 185, 129, 0.15)',
-                border: '1px solid var(--accent-emerald)',
-                borderRadius: 'var(--radius-md)',
-                padding: '6px 14px',
+          ) : (
+            <button
+              onClick={() => onOpenDecisionModal(application)}
+              style={{
+                background: currentRole === 'SENIOR_APPROVER'
+                  ? 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)'
+                  : 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
+                color: currentRole === 'SENIOR_APPROVER' ? '#071f1a' : '#ffffff',
+                border: 'none',
+                borderRadius: '10px',
+                fontWeight: 800,
+                padding: '9px 18px',
                 fontSize: '12px',
-                color: 'var(--status-pass-text)'
-              }}>
-                <strong>OFFICIAL DECISION:</strong> {application.decision.decisionType} (Signed by {application.decision.recordedBy})
-              </div>
-            ) : (
-              <button 
-                className="btn btn-primary"
-                onClick={() => onOpenDecisionModal(application)}
-                style={{ 
-                  background: currentRole === 'SENIOR_APPROVER' 
-                    ? 'linear-gradient(135deg, var(--accent-amber), #d97706)' 
-                    : undefined
-                }}
-              >
-                <ShieldCheck size={16} /> {t.actionDecide}
-              </button>
-            )}
-          </div>
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                cursor: 'pointer',
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+                transition: 'all 0.16s ease'
+              }}
+            >
+              <ShieldCheck size={15} /> {t.actionDecide}
+            </button>
+          )}
         </div>
+      </div>
 
-        {/* Workspace Tab Bar */}
-        <div style={{ 
-          display: 'flex', 
-          gap: '6px', 
-          marginTop: '16px', 
-          borderTop: '1px solid var(--border-subtle)', 
-          paddingTop: '12px',
-          overflowX: 'auto'
-        }}>
-          {[
-            { id: 'DOCUMENTS', label: 'Documents & OCR Extraction', icon: FileText, count: application.documents.length },
-            { id: 'CHECKLIST', label: 'Category Checklist', icon: CheckCircle, count: application.checklist.length },
-            { id: 'FINDINGS', label: 'Explainable Findings', icon: AlertTriangle, count: application.findings.length },
-            { id: 'GRAPH', label: 'Evidence Graph (FR-08)', icon: GitFork },
-            { id: 'TWIN_DIFF', label: 'Digital Twin & History', icon: Clock },
-            { id: 'INFRA', label: 'Infrastructure Signals', icon: Building2 },
-            { id: 'VERIFICATION', label: 'Authorized Source Connectors', icon: ExternalLink }
-          ].map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                className={`btn btn-sm ${isActive ? 'btn-pine' : 'btn-outline'}`}
-                onClick={() => setActiveTab(tab.id as any)}
-                style={{ 
-                  whiteSpace: 'nowrap', 
-                  gap: '6px',
-                  borderRadius: 'var(--radius-full)',
-                  boxShadow: isActive ? '0 4px 12px rgba(38, 61, 57, 0.2)' : 'none'
-                }}
-              >
-                <Icon size={13} color={isActive ? 'var(--accent-gold)' : undefined} />
-                <span>{tab.label}</span>
-                {tab.count !== undefined && (
-                  <span style={{ 
-                    background: isActive ? 'rgba(212, 160, 52, 0.25)' : 'var(--bg-surface-elevated)',
-                    color: isActive ? 'var(--accent-gold)' : 'var(--text-secondary)',
-                    padding: '1px 6px',
-                    borderRadius: '10px',
-                    fontSize: '10px',
-                    fontWeight: 800
-                  }}>
-                    {tab.count}
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
+      {/* 2. FLOATING SUB-TAB NAVIGATION BAR (DETACHED WITH BLANK SPACE) */}
+      <div style={{
+        display: 'flex',
+        gap: '10px',
+        background: '#ffffff',
+        padding: '10px 14px',
+        borderRadius: '14px',
+        border: '1px solid #dbe5e2',
+        boxShadow: '0 2px 10px rgba(0, 0, 0, 0.04)',
+        overflowX: 'auto',
+        marginBottom: '12px'
+      }}>
+        {[
+          { id: 'DOCUMENTS', label: 'Documents & OCR Extraction', icon: FileText, count: application.documents.length },
+          { id: 'CHECKLIST', label: 'Category Checklist', icon: CheckCircle, count: application.checklist.length },
+          { id: 'FINDINGS', label: 'Explainable Findings', icon: AlertTriangle, count: application.findings.length },
+          { id: 'GRAPH', label: 'Evidence Graph (FR-08)', icon: GitFork },
+          { id: 'TWIN_DIFF', label: 'Digital Twin & History', icon: Clock },
+          { id: 'INFRA', label: 'Infrastructure Signals', icon: Building2 },
+          { id: 'VERIFICATION', label: 'Authorized Source Connectors', icon: ExternalLink }
+        ].map((tab) => {
+          const Icon = tab.icon;
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id as any)}
+              style={{
+                whiteSpace: 'nowrap',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '8px 16px',
+                borderRadius: '10px',
+                border: isActive ? '1px solid #166534' : '1px solid transparent',
+                background: isActive ? '#14532d' : 'transparent',
+                color: isActive ? '#ffffff' : '#475569',
+                fontSize: '12px',
+                fontWeight: 700,
+                cursor: 'pointer',
+                transition: 'all 0.16s ease',
+                boxShadow: isActive ? '0 4px 12px rgba(20, 83, 45, 0.25)' : 'none'
+              }}
+            >
+              <Icon size={14} color={isActive ? '#fbbf24' : '#64748b'} />
+              <span>{tab.label}</span>
+              {tab.count !== undefined && (
+                <span style={{
+                  background: isActive ? 'rgba(251, 191, 36, 0.25)' : '#f1f5f9',
+                  color: isActive ? '#fbbf24' : '#475569',
+                  padding: '1px 6px',
+                  borderRadius: '100px',
+                  fontSize: '10px',
+                  fontWeight: 800
+                }}>
+                  {tab.count}
+                </span>
+              )}
+            </button>
+          );
+        })}
       </div>
 
       {/* Tab 1: Documents & OCR Extraction */}
       {activeTab === 'DOCUMENTS' && (
-        <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '16px' }}>
-          {/* Document File Selector */}
-          <div className="glass-panel" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <h3 style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-secondary)' }}>
-              SUBMITTED EVIDENCE DOSSIER ({application.documents.length})
-            </h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        isSplitPaneOpen ? (
+          <SplitPaneDocumentReview 
+            findingData={splitPaneFinding}
+            onClose={() => {
+              setIsSplitPaneOpen(false);
+              if (onClearSplitPaneFinding) onClearSplitPaneFinding();
+            }}
+            onBackToGraph={() => {
+              if (onNavigateToGraph) onNavigateToGraph();
+              else setActiveTab('GRAPH');
+            }}
+          />
+        ) : (
+        <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '20px' }}>
+          {/* Document File Selector (Outer Card Removed, Floating Items) */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '8px', padding: '2px 4px' }}>
+              <div>
+                <h3 style={{ fontSize: '12px', fontWeight: 800, color: '#475569', letterSpacing: '0.04em', textTransform: 'uppercase', margin: 0 }}>
+                  Submitted Evidence Dossier ({application.documents.length})
+                </h3>
+                <span style={{ fontSize: '11px', color: '#94a3b8' }}>Cryptographically signed records</span>
+              </div>
+              <button 
+                onClick={() => setIsSplitPaneOpen(true)}
+                style={{
+                  background: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)',
+                  border: '1.5px solid #fcd34d',
+                  borderRadius: '100px',
+                  color: '#92400e',
+                  fontSize: '11px',
+                  fontWeight: 800,
+                  padding: '5px 12px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  cursor: 'pointer',
+                  boxShadow: '0 2px 8px rgba(245, 158, 11, 0.15)',
+                  transition: 'all 0.18s ease'
+                }}
+                title="Open side-by-side split-pane comparison with overlapping documents"
+              >
+                <GitFork size={13} color="#b45309" /> Split-Pane Compare
+              </button>
+            </div>
+
+            {/* Floating Document Cards */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {application.documents.map((doc) => {
                 const isSelected = doc.id === selectedDoc?.id;
                 return (
@@ -182,30 +339,62 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                     key={doc.id}
                     onClick={() => setSelectedDocId(doc.id)}
                     style={{
-                      background: isSelected ? '#ffffff' : 'var(--bg-surface-elevated)',
-                      border: isSelected ? '2px solid var(--accent-gold)' : '1px solid var(--border-subtle)',
-                      borderRadius: 'var(--radius-lg)',
-                      padding: '14px',
+                      background: isSelected ? '#ffffff' : '#ffffff',
+                      border: isSelected ? '2px solid #166534' : '1px solid #dbe5e2',
+                      borderRadius: '14px',
+                      padding: '14px 16px',
                       cursor: 'pointer',
-                      transition: 'all var(--transition-fast)',
-                      boxShadow: isSelected ? 'var(--shadow-md)' : 'none'
+                      transition: 'all 0.18s ease',
+                      boxShadow: isSelected 
+                        ? '0 6px 20px rgba(22, 101, 52, 0.12)' 
+                        : '0 2px 8px rgba(0, 0, 0, 0.03)',
+                      position: 'relative',
+                      overflow: 'hidden'
                     }}
                   >
+                    {isSelected && (
+                      <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        bottom: 0,
+                        width: '4px',
+                        background: 'linear-gradient(180deg, #166534 0%, #d4a034 100%)'
+                      }} />
+                    )}
+
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <span className="badge badge-info" style={{ fontSize: '9px', padding: '2px 8px' }}>
+                      <span style={{
+                        fontSize: '9px',
+                        fontWeight: 800,
+                        padding: '2px 8px',
+                        borderRadius: '4px',
+                        background: '#e0f2fe',
+                        color: '#0369a1'
+                      }}>
                         {doc.documentType}
                       </span>
-                      <span className={`badge ${doc.status === 'EXTRACTED' ? 'badge-pass' : 'badge-review'}`} style={{ fontSize: '9px', padding: '2px 8px' }}>
+                      <span style={{
+                        fontSize: '9px',
+                        fontWeight: 800,
+                        padding: '2px 8px',
+                        borderRadius: '4px',
+                        background: doc.status === 'EXTRACTED' ? '#dcfce7' : '#fee2e2',
+                        color: doc.status === 'EXTRACTED' ? '#15803d' : '#b91c1c'
+                      }}>
                         {doc.status}
                       </span>
                     </div>
 
-                    <h4 style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)', marginTop: '8px' }}>
+                    <h4 style={{ fontSize: '13px', fontWeight: 800, color: isSelected ? '#166534' : '#0f172a', margin: '8px 0 0 0', lineHeight: 1.3 }}>
                       {doc.title}
                     </h4>
 
-                    <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
-                      {doc.filename} • {(doc.sizeBytes / (1024 * 1024)).toFixed(2)} MB
+                    <div style={{ fontSize: '11px', color: '#64748b', marginTop: '6px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <FileText size={12} color="#94a3b8" />
+                      <span>{doc.filename}</span>
+                      <span>•</span>
+                      <span>{(doc.sizeBytes / (1024 * 1024)).toFixed(2)} MB</span>
                     </div>
                   </div>
                 );
@@ -217,28 +406,48 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
           {selectedDoc && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {/* Document Metadata Bar */}
-              <div className="glass-panel" style={{ padding: '14px 18px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '10px' }}>
+              <div style={{
+                background: '#ffffff',
+                border: '1.5px solid #dbe5e2',
+                borderRadius: '16px',
+                padding: '16px 20px',
+                boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px' }}>
                   <div>
-                    <h3 style={{ fontSize: '14px', fontWeight: 700 }}>{selectedDoc.title}</h3>
-                    <div style={{ fontSize: '11px', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginTop: '2px' }}>
-                      Server SHA-256 Digest: {selectedDoc.sha256}
+                    <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', margin: 0 }}>{selectedDoc.title}</h3>
+                    <div style={{ fontSize: '11px', color: '#64748b', fontFamily: 'monospace', marginTop: '4px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <ShieldCheck size={13} color="#16a34a" />
+                      <span>Server SHA-256 Digest:</span>
+                      <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: '4px', color: '#334155' }}>{selectedDoc.sha256}</code>
                     </div>
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     {selectedDoc.originalLanguage !== 'en' && (
-                      <button 
+                      <button
                         className={`btn btn-sm ${showTranslated ? 'btn-primary' : 'btn-secondary'}`}
                         onClick={() => setShowTranslated(!showTranslated)}
                         title="Toggle BHASHINI translation"
+                        style={{ borderRadius: '100px', fontSize: '11px', padding: '6px 14px' }}
                       >
                         <Globe size={13} />
                         {showTranslated ? 'Viewing English Translation' : `Original Language (${selectedDoc.originalLanguage.toUpperCase()})`}
                       </button>
                     )}
-                    <span className="badge badge-pass" style={{ fontSize: '10px' }}>
-                      Verified Immutable Storage Key
+                    <span style={{
+                      background: '#dcfce7',
+                      color: '#15803d',
+                      border: '1px solid #86efac',
+                      borderRadius: '100px',
+                      fontSize: '10px',
+                      fontWeight: 800,
+                      padding: '4px 10px',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px'
+                    }}>
+                      <CheckCircle2 size={12} color="#16a34a" /> Verified Immutable Storage
                     </span>
                   </div>
                 </div>
@@ -247,12 +456,19 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
               {/* Split View: Visual Document Simulator & Extracted Fields */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                 {/* Visual Document & Bounding Box Viewer */}
-                <div className="glass-panel" style={{ padding: '16px', minHeight: '380px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
-                    <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)' }}>
+                <div style={{
+                  background: '#ffffff',
+                  border: '1.5px solid #dbe5e2',
+                  borderRadius: '16px',
+                  padding: '18px',
+                  minHeight: '380px',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>
                       Page Viewer (Page 1 of {selectedDoc.pageCount})
                     </span>
-                    <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                    <span style={{ fontSize: '11px', color: '#64748b' }}>
                       Native Text Layer + OCR Box Overlays
                     </span>
                   </div>
@@ -260,32 +476,32 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                   <div style={{
                     background: '#fafbf9',
                     border: '1.5px solid #d8e4e0',
-                    borderRadius: 'var(--radius-lg)',
+                    borderRadius: '12px',
                     padding: '24px',
                     minHeight: '340px',
                     position: 'relative',
-                    color: 'var(--text-main)',
+                    color: '#1e293b',
                     fontSize: '12px',
                     lineHeight: 1.8,
                     fontFamily: 'serif',
                     boxShadow: 'inset 0 0 20px rgba(38, 61, 57, 0.03)'
                   }}>
                     <div style={{ textAlign: 'center', marginBottom: '16px', borderBottom: '1px solid rgba(38, 61, 57, 0.1)', paddingBottom: '8px' }}>
-                      <strong style={{ fontSize: '13px', color: 'var(--text-main)', textTransform: 'uppercase' }}>
+                      <strong style={{ fontSize: '13px', color: '#0f172a', textTransform: 'uppercase' }}>
                         {selectedDoc.title}
                       </strong>
-                      <div style={{ fontSize: '10px', color: 'var(--text-muted)' }}>
+                      <div style={{ fontSize: '10px', color: '#64748b' }}>
                         Official Filing Annexure • Academic Year 2026-27
                       </div>
                     </div>
 
                     {showTranslated && selectedDoc.originalLanguage === 'mr' ? (
-                      <div style={{ background: 'rgba(99, 102, 241, 0.08)', padding: '12px', borderRadius: 'var(--radius-sm)' }}>
-                        <div style={{ fontSize: '11px', color: 'var(--accent-cyan)', fontWeight: 600, marginBottom: '6px' }}>
-                          [BHASHINI MOCK TRANSLATION — ENGLISH]
+                      <div style={{ background: 'rgba(99, 102, 241, 0.08)', padding: '12px', borderRadius: '8px' }}>
+                        <div style={{ fontSize: '11px', color: '#4f46e5', fontWeight: 700, marginBottom: '6px' }}>
+                          [BHASHINI MOCK TRANSLATION - ENGLISH]
                         </div>
                         <p>This is to certify that the institutional premises have undergone full municipal fire safety inspection.</p>
-                        <p style={{ marginTop: '8px', border: '1px dashed var(--accent-amber)', padding: '4px 8px', borderRadius: '4px' }}>
+                        <p style={{ marginTop: '8px', border: '1px dashed #d97706', padding: '4px 8px', borderRadius: '4px' }}>
                           <strong>Expiration Clause:</strong> This certificate remains valid strictly until <strong>31st March 2026</strong>.
                         </p>
                       </div>
@@ -296,17 +512,17 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                           The verified administrative and instructional schedule for <strong>{application.institutionName}</strong> is certified as recorded in statutory inspection registers.
                         </p>
                         {selectedDoc.extractedFields.map((f) => (
-                          <div 
+                          <div
                             key={f.id}
                             style={{
                               marginTop: '10px',
-                              border: '1px solid var(--accent-cyan)',
+                              border: '1px solid #06b6d4',
                               background: 'rgba(6, 182, 212, 0.08)',
-                              padding: '6px 10px',
-                              borderRadius: 'var(--radius-sm)'
+                              padding: '8px 12px',
+                              borderRadius: '6px'
                             }}
                           >
-                            <span style={{ fontSize: '10px', color: 'var(--accent-cyan)', fontWeight: 700, display: 'block' }}>
+                            <span style={{ fontSize: '10px', color: '#0891b2', fontWeight: 800, display: 'block' }}>
                               OCR BOUNDING ANCHOR (Conf: {(f.confidence! * 100).toFixed(0)}%)
                             </span>
                             "{f.sourceExcerpt}"
@@ -318,12 +534,18 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                 </div>
 
                 {/* Extracted Fields Table */}
-                <div className="glass-panel" style={{ padding: '16px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
-                    <span style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-secondary)' }}>
+                <div style={{
+                  background: '#ffffff',
+                  border: '1.5px solid #dbe5e2',
+                  borderRadius: '16px',
+                  padding: '18px',
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)'
+                }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px' }}>
+                    <span style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a' }}>
                       Extracted Fields ({selectedDoc.extractedFields.length})
                     </span>
-                    <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
+                    <span style={{ fontSize: '11px', color: '#64748b' }}>
                       Raw vs Normalized Provenance
                     </span>
                   </div>
@@ -331,60 +553,64 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                   {selectedDoc.extractedFields.length > 0 ? (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                       {selectedDoc.extractedFields.map((field) => (
-                        <div 
+                        <div
                           key={field.id}
                           style={{
-                            background: 'var(--bg-surface-elevated)',
-                            border: '1px solid var(--border-subtle)',
-                            borderRadius: 'var(--radius-md)',
-                            padding: '12px',
+                            background: '#f8fafc',
+                            border: '1px solid #e2e8f0',
+                            borderRadius: '10px',
+                            padding: '12px 14px',
                             display: 'flex',
                             flexDirection: 'column',
                             gap: '6px'
                           }}
                         >
                           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-main)' }}>
+                            <span style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a' }}>
                               {field.label}
                             </span>
-                            <span 
-                              className={`badge ${
-                                (field.confidence || 0) >= 0.95 ? 'badge-pass' : 'badge-review'
-                              }`}
-                              style={{ fontSize: '9px', padding: '1px 6px' }}
+                            <span
+                              style={{
+                                fontSize: '10px',
+                                fontWeight: 800,
+                                padding: '2px 8px',
+                                borderRadius: '4px',
+                                background: (field.confidence || 0) >= 0.95 ? '#dcfce7' : '#fef3c7',
+                                color: (field.confidence || 0) >= 0.95 ? '#15803d' : '#92400e'
+                              }}
                             >
                               Conf: {((field.confidence || 0) * 100).toFixed(0)}%
                             </span>
                           </div>
 
-                          <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-                            <strong>Raw OCR:</strong> <code style={{ color: '#e2e8f0' }}>"{field.rawValue}"</code>
+                          <div style={{ fontSize: '12px', color: '#475569' }}>
+                            <strong>Raw OCR:</strong> <code style={{ color: '#0f172a', background: '#e2e8f0', padding: '2px 6px', borderRadius: '4px' }}>"{field.rawValue}"</code>
                           </div>
-                          <div style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-                            <strong>Normalized:</strong> <code style={{ color: 'var(--accent-cyan)' }}>{field.normalizedValue}</code>
+                          <div style={{ fontSize: '12px', color: '#475569' }}>
+                            <strong>Normalized:</strong> <code style={{ color: '#0369a1', background: '#e0f2fe', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>{field.normalizedValue}</code>
                           </div>
 
                           {field.reviewedValue && (
-                            <div style={{ 
-                              fontSize: '11px', 
-                              background: 'rgba(16, 185, 129, 0.1)', 
-                              border: '1px solid rgba(16, 185, 129, 0.3)',
-                              padding: '4px 8px',
-                              borderRadius: '4px',
-                              color: 'var(--status-pass-text)'
+                            <div style={{
+                              fontSize: '11px',
+                              background: '#f0fdf4',
+                              border: '1px solid #86efac',
+                              padding: '5px 10px',
+                              borderRadius: '6px',
+                              color: '#15803d'
                             }}>
                               ✓ Reviewed Value: <strong>{field.reviewedValue}</strong> (by {field.reviewedBy})
                             </div>
                           )}
 
-                          <div style={{ fontSize: '10px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                          <div style={{ fontSize: '10px', color: '#94a3b8', marginTop: '2px' }}>
                             Source Page: {field.pageNumber} • Status: {field.status}
                           </div>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <div style={{ textAlign: 'center', padding: '30px', color: 'var(--text-muted)' }}>
+                    <div style={{ textAlign: 'center', padding: '30px', color: '#94a3b8' }}>
                       No discrete tabular fields mapped for this photograph/plan.
                     </div>
                   )}
@@ -393,7 +619,9 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
             </div>
           )}
         </div>
+        )
       )}
+
 
       {/* Tab 2: Category Checklist */}
       {activeTab === 'CHECKLIST' && (
@@ -429,13 +657,12 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                     </td>
                     <td><span className="badge badge-info">{item.category}</span></td>
                     <td>
-                      <span className={`badge ${
-                        item.result === 'PASS' 
-                          ? 'badge-pass' 
-                          : item.result === 'REVIEW' 
-                          ? 'badge-review' 
-                          : 'badge-insufficient'
-                      }`}>
+                      <span className={`badge ${item.result === 'PASS'
+                          ? 'badge-pass'
+                          : item.result === 'REVIEW'
+                            ? 'badge-review'
+                            : 'badge-insufficient'
+                        }`}>
                         {item.result}
                       </span>
                     </td>
@@ -455,128 +682,211 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
 
       {/* Tab 3: Findings & Actions */}
       {activeTab === 'FINDINGS' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-          <div className="glass-panel" style={{ padding: '14px 18px' }}>
-            <h3 style={{ fontSize: '14px', fontWeight: 700 }}>
-              Explainable Findings & Resolution Center ({application.findings.length})
-            </h3>
-            <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px' }}>
-              Every finding explicitly links to exact rule versions, cited evidence anchors, and uncertainty notes. Findings are cues for review, not fraud allegations.
-            </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+          <div style={{
+            background: '#ffffff',
+            border: '1.5px solid #dbe5e2',
+            borderRadius: '16px',
+            padding: '20px 24px',
+            boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+          }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                Explainable Findings & Resolution Center ({application.findings.length})
+              </h3>
+              <p style={{ fontSize: '12px', color: '#64748b', marginTop: '4px', margin: 0 }}>
+                Every finding explicitly links to exact rule versions, cited evidence anchors, and uncertainty notes. Findings are cues for review, not fraud allegations.
+              </p>
+            </div>
+            <span style={{
+              background: '#fef3c7',
+              color: '#92400e',
+              border: '1px solid #fde68a',
+              borderRadius: '100px',
+              fontSize: '11px',
+              fontWeight: 800,
+              padding: '4px 14px'
+            }}>
+              {application.findings.filter(f => f.status !== 'RESOLVED').length} Unresolved
+            </span>
           </div>
 
           {application.findings.map((f) => (
-            <div 
+            <div
               key={f.id}
-              className="glass-panel"
               style={{
-                borderLeft: f.severity === 'HIGH' 
-                  ? '4px solid var(--accent-rose)' 
-                  : '4px solid var(--accent-amber)'
+                background: '#ffffff',
+                border: '1.5px solid #dbe5e2',
+                borderLeft: f.severity === 'HIGH'
+                  ? '5px solid #e11d48'
+                  : '5px solid #f59e0b',
+                borderRadius: '16px',
+                padding: '22px',
+                boxShadow: '0 6px 20px rgba(0, 0, 0, 0.04)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '14px'
               }}
             >
               <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '12px' }}>
                 <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span className="badge badge-review">{f.findingKey}</span>
-                    <span className={`badge ${f.severity === 'HIGH' ? 'badge-insufficient' : 'badge-review'}`}>
+                  <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+                    <span style={{
+                      background: '#f1f5f9',
+                      color: '#0f172a',
+                      fontSize: '10px',
+                      fontWeight: 800,
+                      padding: '2px 8px',
+                      borderRadius: '6px'
+                    }}>
+                      {f.findingKey}
+                    </span>
+                    <span style={{
+                      background: f.severity === 'HIGH' ? '#ffe4e6' : '#fef3c7',
+                      color: f.severity === 'HIGH' ? '#be123c' : '#92400e',
+                      border: f.severity === 'HIGH' ? '1px solid #fecdd3' : '1px solid #fde68a',
+                      fontSize: '10px',
+                      fontWeight: 800,
+                      padding: '2px 8px',
+                      borderRadius: '6px'
+                    }}>
                       Severity: {f.severity}
                     </span>
-                    <span className="badge badge-info">Status: {f.status}</span>
+                    <span style={{
+                      background: f.status === 'RESOLVED' ? '#dcfce7' : '#e0f2fe',
+                      color: f.status === 'RESOLVED' ? '#15803d' : '#0369a1',
+                      fontSize: '10px',
+                      fontWeight: 800,
+                      padding: '2px 8px',
+                      borderRadius: '6px'
+                    }}>
+                      Status: {f.status}
+                    </span>
                   </div>
-                  <h3 style={{ fontSize: '15px', fontWeight: 700, marginTop: '8px', color: 'var(--text-main)' }}>
+                  <h3 style={{ fontSize: '16px', fontWeight: 800, marginTop: '8px', color: '#0f172a', margin: '8px 0 0 0' }}>
                     {f.title}
                   </h3>
                 </div>
 
                 <div style={{ display: 'flex', gap: '8px' }}>
                   {f.status === 'RESOLVED' ? (
-                    <span className="badge badge-pass" style={{ padding: '6px 12px' }}>
+                    <span style={{
+                      background: '#dcfce7',
+                      color: '#15803d',
+                      border: '1px solid #86efac',
+                      borderRadius: '100px',
+                      fontSize: '11px',
+                      fontWeight: 800,
+                      padding: '6px 14px'
+                    }}>
                       ✓ Resolved: {f.resolutionReason}
                     </span>
                   ) : (
                     resolvingFindingId !== f.id && (
-                      <button 
-                        className="btn btn-secondary btn-sm"
+                      <button
                         onClick={() => setResolvingFindingId(f.id)}
+                        style={{
+                          background: '#f1f5f9',
+                          border: '1px solid #cbd5e1',
+                          color: '#0f172a',
+                          borderRadius: '10px',
+                          padding: '6px 14px',
+                          fontSize: '12px',
+                          fontWeight: 700,
+                          cursor: 'pointer',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          gap: '6px'
+                        }}
                       >
-                        <Check size={13} /> {t.actionResolve}
+                        <Check size={13} color="#15803d" /> {t.actionResolve}
                       </button>
                     )
                   )}
                 </div>
               </div>
 
-              {/* Finding Narrative Details */}
+              {/* Finding Narrative Details 4-Card Grid */}
               <div style={{
-                display: 'grid', 
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
                 gap: '12px',
-                marginTop: '14px',
-                background: 'var(--bg-surface-elevated)',
-                padding: '14px',
-                borderRadius: 'var(--radius-md)'
+                marginTop: '4px'
               }}>
-                <div>
-                  <strong style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                <div style={{ background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '14px' }}>
+                  <strong style={{ fontSize: '10px', color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                     What Was Observed:
                   </strong>
-                  <p style={{ fontSize: '12px', color: 'var(--text-main)', marginTop: '2px' }}>
+                  <p style={{ fontSize: '12px', color: '#0f172a', marginTop: '4px', margin: 0, lineHeight: 1.5 }}>
                     {f.whatObserved}
                   </p>
                 </div>
 
-                <div>
-                  <strong style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: '12px', padding: '14px' }}>
+                  <strong style={{ fontSize: '10px', color: '#1d4ed8', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                     Why It Matters:
                   </strong>
-                  <p style={{ fontSize: '12px', color: 'var(--text-main)', marginTop: '2px' }}>
+                  <p style={{ fontSize: '12px', color: '#1e3a8a', marginTop: '4px', margin: 0, lineHeight: 1.5 }}>
                     {f.whyItMatters}
                   </p>
                 </div>
 
-                <div>
-                  <strong style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                <div style={{ background: '#fffbeb', border: '1px solid #fde68a', borderRadius: '12px', padding: '14px' }}>
+                  <strong style={{ fontSize: '10px', color: '#b45309', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                     Uncertainty / Caveat:
                   </strong>
-                  <p style={{ fontSize: '12px', color: 'var(--accent-amber)', marginTop: '2px' }}>
+                  <p style={{ fontSize: '12px', color: '#92400e', marginTop: '4px', margin: 0, lineHeight: 1.5 }}>
                     {f.uncertaintyNote}
                   </p>
                 </div>
 
-                <div>
-                  <strong style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                <div style={{ background: '#ecfeff', border: '1px solid #a5f3fc', borderRadius: '12px', padding: '14px' }}>
+                  <strong style={{ fontSize: '10px', color: '#0e7490', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                     Recommended Next Action:
                   </strong>
-                  <p style={{ fontSize: '12px', color: 'var(--accent-cyan)', marginTop: '2px' }}>
+                  <p style={{ fontSize: '12px', color: '#155e75', marginTop: '4px', margin: 0, lineHeight: 1.5, fontWeight: 600 }}>
                     {f.recommendedNextStep}
                   </p>
                 </div>
               </div>
 
               {/* Cited Rule & Evidence Anchors */}
-              <div style={{ marginTop: '12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', fontSize: '11px', color: 'var(--text-secondary)' }}>
+              <div style={{
+                marginTop: '4px',
+                paddingTop: '10px',
+                borderTop: '1px solid #f1f5f9',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                flexWrap: 'wrap',
+                gap: '8px',
+                fontSize: '11px',
+                color: '#64748b'
+              }}>
                 <div>
-                  <strong>Cited Regulatory Clause:</strong> <code>{f.ruleCitation.sourceClause}</code> ({f.ruleCitation.sourceLabel})
+                  <strong>Cited Regulatory Clause:</strong> <code style={{ background: '#f1f5f9', padding: '2px 6px', borderRadius: '4px', color: '#0f172a' }}>{f.ruleCitation.sourceClause}</code> ({f.ruleCitation.sourceLabel})
                 </div>
-                <div>
-                  <strong>Anchored Evidence Items:</strong> {f.evidence.length} sources linked
+                <div style={{ background: '#f1f5f9', padding: '3px 10px', borderRadius: '100px', fontWeight: 600 }}>
+                  Anchored Evidence Items: <strong>{f.evidence.length} sources linked</strong>
                 </div>
               </div>
 
               {/* Inline Finding Resolution Form */}
               {resolvingFindingId === f.id && (
-                <div style={{ 
-                  marginTop: '14px', 
-                  padding: '12px', 
-                  background: 'var(--bg-surface-elevated)', 
+                <div style={{
+                  marginTop: '14px',
+                  padding: '12px',
+                  background: 'var(--bg-surface-elevated)',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid var(--primary-500)'
                 }}>
                   <label style={{ fontSize: '12px', fontWeight: 600, display: 'block', marginBottom: '6px' }}>
                     Scrutiny Officer Resolution Rationale (Required):
                   </label>
-                  <input 
+                  <input
                     type="text"
                     className="input-control"
                     placeholder="E.g., Verified adjunct roster; confirmed valid fire undertaking received..."
@@ -587,7 +897,7 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                     <button className="btn btn-outline btn-sm" onClick={() => setResolvingFindingId(null)}>
                       Cancel
                     </button>
-                    <button 
+                    <button
                       className="btn btn-primary btn-sm"
                       onClick={() => handleConfirmResolve(f.id)}
                       disabled={!resolutionNote.trim()}
@@ -604,7 +914,14 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
 
       {/* Tab 4: Evidence Graph */}
       {activeTab === 'GRAPH' && (
-        <AccessibleGraph nodes={mockEvidenceNodes} edges={mockEvidenceEdges} />
+        <AccessibleGraph 
+          initialFocusedCluster="cluster-pune-land"
+          onOpenCaseReview={(finding) => {
+            setSplitPaneFinding(finding);
+            setIsSplitPaneOpen(true);
+            setActiveTab('DOCUMENTS');
+          }}
+        />
       )}
 
       {/* Tab 5: Digital Twin & Cross-Year Diff */}
@@ -709,13 +1026,12 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                         </span>
                       </td>
                       <td>
-                        <span className={`badge ${
-                          attr.reviewStatus === 'CONFIRMED' 
-                            ? 'badge-pass' 
-                            : attr.reviewStatus === 'DISPUTED' 
-                            ? 'badge-insufficient' 
-                            : 'badge-review'
-                        }`} style={{ fontSize: '10px' }}>
+                        <span className={`badge ${attr.reviewStatus === 'CONFIRMED'
+                            ? 'badge-pass'
+                            : attr.reviewStatus === 'DISPUTED'
+                              ? 'badge-insufficient'
+                              : 'badge-review'
+                          }`} style={{ fontSize: '10px' }}>
                           {attr.reviewStatus}
                         </span>
                       </td>

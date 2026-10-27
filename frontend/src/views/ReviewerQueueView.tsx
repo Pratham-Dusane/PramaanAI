@@ -18,11 +18,13 @@ import {
 import { Application, UserRole } from '../types';
 import { SupportedLanguage, translations } from '../data/translations';
 import { ComplianceAnalytics } from '../components/ComplianceAnalytics';
+import { GitFork } from 'lucide-react';
 
 interface ReviewerQueueViewProps {
   applications: Application[];
   onSelectApplication: (appId: string) => void;
   onOpenDecisionModal: (app: Application) => void;
+  onOpenGraphForCase?: (appId: string, clusterId?: string) => void;
   currentRole: UserRole;
   currentLang: SupportedLanguage;
 }
@@ -39,6 +41,7 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
   applications,
   onSelectApplication,
   onOpenDecisionModal,
+  onOpenGraphForCase,
   currentRole,
   currentLang
 }) => {
@@ -631,12 +634,30 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
                       </span>
                     ) : (
                       <>
-                        {/* Most urgent discrepancy badge first */}
+                        {/* Most urgent discrepancy badge first - Deep Linked to Evidence Graph */}
                         <span 
                           className={`badge ${orderedDiscrepancies[0].badgeClass}`} 
-                          style={{ fontSize: '10px', padding: '2px 8px', whiteSpace: 'nowrap' }}
+                          style={{ 
+                            fontSize: '10px', 
+                            padding: '3px 8px', 
+                            whiteSpace: 'nowrap',
+                            cursor: onOpenGraphForCase ? 'pointer' : 'default',
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '4px',
+                            boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+                            transition: 'all 0.15s ease'
+                          }}
+                          onClick={(e) => {
+                            if (onOpenGraphForCase) {
+                              e.stopPropagation();
+                              onOpenGraphForCase(app.id, app.institutionId === 'DEMO-INST-001' ? 'cluster-pune-land' : undefined);
+                            }
+                          }}
+                          title="Click to inspect this case's multi-institution cluster on the Evidence Graph"
                         >
-                          {orderedDiscrepancies[0].label}
+                          <span>{orderedDiscrepancies[0].label}</span>
+                          <GitFork size={10} style={{ opacity: 0.8 }} />
                         </span>
 
                         {/* Compact +1 badge if additional discrepancy levels exist */}
@@ -646,10 +667,16 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
                             title={orderedDiscrepancies.slice(1).map(d => d.label).join(', ')}
                             style={{ 
                               fontSize: '10px', 
-                              padding: '2px 7px', 
+                              padding: '3px 7px', 
                               fontWeight: 800, 
-                              cursor: 'help',
+                              cursor: onOpenGraphForCase ? 'pointer' : 'help',
                               whiteSpace: 'nowrap'
+                            }}
+                            onClick={(e) => {
+                              if (onOpenGraphForCase) {
+                                e.stopPropagation();
+                                onOpenGraphForCase(app.id, app.institutionId === 'DEMO-INST-001' ? 'cluster-pune-land' : undefined);
+                              }
                             }}
                           >
                             +{orderedDiscrepancies.length - 1}

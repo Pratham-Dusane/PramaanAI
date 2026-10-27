@@ -48,7 +48,7 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
   en: {
     appTitle: 'AICTE Application Validation & Compliance Intelligence Platform',
     appSubtitle: 'Advisory Decision Support System for Institutional Scrutiny',
-    demoBanner: 'Demonstration environment — synthetic records; not an official AICTE system.',
+    demoBanner: 'Demonstration environment - synthetic records; not an official AICTE system.',
     switchRole: 'Switch Role',
     activeRole: 'Active Role',
     searchPlaceholder: 'Search by Application ID, Institute Name or Keyword...',
@@ -91,7 +91,7 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
   hi: {
     appTitle: 'एआईसीटीई आवेदन सत्यापन एवं संस्थान अनुपालन आसूचना मंच',
     appSubtitle: 'संस्थागत जांच हेतु सलाहकार निर्णय समर्थन प्रणाली',
-    demoBanner: 'प्रदर्शन वातावरण — कृत्रिम आंकड़े; यह एआईसीटीई की आधिकारिक प्रणाली नहीं है।',
+    demoBanner: 'प्रदर्शन वातावरण - कृत्रिम आंकड़े; यह एआईसीटीई की आधिकारिक प्रणाली नहीं है।',
     switchRole: 'भूमिका बदलें',
     activeRole: 'सक्रिय भूमिका',
     searchPlaceholder: 'आवेदन आईडी, संस्थान का नाम या कीवर्ड खोजें...',
@@ -134,7 +134,7 @@ export const translations: Record<SupportedLanguage, TranslationDictionary> = {
   mr: {
     appTitle: 'एआयसीटीई अर्ज पडताळणी व संस्थात्मक अनुपालन बुद्धिमत्ता प्रणाली',
     appSubtitle: 'संस्थात्मक छाननीसाठी सल्लागार निर्णय सहाय्य प्रणाली',
-    demoBanner: 'प्रात्यक्षिक पर्यावरण — कृत्रिम नोंदी; ही अधिकृत एआयसीटीई प्रणाली नाही.',
+    demoBanner: 'प्रात्यक्षिक पर्यावरण - कृत्रिम नोंदी; ही अधिकृत एआयसीटीई प्रणाली नाही.',
     switchRole: 'भूमिका बदला',
     activeRole: 'सक्रिय भूमिका',
     searchPlaceholder: 'अर्ज क्रमांक, संस्थेचे नाव किंवा शब्द शोधा...',

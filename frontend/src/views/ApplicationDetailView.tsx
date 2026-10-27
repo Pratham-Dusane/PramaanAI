@@ -137,18 +137,25 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
             return (
               <button
                 key={tab.id}
-                className={`btn btn-sm ${isActive ? 'btn-primary' : 'btn-outline'}`}
+                className={`btn btn-sm ${isActive ? 'btn-pine' : 'btn-outline'}`}
                 onClick={() => setActiveTab(tab.id as any)}
-                style={{ whiteSpace: 'nowrap', gap: '6px' }}
+                style={{ 
+                  whiteSpace: 'nowrap', 
+                  gap: '6px',
+                  borderRadius: 'var(--radius-full)',
+                  boxShadow: isActive ? '0 4px 12px rgba(38, 61, 57, 0.2)' : 'none'
+                }}
               >
-                <Icon size={13} />
+                <Icon size={13} color={isActive ? 'var(--accent-gold)' : undefined} />
                 <span>{tab.label}</span>
                 {tab.count !== undefined && (
                   <span style={{ 
-                    background: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.06)',
+                    background: isActive ? 'rgba(212, 160, 52, 0.25)' : 'var(--bg-surface-elevated)',
+                    color: isActive ? 'var(--accent-gold)' : 'var(--text-secondary)',
                     padding: '1px 6px',
                     borderRadius: '10px',
-                    fontSize: '10px'
+                    fontSize: '10px',
+                    fontWeight: 800
                   }}>
                     {tab.count}
                   </span>
@@ -175,25 +182,25 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                     key={doc.id}
                     onClick={() => setSelectedDocId(doc.id)}
                     style={{
-                      background: isSelected ? 'var(--bg-surface-elevated)' : 'rgba(255, 255, 255, 0.02)',
-                      border: '1px solid',
-                      borderColor: isSelected ? 'var(--primary-500)' : 'var(--border-subtle)',
-                      borderRadius: 'var(--radius-md)',
-                      padding: '12px',
+                      background: isSelected ? '#ffffff' : 'var(--bg-surface-elevated)',
+                      border: isSelected ? '2px solid var(--accent-gold)' : '1px solid var(--border-subtle)',
+                      borderRadius: 'var(--radius-lg)',
+                      padding: '14px',
                       cursor: 'pointer',
-                      transition: 'all var(--transition-fast)'
+                      transition: 'all var(--transition-fast)',
+                      boxShadow: isSelected ? 'var(--shadow-md)' : 'none'
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <span className="badge badge-info" style={{ fontSize: '9px', padding: '2px 6px' }}>
+                      <span className="badge badge-info" style={{ fontSize: '9px', padding: '2px 8px' }}>
                         {doc.documentType}
                       </span>
-                      <span className={`badge ${doc.status === 'EXTRACTED' ? 'badge-pass' : 'badge-review'}`} style={{ fontSize: '9px', padding: '2px 6px' }}>
+                      <span className={`badge ${doc.status === 'EXTRACTED' ? 'badge-pass' : 'badge-review'}`} style={{ fontSize: '9px', padding: '2px 8px' }}>
                         {doc.status}
                       </span>
                     </div>
 
-                    <h4 style={{ fontSize: '13px', fontWeight: 600, color: '#fff', marginTop: '6px' }}>
+                    <h4 style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)', marginTop: '8px' }}>
                       {doc.title}
                     </h4>
 
@@ -251,22 +258,23 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                   </div>
 
                   <div style={{
-                    background: '#0b1120',
-                    border: '1px solid var(--border-subtle)',
-                    borderRadius: 'var(--radius-md)',
+                    background: '#fafbf9',
+                    border: '1.5px solid #d8e4e0',
+                    borderRadius: 'var(--radius-lg)',
                     padding: '24px',
                     minHeight: '340px',
                     position: 'relative',
-                    color: '#cbd5e1',
+                    color: 'var(--text-main)',
                     fontSize: '12px',
                     lineHeight: 1.8,
-                    fontFamily: 'serif'
+                    fontFamily: 'serif',
+                    boxShadow: 'inset 0 0 20px rgba(38, 61, 57, 0.03)'
                   }}>
-                    <div style={{ textAlign: 'center', marginBottom: '16px', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '8px' }}>
-                      <strong style={{ fontSize: '13px', color: '#fff', textTransform: 'uppercase' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '16px', borderBottom: '1px solid rgba(38, 61, 57, 0.1)', paddingBottom: '8px' }}>
+                      <strong style={{ fontSize: '13px', color: 'var(--text-main)', textTransform: 'uppercase' }}>
                         {selectedDoc.title}
                       </strong>
-                      <div style={{ fontSize: '10px', color: '#94a3b8' }}>
+                      <div style={{ fontSize: '10px', color: 'var(--text-muted)' }}>
                         Official Filing Annexure • Academic Year 2026-27
                       </div>
                     </div>
@@ -336,7 +344,7 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                           }}
                         >
                           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <span style={{ fontSize: '12px', fontWeight: 700, color: '#fff' }}>
+                            <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-main)' }}>
                               {field.label}
                             </span>
                             <span 
@@ -476,7 +484,7 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                     </span>
                     <span className="badge badge-info">Status: {f.status}</span>
                   </div>
-                  <h3 style={{ fontSize: '15px', fontWeight: 700, marginTop: '8px', color: '#fff' }}>
+                  <h3 style={{ fontSize: '15px', fontWeight: 700, marginTop: '8px', color: 'var(--text-main)' }}>
                     {f.title}
                   </h3>
                 </div>
@@ -505,7 +513,7 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                 gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', 
                 gap: '12px',
                 marginTop: '14px',
-                background: 'rgba(0,0,0,0.2)',
+                background: 'var(--bg-surface-elevated)',
                 padding: '14px',
                 borderRadius: 'var(--radius-md)'
               }}>
@@ -513,7 +521,7 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                   <strong style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
                     What Was Observed:
                   </strong>
-                  <p style={{ fontSize: '12px', color: '#e2e8f0', marginTop: '2px' }}>
+                  <p style={{ fontSize: '12px', color: 'var(--text-main)', marginTop: '2px' }}>
                     {f.whatObserved}
                   </p>
                 </div>
@@ -522,7 +530,7 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
                   <strong style={{ fontSize: '11px', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
                     Why It Matters:
                   </strong>
-                  <p style={{ fontSize: '12px', color: '#e2e8f0', marginTop: '2px' }}>
+                  <p style={{ fontSize: '12px', color: 'var(--text-main)', marginTop: '2px' }}>
                     {f.whyItMatters}
                   </p>
                 </div>
@@ -744,12 +752,12 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
               gap: '8px'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <AlertTriangle size={16} color="var(--accent-amber)" />
-                <strong style={{ color: '#fff', fontSize: '13px' }}>
+                <AlertTriangle size={16} color="var(--accent-gold-dark)" />
+                <strong style={{ color: 'var(--status-review-text)', fontSize: '13px' }}>
                   Visual Duplicate Candidate Detected (98.4% Similarity)
                 </strong>
               </div>
-              <p style={{ fontSize: '12px', color: '#fde68a' }}>
+              <p style={{ fontSize: '12px', color: 'var(--text-main)' }}>
                 The uploaded photograph of "Central Computer Center" has a pHash Hamming distance of 2 compared to an image submitted by <strong>Sardar Patel Institute (DEMO-INST-002)</strong>.
               </p>
               <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>
@@ -767,8 +775,8 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
             </p>
 
             <div style={{
-              background: 'rgba(244, 63, 94, 0.1)',
-              border: '1px solid var(--accent-rose)',
+              background: 'rgba(217, 72, 60, 0.08)',
+              border: '1px solid var(--status-insufficient-border)',
               borderRadius: 'var(--radius-md)',
               padding: '14px',
               display: 'flex',
@@ -776,12 +784,12 @@ export const ApplicationDetailView: React.FC<ApplicationDetailViewProps> = ({
               gap: '8px'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <AlertTriangle size={16} color="var(--accent-rose)" />
-                <strong style={{ color: '#fff', fontSize: '13px' }}>
+                <AlertTriangle size={16} color="var(--status-insufficient-text)" />
+                <strong style={{ color: 'var(--status-insufficient-text)', fontSize: '13px' }}>
                   Floor Plan Dimension Discrepancy
                 </strong>
               </div>
-              <p style={{ fontSize: '12px', color: '#fecdd3' }}>
+              <p style={{ fontSize: '12px', color: 'var(--text-main)' }}>
                 Classroom C-204 is labeled as <strong>54 sq.m.</strong> on the architectural drawing, whereas Application Form Schedule B declares it as <strong>66 sq.m.</strong>
               </p>
               <div style={{ fontSize: '11px', color: 'var(--text-muted)' }}>

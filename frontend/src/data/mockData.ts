@@ -476,6 +476,46 @@ export const mockApplications: Application[] = [
     checklist: [],
     findings: [],
     documents: []
+  },
+  {
+    id: 'DEMO-NEW-2026-003',
+    institutionId: 'DEMO-INST-003',
+    institutionName: 'Bangalore Institute of Advanced Computing',
+    applicationType: 'NEW_PROGRAM',
+    applicationCategory: 'DEMO_NEW_INSTITUTION',
+    academicYear: '2026-27',
+    status: 'READY_FOR_REVIEW',
+    urgencyScore: 92,
+    deadlineAt: '2026-11-10T23:59:59Z',
+    requiredDocuments: { total: 10, present: 9, missing: 1 },
+    openFindingsCount: { high: 2, medium: 1, low: 0 },
+    assignedReviewerId: 'REV-402',
+    assignedReviewerName: 'Dr. S. K. Raman (Senior Scrutiny Officer)',
+    createdAt: '2026-10-20T08:00:00Z',
+    updatedAt: '2026-10-26T16:20:00Z',
+    checklist: [],
+    findings: [],
+    documents: []
+  },
+  {
+    id: 'DEMO-EOA-2026-004',
+    institutionId: 'DEMO-INST-004',
+    institutionName: 'Chennai Metropolitan School of Technology',
+    applicationType: 'EXTENSION_OF_APPROVAL',
+    applicationCategory: 'DEMO_EOA',
+    academicYear: '2026-27',
+    status: 'UNDER_REVIEW',
+    urgencyScore: 78,
+    deadlineAt: '2026-11-18T23:59:59Z',
+    requiredDocuments: { total: 8, present: 8, missing: 0 },
+    openFindingsCount: { high: 1, medium: 0, low: 2 },
+    assignedReviewerId: 'REV-305',
+    assignedReviewerName: 'Prof. Anjali Saxena',
+    createdAt: '2026-10-19T11:30:00Z',
+    updatedAt: '2026-10-25T15:45:00Z',
+    checklist: [],
+    findings: [],
+    documents: []
   }
 ];
 

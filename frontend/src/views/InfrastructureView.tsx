@@ -52,13 +52,13 @@ export const InfrastructureView: React.FC = () => {
               <div style={{
                 width: '120px',
                 height: '90px',
-                background: '#1e293b',
+                background: 'var(--bg-pine)',
                 borderRadius: 'var(--radius-sm)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontSize: '11px',
-                color: 'var(--text-muted)',
+                color: 'var(--text-on-pine-secondary)',
                 border: '1px solid var(--border-subtle)'
               }}>
                 [Photo Asset A]
@@ -75,11 +75,11 @@ export const InfrastructureView: React.FC = () => {
             </div>
 
             <div style={{
-              background: 'rgba(245, 158, 11, 0.1)',
-              borderLeft: '3px solid var(--accent-amber)',
+              background: 'var(--status-review-bg)',
+              borderLeft: '3px solid var(--accent-gold)',
               padding: '8px 12px',
               fontSize: '11px',
-              color: '#fde68a'
+              color: 'var(--status-review-text)'
             }}>
               ⚠ Similar visual layout matches photo uploaded in application <strong>DEMO-EOA-2026-002</strong> by Sardar Patel Institute. OCR detected background signage reading "SP Applied Lab 2".
             </div>
@@ -119,22 +119,22 @@ export const InfrastructureView: React.FC = () => {
               gap: '10px',
               fontSize: '12px'
             }}>
-              <div style={{ background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: 'var(--radius-sm)' }}>
+              <div style={{ background: '#ffffff', border: '1px solid var(--border-subtle)', padding: '10px', borderRadius: 'var(--radius-sm)' }}>
                 <span style={{ fontSize: '10px', color: 'var(--text-muted)', display: 'block' }}>FORM DECLARATION:</span>
                 <strong>Classroom C-204 = 66 sq.m.</strong>
               </div>
-              <div style={{ background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: 'var(--radius-sm)' }}>
+              <div style={{ background: '#ffffff', border: '1px solid var(--border-subtle)', padding: '10px', borderRadius: 'var(--radius-sm)' }}>
                 <span style={{ fontSize: '10px', color: 'var(--text-muted)', display: 'block' }}>BLUEPRINT OCR LABEL:</span>
-                <strong style={{ color: 'var(--accent-rose)' }}>Classroom C-204 = 54 sq.m.</strong>
+                <strong style={{ color: 'var(--status-insufficient-text)' }}>Classroom C-204 = 54 sq.m.</strong>
               </div>
             </div>
 
             <div style={{
-              background: 'rgba(244, 63, 94, 0.1)',
-              borderLeft: '3px solid var(--accent-rose)',
+              background: 'var(--status-insufficient-bg)',
+              borderLeft: '3px solid var(--status-insufficient-text)',
               padding: '8px 12px',
               fontSize: '11px',
-              color: '#fecdd3'
+              color: 'var(--status-insufficient-text)'
             }}>
               Discrepancy: Blueprint dimension shows 54 sq.m. which does not meet the minimum 66 sq.m. norm for 60-student batch division.
             </div>

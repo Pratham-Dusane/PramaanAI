@@ -75,7 +75,7 @@ export const RulesAdminView: React.FC = () => {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '13px', fontWeight: 700, color: '#fff' }}>
+                    <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)' }}>
                       {pack.rulePackId}
                     </span>
                     <span className={`badge ${pack.status === 'PUBLISHED' ? 'badge-pass' : 'badge-review'}`} style={{ fontSize: '9px', padding: '1px 6px' }}>
@@ -92,11 +92,11 @@ export const RulesAdminView: React.FC = () => {
 
           <div style={{
             marginTop: '12px',
-            background: 'rgba(0, 0, 0, 0.25)',
+            background: 'var(--bg-surface-elevated)',
             padding: '12px',
             borderRadius: 'var(--radius-md)',
             fontSize: '11px',
-            color: 'var(--text-muted)'
+            color: 'var(--text-secondary)'
           }}>
             <strong>Source Provenance Disclaimer:</strong>
             <p style={{ marginTop: '4px' }}>{selectedPack.sourceDisclaimer}</p>
@@ -153,19 +153,19 @@ export const RulesAdminView: React.FC = () => {
                   </span>
                 </div>
 
-                <h4 style={{ fontSize: '13px', fontWeight: 600, color: '#fff' }}>{rule.title}</h4>
+                <h4 style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)' }}>{rule.title}</h4>
                 <p style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>{rule.description}</p>
 
                 {/* Allowlisted Predicate JSON */}
                 <div style={{
-                  background: 'rgba(0, 0, 0, 0.4)',
-                  padding: '10px 12px',
-                  borderRadius: 'var(--radius-sm)',
+                  background: 'var(--bg-pine)',
+                  padding: '10px 14px',
+                  borderRadius: 'var(--radius-md)',
                   fontSize: '11px',
                   fontFamily: 'var(--font-mono)',
-                  color: '#e2e8f0'
+                  color: 'var(--text-on-pine-secondary)'
                 }}>
-                  <span style={{ color: 'var(--text-muted)' }}>// Declarative AST Predicate:</span>
+                  <span style={{ color: 'var(--accent-gold)' }}>// Declarative AST Predicate:</span>
                   <div>{JSON.stringify(rule.predicate, null, 2)}</div>
                 </div>
 

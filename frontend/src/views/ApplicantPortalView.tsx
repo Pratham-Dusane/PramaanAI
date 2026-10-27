@@ -119,17 +119,18 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
 
           {/* Drag & Drop File Upload Area */}
           <div style={{
-            border: '2px dashed var(--border-subtle)',
+            border: '2px dashed var(--border-accent)',
             borderRadius: 'var(--radius-lg)',
-            padding: '24px',
             textAlign: 'center',
-            background: 'rgba(255, 255, 255, 0.01)',
-            cursor: 'pointer'
+            background: 'var(--bg-surface-elevated)',
+            cursor: 'pointer',
+            padding: '32px 24px',
+            transition: 'all var(--transition-fast)'
           }}
           onClick={handleSimulateUpload}
           >
-            <UploadCloud size={32} color="var(--primary-500)" style={{ margin: '0 auto 8px' }} />
-            <div style={{ fontSize: '13px', fontWeight: 600, color: '#fff' }}>
+            <UploadCloud size={36} color="var(--accent-gold-dark)" style={{ margin: '0 auto 10px' }} />
+            <div style={{ fontSize: '14px', fontWeight: 700, color: 'var(--text-main)' }}>
               Drag & Drop PDF or Image Evidence Dossier
             </div>
             <div style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '4px' }}>
@@ -179,7 +180,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
               gap: '10px'
             }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <strong style={{ fontSize: '13px', color: '#fff' }}>Preflight Diagnostic Summary</strong>
+                <strong style={{ fontSize: '13px', color: 'var(--text-main)' }}>Preflight Diagnostic Summary</strong>
                 <span className="badge badge-review">1 Preventable Omission Detected</span>
               </div>
 
@@ -227,7 +228,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
                 }}
               >
                 <div>
-                  <h4 style={{ fontSize: '13px', fontWeight: 600, color: '#fff' }}>{item.label}</h4>
+                  <h4 style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)' }}>{item.label}</h4>
                   <div style={{ fontSize: '11px', color: 'var(--text-secondary)', marginTop: '2px' }}>
                     Value: <code>{item.value}</code> • Provenance: {item.source}
                   </div>

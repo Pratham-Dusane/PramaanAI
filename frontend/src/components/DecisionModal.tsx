@@ -83,7 +83,7 @@ export const DecisionModal: React.FC<DecisionModalProps> = ({
           }}>
             <AlertOctagon size={20} color="var(--accent-rose)" style={{ flexShrink: 0, marginTop: '2px' }} />
             <div style={{ fontSize: '12px' }}>
-              <strong style={{ color: '#fff' }}>Access Restricted: Permission "decision.record" Required</strong>
+              <strong style={{ color: 'var(--status-insufficient-text)' }}>Access Restricted: Permission "decision.record" Required</strong>
               <p style={{ color: '#fb7185', marginTop: '2px' }}>
                 Your current role (<strong>{currentRole}</strong>) is advisory only. In accordance with safety invariant ADR-005, AI agents and scrutiny reviewers cannot write official approval or rejection decisions.
               </p>

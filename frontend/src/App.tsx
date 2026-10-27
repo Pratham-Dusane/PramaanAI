@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Navbar } from './components/Navbar';
-import { Sidebar, ActiveView } from './components/Sidebar';
+import { Navbar, ActiveView } from './components/Navbar';
 import { CopilotDrawer } from './components/CopilotDrawer';
+import { CopilotButton } from './components/CopilotButton';
 import { NotificationCenter } from './components/NotificationCenter';
 import { DecisionModal } from './components/DecisionModal';
 import { ReviewerQueueView } from './views/ReviewerQueueView';
@@ -37,6 +37,14 @@ export const App: React.FC = () => {
   const [isCopilotOpen, setIsCopilotOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [decisionModalApp, setDecisionModalApp] = useState<Application | null>(null);
+
+  const handleToggleCopilot = () => {
+    setIsCopilotOpen(!isCopilotOpen);
+  };
+
+  const handleCloseCopilot = () => {
+    setIsCopilotOpen(false);
+  };
 
   const selectedApp = applications.find((a) => a.id === selectedAppId) || applications[0];
   const unreadAlerts = notifications.filter((n) => !n.acknowledged).length;
@@ -117,7 +125,7 @@ export const App: React.FC = () => {
 
   return (
     <div className="app-container">
-      {/* Top Universal Navbar */}
+      {/* Top Universal Horizontal Navigation Bar */}
       <Navbar 
         currentRole={currentRole}
         onRoleChange={setCurrentRole}
@@ -125,21 +133,19 @@ export const App: React.FC = () => {
         onLangChange={setCurrentLang}
         unreadAlertsCount={unreadAlerts}
         onToggleNotifications={() => setIsNotificationsOpen(true)}
-        onToggleCopilot={() => setIsCopilotOpen(!isCopilotOpen)}
-        isCopilotOpen={isCopilotOpen}
+        activeView={activeView}
+        onSelectView={setActiveView}
+        openFindingsCount={totalOpenFindings}
       />
 
       {/* Main App Workspace */}
-      <div className="main-layout">
-        {/* Left Primary Navigation Sidebar */}
-        <Sidebar 
-          activeView={activeView}
-          onSelectView={setActiveView}
-          currentLang={currentLang}
-          currentRole={currentRole}
-          openFindingsCount={totalOpenFindings}
-        />
-
+      <div 
+        className="main-layout"
+        style={{
+          marginRight: isCopilotOpen ? '450px' : '0',
+          transition: 'margin-right 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+        }}
+      >
         {/* View Content Canvas */}
         <main className="content-area">
           {activeView === 'QUEUE' && (
@@ -204,10 +210,16 @@ export const App: React.FC = () => {
         </main>
       </div>
 
+      {/* Floating Bottom-Right Kokonut / Bklit Copilot Button */}
+      <CopilotButton 
+        isOpen={isCopilotOpen} 
+        onToggle={handleToggleCopilot} 
+      />
+
       {/* Slide-out Grounded Regulatory Copilot Drawer */}
       <CopilotDrawer 
         isOpen={isCopilotOpen} 
-        onClose={() => setIsCopilotOpen(false)} 
+        onClose={handleCloseCopilot} 
       />
 
       {/* Deadline & Expiry Alerts Modal */}

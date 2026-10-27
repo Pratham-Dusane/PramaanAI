@@ -41,7 +41,7 @@ export const DuplicatesView: React.FC = () => {
             gap: '8px'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <strong style={{ fontSize: '12px', color: '#fff' }}>
+              <strong style={{ fontSize: '13px', color: 'var(--text-main)' }}>
                 Pune_PMC_Fire_NOC_2025_26.pdf
               </strong>
               <span className="badge badge-info" style={{ fontSize: '10px' }}>
@@ -86,7 +86,7 @@ export const DuplicatesView: React.FC = () => {
             gap: '8px'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <strong style={{ fontSize: '12px', color: '#fff' }}>
+              <strong style={{ fontSize: '13px', color: 'var(--text-main)' }}>
                 Campus_Computer_Center_Geo.jpg
               </strong>
               <span className="badge badge-review" style={{ fontSize: '10px' }}>

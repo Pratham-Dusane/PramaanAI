@@ -90,7 +90,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
               </div>
 
               <div>
-                <h4 style={{ fontSize: '13px', fontWeight: 600, color: '#fff' }}>{item.title}</h4>
+                <h4 style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-main)' }}>{item.title}</h4>
                 <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '2px' }}>
                   {item.description}
                 </p>

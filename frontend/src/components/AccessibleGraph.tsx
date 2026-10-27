@@ -91,26 +91,26 @@ export const AccessibleGraph: React.FC<AccessibleGraphProps> = ({ nodes, edges }
                   refY="3" 
                   orient="auto"
                 >
-                  <polygon points="0 0, 8 3, 0 6" fill="rgba(255, 255, 255, 0.25)" />
+                  <polygon points="0 0, 8 3, 0 6" fill="rgba(38, 61, 57, 0.5)" />
                 </marker>
               </defs>
 
               {/* Hardcoded coordinates for demo readability */}
               {/* Edges */}
-              <line x1="100" y1="210" x2="220" y2="210" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
-              <line x1="220" y1="210" x2="350" y2="120" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
-              <line x1="220" y1="210" x2="350" y2="210" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
-              <line x1="220" y1="210" x2="350" y2="300" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
+              <line x1="100" y1="210" x2="220" y2="210" stroke="rgba(38, 61, 57, 0.25)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
+              <line x1="220" y1="210" x2="350" y2="120" stroke="rgba(38, 61, 57, 0.25)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
+              <line x1="220" y1="210" x2="350" y2="210" stroke="rgba(38, 61, 57, 0.25)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
+              <line x1="220" y1="210" x2="350" y2="300" stroke="rgba(38, 61, 57, 0.25)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
               
-              <line x1="350" y1="120" x2="480" y2="120" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
-              <line x1="350" y1="210" x2="480" y2="210" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
-              <line x1="350" y1="300" x2="480" y2="300" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
+              <line x1="350" y1="120" x2="480" y2="120" stroke="rgba(38, 61, 57, 0.25)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
+              <line x1="350" y1="210" x2="480" y2="210" stroke="rgba(38, 61, 57, 0.25)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
+              <line x1="350" y1="300" x2="480" y2="300" stroke="rgba(38, 61, 57, 0.25)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
 
-              <line x1="480" y1="120" x2="590" y2="160" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
-              <line x1="480" y1="210" x2="590" y2="160" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
-              <line x1="590" y1="160" x2="680" y2="160" stroke="rgba(245,158,11,0.5)" strokeWidth="2" markerEnd="url(#arrowhead)" />
+              <line x1="480" y1="120" x2="590" y2="160" stroke="rgba(38, 61, 57, 0.25)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
+              <line x1="480" y1="210" x2="590" y2="160" stroke="rgba(38, 61, 57, 0.25)" strokeWidth="1.5" markerEnd="url(#arrowhead)" />
+              <line x1="590" y1="160" x2="680" y2="160" stroke="rgba(212, 160, 52, 0.7)" strokeWidth="2" markerEnd="url(#arrowhead)" />
 
-              <line x1="480" y1="300" x2="680" y2="300" stroke="rgba(244,63,94,0.5)" strokeWidth="2" markerEnd="url(#arrowhead)" />
+              <line x1="480" y1="300" x2="680" y2="300" stroke="rgba(217, 72, 60, 0.7)" strokeWidth="2" markerEnd="url(#arrowhead)" />
 
               {/* Node Renderers */}
               {[
@@ -145,9 +145,9 @@ export const AccessibleGraph: React.FC<AccessibleGraphProps> = ({ nodes, edges }
                     <text 
                       y={34} 
                       textAnchor="middle" 
-                      fill="#e2e8f0" 
+                      fill="var(--text-main)" 
                       fontSize="10" 
-                      fontWeight="600"
+                      fontWeight="700"
                     >
                       {node.label.length > 18 ? node.label.slice(0, 16) + '...' : node.label}
                     </text>

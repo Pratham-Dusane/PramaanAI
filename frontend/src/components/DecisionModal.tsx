@@ -88,7 +88,7 @@ export const DecisionModal: React.FC<DecisionModalProps> = ({
                 Your current role (<strong>{currentRole}</strong>) is advisory only. In accordance with safety invariant ADR-005, AI agents and scrutiny reviewers cannot write official approval or rejection decisions.
               </p>
               <p style={{ color: 'var(--text-secondary)', marginTop: '6px' }}>
-                💡 <em>Tip: Switch your active role in the top header to <strong>Senior Approver</strong> to simulate authorized decision recording.</em>
+                <em>Note: Switch your active role in the top header to <strong>Senior Approver</strong> to simulate authorized decision recording.</em>
               </p>
             </div>
           </div>
@@ -130,31 +130,64 @@ export const DecisionModal: React.FC<DecisionModalProps> = ({
             <label style={{ fontSize: '12px', fontWeight: 600, display: 'block', marginBottom: '6px' }}>
               Official Decision Outcome
             </label>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px' }}>
               <button
                 type="button"
-                className={`btn ${decisionType === 'APPROVED' ? 'btn-primary' : 'btn-secondary'}`}
                 onClick={() => setDecisionType('APPROVED')}
-                style={{ fontSize: '12px', padding: '8px' }}
                 disabled={!isAuthorized}
+                style={{
+                  padding: '12px 10px',
+                  borderRadius: '12px',
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  cursor: isAuthorized ? 'pointer' : 'not-allowed',
+                  border: decisionType === 'APPROVED' ? '2px solid #059669' : '1px solid #cbd5e1',
+                  background: decisionType === 'APPROVED' ? 'rgba(5, 150, 105, 0.1)' : '#ffffff',
+                  color: decisionType === 'APPROVED' ? '#065f46' : '#475569',
+                  transition: 'all 0.18s ease',
+                  transform: decisionType === 'APPROVED' ? 'translateY(-2px)' : 'none',
+                  boxShadow: decisionType === 'APPROVED' ? '0 4px 12px rgba(5, 150, 105, 0.2)' : 'none'
+                }}
               >
                 Approve EoA
               </button>
               <button
                 type="button"
-                className={`btn ${decisionType === 'DEFERRED_FOR_INSPECTION' ? 'btn-primary' : 'btn-secondary'}`}
                 onClick={() => setDecisionType('DEFERRED_FOR_INSPECTION')}
-                style={{ fontSize: '12px', padding: '8px' }}
                 disabled={!isAuthorized}
+                style={{
+                  padding: '12px 10px',
+                  borderRadius: '12px',
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  cursor: isAuthorized ? 'pointer' : 'not-allowed',
+                  border: decisionType === 'DEFERRED_FOR_INSPECTION' ? '2px solid #d97706' : '1px solid #cbd5e1',
+                  background: decisionType === 'DEFERRED_FOR_INSPECTION' ? 'rgba(217, 119, 6, 0.1)' : '#ffffff',
+                  color: decisionType === 'DEFERRED_FOR_INSPECTION' ? '#92400e' : '#475569',
+                  transition: 'all 0.18s ease',
+                  transform: decisionType === 'DEFERRED_FOR_INSPECTION' ? 'translateY(-2px)' : 'none',
+                  boxShadow: decisionType === 'DEFERRED_FOR_INSPECTION' ? '0 4px 12px rgba(217, 119, 6, 0.2)' : 'none'
+                }}
               >
                 Defer for Inspection
               </button>
               <button
                 type="button"
-                className={`btn ${decisionType === 'REJECTED' ? 'btn-danger' : 'btn-secondary'}`}
                 onClick={() => setDecisionType('REJECTED')}
-                style={{ fontSize: '12px', padding: '8px' }}
                 disabled={!isAuthorized}
+                style={{
+                  padding: '12px 10px',
+                  borderRadius: '12px',
+                  fontSize: '12px',
+                  fontWeight: 800,
+                  cursor: isAuthorized ? 'pointer' : 'not-allowed',
+                  border: decisionType === 'REJECTED' ? '2px solid #e11d48' : '1px solid #cbd5e1',
+                  background: decisionType === 'REJECTED' ? 'rgba(225, 29, 72, 0.1)' : '#ffffff',
+                  color: decisionType === 'REJECTED' ? '#9f1239' : '#475569',
+                  transition: 'all 0.18s ease',
+                  transform: decisionType === 'REJECTED' ? 'translateY(-2px)' : 'none',
+                  boxShadow: decisionType === 'REJECTED' ? '0 4px 12px rgba(225, 29, 72, 0.2)' : 'none'
+                }}
               >
                 Reject EoA
               </button>

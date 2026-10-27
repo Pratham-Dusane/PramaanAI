@@ -131,7 +131,7 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
           }}>
             <Calendar size={15} color="var(--text-secondary)" />
             <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--text-main)', letterSpacing: '0.02em' }}>
-              AY 2026–2027
+              AY 2026-2027
             </span>
           </div>
 
@@ -342,7 +342,7 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
             </div>
           </div>
           <div style={{ fontSize: '12px', fontWeight: 600, color: 'var(--text-on-pine-muted)' }}>
-            Active AY 2026–27 Cycle
+            Active AY 2026-27 Cycle
           </div>
         </div>
       </div>
@@ -552,12 +552,33 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
                     </div>
 
                     <div style={{ fontSize: '10px', fontWeight: 600, color: missingDocs > 0 ? 'var(--status-insufficient-text)' : 'var(--status-pass-text)', whiteSpace: 'nowrap' }}>
-                      {missingDocs > 0 ? `⚠ ${missingDocs} Required Doc Missing` : '✓ All Mandatory Docs Attached'}
+                      {missingDocs > 0 ? `${missingDocs} Required Doc Missing` : 'All Mandatory Docs Attached'}
                     </div>
                   </div>
 
-                  {/* Column 4: Priority Urgency Metric & Spaced Action Button */}
+                  {/* Column 4: Priority Urgency Metric, VNI Score & Spaced Action Button */}
                   <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexShrink: 0 }}>
+                    {app.vniScore !== undefined && (
+                      <div style={{ textAlign: 'right', minWidth: '70px', paddingRight: '10px', borderRight: '1px solid rgba(38, 61, 57, 0.1)' }}>
+                        <div style={{ fontSize: '9px', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
+                          VNI NEED
+                        </div>
+                        <div style={{ 
+                          fontSize: '16px', 
+                          fontWeight: 900, 
+                          color: app.vniScore >= 70 ? 'var(--mode-physical)' : 'var(--dim-d1)',
+                          lineHeight: 1.2
+                        }}>
+                          {app.vniScore} / 100
+                        </div>
+                        {app.recommendedMode && (
+                          <div style={{ fontSize: '9px', fontWeight: 800, color: 'var(--mode-physical)', marginTop: '2px' }}>
+                            {app.recommendedMode.replace('_', ' ')}
+                          </div>
+                        )}
+                      </div>
+                    )}
+
                     <div style={{ textAlign: 'right', minWidth: '60px' }}>
                       <div style={{ fontSize: '9px', fontWeight: 800, letterSpacing: '0.06em', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
                         URGENCY
@@ -630,7 +651,7 @@ export const ReviewerQueueView: React.FC<ReviewerQueueViewProps> = ({
                     </span>
                     {orderedDiscrepancies.length === 0 ? (
                       <span style={{ fontSize: '11px', color: 'var(--status-pass-text)', fontWeight: 700, whiteSpace: 'nowrap' }}>
-                        ✓ Complete Compliance Verified
+                        Complete Compliance Verified
                       </span>
                     ) : (
                       <>

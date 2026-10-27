@@ -234,7 +234,7 @@ export const ComplianceAnalytics: React.FC = () => {
               <span>Statistics - Monthly Volume</span>
             </h3>
             <p style={{ fontSize: '11px', color: 'var(--text-muted)', marginTop: '2px' }}>
-              Intake vs. Verified & Cleared Scrutinies (Jan–Jun)
+              Intake vs. Verified & Cleared Scrutinies (Jan-Jun)
             </p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '10px', fontWeight: 700 }}>

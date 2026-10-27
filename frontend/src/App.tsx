@@ -14,6 +14,12 @@ import { DuplicatesView } from './views/DuplicatesView';
 import { RulesAdminView } from './views/RulesAdminView';
 import { BulkProcessingView } from './views/BulkProcessingView';
 import { AuditLogView } from './views/AuditLogView';
+import { ContextIntelligenceView } from './views/ContextIntelligenceView';
+import { VerificationScoringView } from './views/VerificationScoringView';
+import { MethodologyDecisionView } from './views/MethodologyDecisionView';
+import { PreVisitBriefView } from './views/PreVisitBriefView';
+import { ModeComparisonView } from './views/ModeComparisonView';
+import { OfficialReviewView } from './views/OfficialReviewView';
 import { 
   mockApplications, 
   mockInstitutions, 
@@ -225,6 +231,54 @@ export const App: React.FC = () => {
 
           {activeView === 'AUDIT' && (
             <AuditLogView />
+          )}
+
+          {activeView === 'CONTEXT' && (
+            <ContextIntelligenceView 
+              application={selectedApp}
+              currentRole={currentRole}
+              onNavigate={(view) => setActiveView(view)}
+            />
+          )}
+
+          {activeView === 'SCORING' && (
+            <VerificationScoringView 
+              application={selectedApp}
+              currentRole={currentRole}
+              onNavigate={(view) => setActiveView(view)}
+            />
+          )}
+
+          {activeView === 'METHODOLOGY' && (
+            <MethodologyDecisionView 
+              application={selectedApp}
+              currentRole={currentRole}
+              onNavigate={(view) => setActiveView(view)}
+            />
+          )}
+
+          {activeView === 'BRIEF' && (
+            <PreVisitBriefView 
+              application={selectedApp}
+              currentRole={currentRole}
+              onNavigate={(view) => setActiveView(view)}
+            />
+          )}
+
+          {activeView === 'MODE_COMPARE' && (
+            <ModeComparisonView 
+              application={selectedApp}
+              currentRole={currentRole}
+              onNavigate={(view) => setActiveView(view)}
+            />
+          )}
+
+          {activeView === 'OFFICIAL_REVIEW' && (
+            <OfficialReviewView 
+              application={selectedApp}
+              currentRole={currentRole}
+              onNavigate={(view) => setActiveView(view)}
+            />
           )}
         </main>
       </div>

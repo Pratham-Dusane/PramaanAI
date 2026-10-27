@@ -27,7 +27,7 @@ export const NotificationCenter: React.FC<NotificationCenterProps> = ({
         <div className="panel-header">
           <div className="panel-title">
             <Bell size={18} color="var(--primary-500)" />
-            <span>Deadline & Certificate Expiry Alerts (FR-14)</span>
+            <span>Deadline & Certificate Expiry Alerts</span>
           </div>
           <button className="btn btn-outline btn-sm" onClick={onClose} aria-label="Close Alerts">
             <X size={16} />

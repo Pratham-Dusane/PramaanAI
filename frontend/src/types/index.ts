@@ -4,7 +4,9 @@ export type UserRole =
   | 'SENIOR_APPROVER' 
   | 'INSPECTOR' 
   | 'RULE_ADMIN' 
-  | 'AUDITOR';
+  | 'AUDITOR'
+  | 'EVC_COORDINATOR'
+  | 'EVC_EXPERT';
 
 export type CheckResult = 
   | 'PASS' 
@@ -210,6 +212,8 @@ export interface Application {
     reason: string;
     citedEvidence: string[];
   };
+  vniScore?: number;
+  recommendedMode?: MethodologyMode;
 }
 
 export interface RuleDefinition {
@@ -314,4 +318,177 @@ export interface NotificationItem {
   relatedEntity: string;
   dueDate: string;
   acknowledged: boolean;
+}
+
+// ─── PRD v2.0 Lane 2: Methodology Intelligence Types ───
+
+export type RecommendationState = 
+  | 'NOT_COMPUTED' 
+  | 'COMPUTED' 
+  | 'UNDER_OFFICIAL_REVIEW' 
+  | 'ACCEPTED' 
+  | 'MODIFIED' 
+  | 'REJECTED' 
+  | 'SUPERSEDED';
+
+export type MethodologyMode = 
+  | 'DESK_ONLY' 
+  | 'ONLINE_EVC' 
+  | 'HYBRID_EVC' 
+  | 'PHYSICAL_EVC' 
+  | 'DEFER_INSUFFICIENT_CONTEXT';
+
+export type CoverageState = 'OBSERVED' | 'NOT_AVAILABLE' | 'NOT_APPLICABLE' | 'SIMULATED';
+
+export type ChannelAdequacy = 'FULL' | 'PARTIAL' | 'NONE';
+
+export type ReviewAction = 'ACCEPT' | 'MODIFY' | 'REJECT';
+
+export type ContextFamily = 'C1' | 'C2' | 'C3' | 'C4' | 'C5' | 'C6';
+
+export type DimensionId = 'D1' | 'D2' | 'D3' | 'D4' | 'D5' | 'D6' | 'D7';
+
+export interface ContextFeatureValue {
+  featureId: string;
+  featureLabel: string;
+  family: ContextFamily;
+  value: string | number;
+  coverageState: CoverageState;
+  confidence: number | null;
+  evidenceNodeIds: string[];
+}
+
+export interface ContextSnapshot {
+  id: string;
+  applicationVersionId: string;
+  pipelineVersion: string;
+  featureSetVersion: string;
+  createdAt: string;
+  features: ContextFeatureValue[];
+}
+
+export interface DimensionScore {
+  dimension: DimensionId;
+  label: string;
+  question: string;
+  score: number;       // 0-100
+  confidence: number;  // 0-1
+  topFeatures: { featureId: string; featureLabel: string; contribution: number; direction: 'raises' | 'lowers' }[];
+  evidenceLinks: string[];
+}
+
+export interface ScoreRun {
+  id: string;
+  snapshotId: string;
+  scoringSpecVersion: string;
+  dimensions: DimensionScore[];
+  vni: number;
+  vniConfidence: number;
+}
+
+export interface PolicyGate {
+  id: string;
+  name: string;
+  description: string;
+  predicate: string;
+  floorMode: MethodologyMode;
+  citation: string;
+  demoOnly: boolean;
+  version: string;
+}
+
+export interface GateEvaluation {
+  gateId: string;
+  gateName: string;
+  fired: boolean;
+  floorMode: MethodologyMode;
+  inputs: Record<string, string | number | boolean>;
+  status: 'FIRED' | 'PASSED' | 'NOT_APPLICABLE';
+}
+
+export interface Counterfactual {
+  featureChanged: string;
+  featureLabel: string;
+  originalValue: string | number;
+  newValue: string | number;
+  originalMode: MethodologyMode;
+  newMode: MethodologyMode;
+}
+
+export interface FocusArea {
+  id: string;
+  category: 'INSTRUCTIONAL' | 'ADMINISTRATIVE' | 'AMENITIES' | 'LABORATORY' | 'FACULTY';
+  item: string;
+  reason: string;
+  priority: 'HIGH' | 'MEDIUM' | 'LOW';
+  channelAdequacy: { desk: ChannelAdequacy; remote: ChannelAdequacy; physical: ChannelAdequacy };
+  relatedFindingIds: string[];
+}
+
+export interface MethodologyRecommendation {
+  id: string;
+  snapshotId: string;
+  scoreRunId: string;
+  mode: MethodologyMode;
+  confidence: number;
+  floorMode: MethodologyMode;
+  gatesEvaluated: GateEvaluation[];
+  topFeatures: string[];
+  focusAreas: FocusArea[];
+  counterfactuals: Counterfactual[];
+  modelVersion: string;
+  state: RecommendationState;
+  isRandomAudit: boolean;
+  tier1Output: MethodologyMode;
+  tier2Output: MethodologyMode;
+  tier2Probability: number;
+  createdAt: string;
+}
+
+export interface RecommendationReview {
+  recommendationId: string;
+  actor: string;
+  actorRole: string;
+  action: ReviewAction;
+  finalMode: MethodologyMode;
+  reasonCode: string;
+  reasonText: string;
+  secondApprover?: string;
+  timestamp: string;
+}
+
+export interface PreVisitBrief {
+  recommendationId: string;
+  applicationSummary: string;
+  mode: MethodologyMode;
+  modeReasons: { reason: string; evidenceIds: string[] }[];
+  focusChecklist: { category: string; items: { label: string; checked: boolean; evidenceId?: string }[] }[];
+  documentsToObtain: string[];
+  unverifiableItems: string[];
+  openDeficiencies: { year: string; deficiency: string; status: string }[];
+  caveats: string[];
+  generatedAt: string;
+}
+
+export interface ChannelMatrixItem {
+  itemId: string;
+  itemLabel: string;
+  category: string;
+  deskAdequacy: ChannelAdequacy;
+  remoteVideoAdequacy: ChannelAdequacy;
+  physicalAdequacy: ChannelAdequacy;
+}
+
+export interface ModeComparison {
+  mode: MethodologyMode;
+  modeLabel: string;
+  itemsFull: number;
+  itemsPartial: number;
+  itemsNone: number;
+  evidenceArtefacts: string[];
+  cost: string;
+  elapsedTime: string;
+  residualUncertainties: string[];
+  gateStatus: 'ALLOWED' | 'BLOCKED';
+  gateBlockReason?: string;
 }

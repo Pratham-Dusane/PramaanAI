@@ -45,6 +45,8 @@ export const mockApplications: Application[] = [
     academicYear: '2026-27',
     status: 'READY_FOR_REVIEW',
     urgencyScore: 88,
+    vniScore: 72,
+    recommendedMode: 'PHYSICAL_EVC',
     deadlineAt: '2026-11-15T23:59:59Z',
     requiredDocuments: { total: 8, present: 7, missing: 1 },
     openFindingsCount: { high: 1, medium: 2, low: 1 },
@@ -888,24 +890,24 @@ export const mockAuditEvents: AuditEvent[] = [
 export const mockCopilotCorpus = [
   {
     queryMatch: 'faculty ratio',
-    answer: 'Under Section 7.1 of the Approval Process Handbook 2024–2027, the prescribed Faculty-to-Student Ratio for Engineering & Technology programs at the Undergraduate Degree level is 1:15. For Postgraduate courses, the mandated ratio is 1:12. The faculty cadre ratio should strictly be 1:2:6 (1 Professor : 2 Associate Professors : 6 Assistant Professors).',
+    answer: 'Under Section 7.1 of the Approval Process Handbook 2024-2027, the prescribed Faculty-to-Student Ratio for Engineering & Technology programs at the Undergraduate Degree level is 1:15. For Postgraduate courses, the mandated ratio is 1:12. The faculty cadre ratio should strictly be 1:2:6 (1 Professor : 2 Associate Professors : 6 Assistant Professors).',
     citations: [
       {
-        sourceTitle: 'AICTE Approval Process Handbook 2024–2027',
+        sourceTitle: 'AICTE Approval Process Handbook 2024-2027',
         section: 'Chapter VII: Norms for Faculty Requirements',
         page: 84,
         clause: 'Clause 7.1',
         excerpt: 'The Cadre Ratio shall be 1:2:6 for Engineering and Technology undergraduate degree courses.'
       }
     ],
-    limitations: 'Based on configured Approval Process Handbook 2024–2027; verify subsequent circulars for autonomous status exceptions.'
+    limitations: 'Based on configured Approval Process Handbook 2024-2027; verify subsequent circulars for autonomous status exceptions.'
   },
   {
     queryMatch: 'satellite imagery',
     answer: 'Per Clause 6.18 of the Approval Process Handbook, satellite imagery and public map screenshots cannot be accepted as standalone proof of land ownership, continuous boundary, or building completion. All built-up area declarations require architect-certified structural plans, registered land revenue 7/12 extracts, and physical verification by an authorized Scrutiny Committee / Expert Visit Committee (EVC).',
     citations: [
       {
-        sourceTitle: 'AICTE Approval Process Handbook 2024–2027',
+        sourceTitle: 'AICTE Approval Process Handbook 2024-2027',
         section: 'Chapter VI: Norms for Land and Built-up Area',
         page: 63,
         clause: 'Clause 6.18',

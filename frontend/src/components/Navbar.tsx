@@ -1,37 +1,51 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { 
-  Bell, 
-  ChevronDown, 
-  LayoutGrid, 
-  FileText, 
-  Users, 
-  FolderTree, 
-  BarChart3, 
-  FileCheck2, 
-  Settings, 
-  GitFork, 
-  Clock, 
-  Building2, 
-  Copy, 
-  ScrollText, 
-  Layers, 
-  UserCheck, 
-  Globe 
+import {
+  Bell,
+  ChevronDown,
+  LayoutGrid,
+  FileText,
+  Users,
+  FolderTree,
+  BarChart3,
+  FileCheck2,
+  Settings,
+  GitFork,
+  Clock,
+  Building2,
+  Copy,
+  ScrollText,
+  Layers,
+  UserCheck,
+  Globe,
+  Check,
+  Compass,
+  Sparkles,
+  Sliders,
+  CheckSquare,
+  Scale,
+  ShieldCheck,
+  Activity
 } from 'lucide-react';
 import { UserRole } from '../types';
 import { SupportedLanguage, translations } from '../data/translations';
 
-export type ActiveView = 
-  | 'QUEUE' 
-  | 'DETAIL' 
-  | 'APPLICANT' 
-  | 'GRAPH' 
-  | 'TWIN' 
-  | 'INFRA' 
-  | 'DUPLICATES' 
-  | 'RULES' 
-  | 'BULK' 
-  | 'AUDIT';
+export type ActiveView =
+  | 'QUEUE'
+  | 'DETAIL'
+  | 'APPLICANT'
+  | 'GRAPH'
+  | 'TWIN'
+  | 'INFRA'
+  | 'DUPLICATES'
+  | 'RULES'
+  | 'BULK'
+  | 'AUDIT'
+  | 'CONTEXT'
+  | 'SCORING'
+  | 'METHODOLOGY'
+  | 'BRIEF'
+  | 'MODE_COMPARE'
+  | 'OFFICIAL_REVIEW';
 
 interface NavbarProps {
   currentRole: UserRole;
@@ -104,7 +118,9 @@ export const Navbar: React.FC<NavbarProps> = ({
     SENIOR_APPROVER: 'Senior Approver (Decision Authority)',
     INSPECTOR: 'Domain Expert / Inspector',
     RULE_ADMIN: 'Rule Administrator',
-    AUDITOR: 'Auditor / System Admin'
+    AUDITOR: 'Auditor / System Admin',
+    EVC_COORDINATOR: 'EVC Coordinator (Approval Authority)',
+    EVC_EXPERT: 'Senior EVC Expert / Inspector'
   };
 
   const roleProfiles: Record<UserRole, { name: string; title: string; email: string; initials: string }> = {
@@ -143,6 +159,18 @@ export const Navbar: React.FC<NavbarProps> = ({
       title: 'Auditor / System Admin',
       email: 'c.verma@audit-central.gov.in',
       initials: 'CV'
+    },
+    EVC_COORDINATOR: {
+      name: 'Shri R. Kumar',
+      title: 'EVC Coordinator (Approval Authority)',
+      email: 'r.kumar@evc-aicte.gov.in',
+      initials: 'RK'
+    },
+    EVC_EXPERT: {
+      name: 'Prof. N. K. Sen',
+      title: 'Senior EVC Domain Expert',
+      email: 'nk.sen@inspection.nic.in',
+      initials: 'NS'
     }
   };
 
@@ -172,6 +200,21 @@ export const Navbar: React.FC<NavbarProps> = ({
       }
     },
     {
+      id: 'METHODOLOGY_AI',
+      label: 'Methodology AI',
+      icon: Compass,
+      isActive: ['SCORING', 'METHODOLOGY', 'CONTEXT', 'BRIEF', 'MODE_COMPARE', 'OFFICIAL_REVIEW'].includes(activeView),
+      defaultView: 'METHODOLOGY' as ActiveView,
+      dropdownItems: [
+        { label: 'Methodology Recommendation', view: 'METHODOLOGY' as ActiveView, icon: Sparkles },
+        { label: 'Verification Scoring & Radar', view: 'SCORING' as ActiveView, icon: Activity },
+        { label: 'Pre-Visit Expert Brief', view: 'BRIEF' as ActiveView, icon: CheckSquare },
+        { label: 'Mode Comparison & Matrix', view: 'MODE_COMPARE' as ActiveView, icon: Scale },
+        { label: 'Official Methodology Review', view: 'OFFICIAL_REVIEW' as ActiveView, icon: ShieldCheck },
+        { label: 'Context Intelligence', view: 'CONTEXT' as ActiveView, icon: Sliders }
+      ]
+    },
+    {
       id: 'APPLICANT_PORTAL',
       label: 'Applicant Portal',
       icon: Users,
@@ -188,8 +231,8 @@ export const Navbar: React.FC<NavbarProps> = ({
       isActive: activeView === 'GRAPH' || activeView === 'TWIN',
       defaultView: 'GRAPH' as ActiveView,
       dropdownItems: [
-        { label: 'Evidence Graph & Traceability (FR-08)', view: 'GRAPH' as ActiveView, icon: GitFork },
-        { label: 'Digital Twin Timeline & Dossier (FR-07)', view: 'TWIN' as ActiveView, icon: Clock }
+        { label: 'Evidence Graph & Traceability', view: 'GRAPH' as ActiveView, icon: GitFork },
+        { label: 'Digital Twin Timeline & Dossier', view: 'TWIN' as ActiveView, icon: Clock }
       ]
     },
     {
@@ -199,9 +242,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       isActive: activeView === 'INFRA' || activeView === 'DUPLICATES' || activeView === 'TWIN',
       defaultView: 'INFRA' as ActiveView,
       dropdownItems: [
-        { label: 'Infrastructure & Satellite Signals (FR-04)', view: 'INFRA' as ActiveView, icon: Building2 },
-        { label: 'Duplicate Application Links (FR-05)', view: 'DUPLICATES' as ActiveView, icon: Copy },
-        { label: 'Digital Twin Model & Trends (FR-07)', view: 'TWIN' as ActiveView, icon: Clock }
+        { label: 'Infrastructure & Spatial Signals', view: 'INFRA' as ActiveView, icon: Building2 },
+        { label: 'Duplicate Application Links', view: 'DUPLICATES' as ActiveView, icon: Copy },
+        { label: 'Digital Twin Model & Trends', view: 'TWIN' as ActiveView, icon: Clock }
       ]
     },
     {
@@ -221,8 +264,8 @@ export const Navbar: React.FC<NavbarProps> = ({
       isActive: activeView === 'RULES' || activeView === 'BULK',
       defaultView: 'RULES' as ActiveView,
       dropdownItems: [
-        { label: 'Rule Pack & Replay Engine (FR-06)', view: 'RULES' as ActiveView, icon: ScrollText },
-        { label: 'Bulk Intake & Processing (FR-09)', view: 'BULK' as ActiveView, icon: Layers }
+        { label: 'Rule Pack & Replay Engine', view: 'RULES' as ActiveView, icon: ScrollText },
+        { label: 'Bulk Intake & Processing', view: 'BULK' as ActiveView, icon: Layers }
       ]
     }
   ];
@@ -232,7 +275,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* 1. TOP BAR (Govt of India Logo + Titles + Language + Notifications + User Profile) */}
       <div className="top-brand-bar">
         {/* Left: Govt of India Emblem & AICTE System Titles */}
-        <div 
+        <div
           className="brand-container"
           onClick={() => onSelectView('QUEUE')}
           title="Return to Dashboard"
@@ -247,9 +290,9 @@ export const Navbar: React.FC<NavbarProps> = ({
         >
           {/* Official State Emblem of India (Gold Lion Capital & Satyameva Jayate) */}
           <div className="emblem-wrapper">
-            <img 
-              src="/india-emblem-gold.jpg" 
-              alt="State Emblem of India" 
+            <img
+              src="/india-emblem-gold.jpg"
+              alt="State Emblem of India"
               className="emblem-img"
             />
           </div>
@@ -279,13 +322,13 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="fluid-lang-label">
                 {currentLang === 'en' ? 'English (EN)' : currentLang === 'hi' ? 'हिन्दी (HI)' : 'मराठी (MR)'}
               </span>
-              <ChevronDown 
-                size={12} 
+              <ChevronDown
+                size={12}
                 className="fluid-chevron"
                 style={{
                   transform: isLangMenuOpen ? 'rotate(180deg)' : 'none',
                   transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)'
-                }} 
+                }}
               />
             </button>
 
@@ -313,7 +356,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         <span className="lang-secondary-text">{item.sub}</span>
                       </div>
                       {isSelected && (
-                        <span className="lang-checkmark">✓</span>
+                        <Check size={14} className="lang-checkmark" color="var(--accent-gold-dark)" />
                       )}
                     </button>
                   );
@@ -323,7 +366,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Notification Bell with Badge */}
-          <button 
+          <button
             className="header-icon-btn"
             onClick={onToggleNotifications}
             title="Expiry & Deadline Alerts"
@@ -342,7 +385,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* User Profile on Far Right directly matching Reference Image */}
           <div className="user-profile-wrapper" ref={userMenuRef}>
-            <div 
+            <div
               className="user-profile-trigger"
               onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
               role="button"
@@ -358,12 +401,12 @@ export const Navbar: React.FC<NavbarProps> = ({
               <div className="user-text-stack">
                 <div className="user-name-row">
                   <span>{currentProfile.name}</span>
-                  <ChevronDown 
-                    size={13} 
-                    style={{ 
-                      transform: isUserMenuOpen ? 'rotate(180deg)' : 'none', 
-                      transition: 'transform 0.2s ease' 
-                    }} 
+                  <ChevronDown
+                    size={13}
+                    style={{
+                      transform: isUserMenuOpen ? 'rotate(180deg)' : 'none',
+                      transition: 'transform 0.2s ease'
+                    }}
                   />
                 </div>
                 <div className="user-role-label">
@@ -405,7 +448,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                         <span>{roleLabels[role]}</span>
                       </div>
                       {currentRole === role && (
-                        <span style={{ color: 'var(--accent-gold-dark)', fontWeight: 800, fontSize: '13px' }}>✓</span>
+                        <Check size={14} color="var(--accent-gold-dark)" />
                       )}
                     </button>
                   ))}
@@ -425,7 +468,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             const Icon = tab.icon;
 
             return (
-              <div 
+              <div
                 key={tab.id}
                 className="horizontal-tab-container"
                 onMouseEnter={() => {
@@ -460,20 +503,20 @@ export const Navbar: React.FC<NavbarProps> = ({
                   )}
 
                   {hasSubmenu && (
-                    <ChevronDown 
-                      size={12} 
+                    <ChevronDown
+                      size={12}
                       className="tab-chevron"
-                      style={{ 
+                      style={{
                         transform: isMenuOpen ? 'rotate(180deg)' : 'none',
-                        transition: 'transform 0.15s ease' 
-                      }} 
+                        transition: 'transform 0.15s ease'
+                      }}
                     />
                   )}
                 </button>
 
                 {/* Submenu Popover for Multi-view Tabs */}
                 {hasSubmenu && isMenuOpen && (
-                  <div 
+                  <div
                     className="horizontal-submenu-popover"
                     onMouseEnter={() => {
                       if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -499,7 +542,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                           <SubIcon size={16} color={isSubActive ? 'var(--accent-gold-dark)' : 'var(--text-secondary)'} />
                           <span>{item.label}</span>
                           {isSubActive && (
-                            <span style={{ marginLeft: 'auto', color: 'var(--accent-gold-dark)', fontWeight: 800 }}>✓</span>
+                            <Check size={14} color="var(--accent-gold-dark)" style={{ marginLeft: 'auto' }} />
                           )}
                         </button>
                       );

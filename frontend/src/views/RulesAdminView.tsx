@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { ScrollText, Play, CheckCircle2, History, AlertTriangle, Layers, BookOpen } from 'lucide-react';
+import { ScrollText, Play, CheckCircle2, History, AlertTriangle, Layers, BookOpen, ShieldAlert, Sliders } from 'lucide-react';
 import { mockRulePacks } from '../data/mockData';
+import { mockPolicyGates } from '../data/mockMethodologyData';
 import { RulePack } from '../types';
 
 export const RulesAdminView: React.FC = () => {
+  const [activeSection, setActiveSection] = useState<'RULE_PACKS' | 'POLICY_GATES'>('RULE_PACKS');
   const [selectedPackId, setSelectedPackId] = useState<string>('DEMO_EOA_2026');
   const [isReplaying, setIsReplaying] = useState(false);
   const [replayDiff, setReplayDiff] = useState<any | null>(null);
@@ -38,25 +40,120 @@ export const RulesAdminView: React.FC = () => {
 
   return (
     <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      <div className="glass-panel" style={{ padding: '20px' }}>
-        <div className="panel-header" style={{ marginBottom: '8px' }}>
-          <div className="panel-title">
-            <ScrollText size={20} color="var(--primary-500)" />
-            <span>Regulatory Rule Packs & Non-Destructive Simulation Replay (FR-13)</span>
-          </div>
-          <span className="badge badge-info">Declarative Predicate Engine</span>
-        </div>
-        <p style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-          Rules are declarative, versioned, category-scoped, and evaluated via safe AST predicates (no arbitrary Python eval or SQL). Published packs are immutable. Replay simulates proposed changes against historical application snapshots without modifying past decisions.
-        </p>
+      {/* Sub-tab Switcher */}
+      <div style={{ display: 'flex', gap: '8px', borderBottom: '2px solid rgba(38, 61, 57, 0.1)', paddingBottom: '10px' }}>
+        <button
+          onClick={() => setActiveSection('RULE_PACKS')}
+          style={{
+            padding: '8px 16px',
+            borderRadius: '8px',
+            border: 'none',
+            background: activeSection === 'RULE_PACKS' ? 'var(--bg-pine)' : 'transparent',
+            color: activeSection === 'RULE_PACKS' ? '#ffffff' : 'var(--text-secondary)',
+            fontSize: '13px',
+            fontWeight: 700,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px'
+          }}
+        >
+          <ScrollText size={15} />
+          <span>Rule Packs & Simulation Replay</span>
+        </button>
+
+        <button
+          onClick={() => setActiveSection('POLICY_GATES')}
+          style={{
+            padding: '8px 16px',
+            borderRadius: '8px',
+            border: 'none',
+            background: activeSection === 'POLICY_GATES' ? 'var(--bg-pine)' : 'transparent',
+            color: activeSection === 'POLICY_GATES' ? '#ffffff' : 'var(--text-secondary)',
+            fontSize: '13px',
+            fontWeight: 700,
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px'
+          }}
+        >
+          <ShieldAlert size={15} />
+          <span>Deterministic Policy Gates</span>
+        </button>
       </div>
 
-      {/* Rule Pack Selector & Metadata */}
-      <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '20px' }}>
-        <div className="glass-panel" style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-          <h3 style={{ fontSize: '13px', fontWeight: 700, color: 'var(--text-secondary)' }}>
-            VERSIONED RULE PACKS ({mockRulePacks.length})
-          </h3>
+      {activeSection === 'POLICY_GATES' ? (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="glass-panel" style={{ padding: '20px' }}>
+            <div className="panel-header" style={{ marginBottom: '8px' }}>
+              <div className="panel-title">
+                <ShieldAlert size={20} color="var(--primary-500)" />
+                <span>Deterministic Policy Gates Configuration</span>
+              </div>
+              <span className="badge badge-info">Tier 0 Floor Rules</span>
+            </div>
+            <p style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+              Policy gates define hard statutory minimums under the AICTE Approval Process Handbook. When a gate condition fires, it establishes a non-negotiable floor mode that cannot be overridden without explicit two-approver regulatory authorization.
+            </p>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))', gap: '16px' }}>
+            {mockPolicyGates.map(gate => (
+              <div key={gate.id} className="glass-panel" style={{ padding: '20px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <span style={{ fontSize: '11px', fontWeight: 800, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+                      {gate.id}
+                    </span>
+                    <span style={{ background: 'rgba(212, 160, 52, 0.15)', color: 'var(--accent-gold-dark)', fontSize: '10px', fontWeight: 800, padding: '2px 6px', borderRadius: '4px' }}>
+                      DEMO ONLY
+                    </span>
+                  </div>
+
+                  <h3 style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-main)', margin: '0 0 6px 0' }}>
+                    {gate.name}
+                  </h3>
+
+                  <p style={{ fontSize: '12px', color: 'var(--text-secondary)', margin: '0 0 12px 0', lineHeight: 1.4 }}>
+                    {gate.description}
+                  </p>
+
+                  <div style={{ background: 'var(--bg-main)', borderRadius: '6px', padding: '8px 10px', fontSize: '11px', fontFamily: 'var(--font-mono)', marginBottom: '12px' }}>
+                    <div style={{ color: 'var(--text-muted)', fontSize: '9px', textTransform: 'uppercase' }}>Predicate Expression</div>
+                    <div style={{ fontWeight: 600, color: 'var(--text-main)', marginTop: '2px' }}>{gate.predicate}</div>
+                  </div>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '10px', borderTop: '1px solid rgba(38, 61, 57, 0.08)', fontSize: '11px' }}>
+                  <span style={{ color: 'var(--text-muted)' }}>Ref: {gate.citation}</span>
+                  <span style={{ fontWeight: 800, color: 'var(--mode-physical)' }}>Floor: {gate.floorMode}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="glass-panel" style={{ padding: '20px' }}>
+            <div className="panel-header" style={{ marginBottom: '8px' }}>
+              <div className="panel-title">
+                <ScrollText size={20} color="var(--primary-500)" />
+                <span>Regulatory Rule Packs & Non-Destructive Simulation Replay</span>
+              </div>
+              <span className="badge badge-info">Declarative Predicate Engine</span>
+            </div>
+            <p style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
+              Rules are declarative, versioned, category-scoped, and evaluated via safe AST predicates (no arbitrary Python eval or SQL). Published packs are immutable. Replay simulates proposed changes against historical application snapshots without modifying past decisions.
+            </p>
+          </div>
+
+          {/* Rule Pack Selector & Metadata */}
+          <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '20px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <h3 style={{ fontSize: '12px', fontWeight: 800, color: 'var(--text-secondary)', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+                VERSIONED RULE PACKS ({mockRulePacks.length})
+              </h3>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {mockRulePacks.map((pack) => {
@@ -219,6 +316,8 @@ export const RulesAdminView: React.FC = () => {
             </table>
           </div>
         </div>
+      )}
+        </>
       )}
     </div>
   );

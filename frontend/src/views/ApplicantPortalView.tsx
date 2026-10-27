@@ -645,7 +645,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
                     }} />
                   </div>
                   <div style={{ fontSize: '11px', color: '#15803d', fontWeight: 800, marginTop: '6px' }}>
-                    {uploadProgress === 100 ? '✓ Verification & SHA-256 Digest Successfully Computed' : `Scanning magic bytes: ${uploadProgress}%`}
+                    {uploadProgress === 100 ? 'Verification and SHA-256 Digest Successfully Computed' : `Scanning magic bytes: ${uploadProgress}%`}
                   </div>
                 </div>
               )}
@@ -890,7 +890,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
                   <RefreshCw size={20} />
                 </div>
                 <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0, letterSpacing: '-0.01em' }}>
-                  Safe Next-Application Carry-Forward Assistant (FR-21)
+                  Safe Next-Application Carry-Forward Assistant
                 </h3>
               </div>
               <p style={{ fontSize: '12px', color: '#64748b', marginTop: '6px', margin: 0 }}>
@@ -986,7 +986,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
 
                 <div style={{ marginTop: 'auto', paddingTop: '12px', borderTop: '1px solid #f1f5f9', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <span style={{ fontSize: '11px', color: item.blocked ? '#dc2626' : item.confirmed ? '#15803d' : '#64748b', fontWeight: item.confirmed || item.blocked ? 700 : 500 }}>
-                    {item.blocked ? 'Requires Fresh Upload' : item.confirmed ? '✓ Confirmed for AY 2026-27' : 'Pending Confirmation'}
+                    {item.blocked ? 'Requires Fresh Upload' : item.confirmed ? 'Confirmed for AY 2026-27' : 'Pending Confirmation'}
                   </span>
                   <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: item.blocked ? 'not-allowed' : 'pointer' }}>
                     <input 
@@ -1298,7 +1298,7 @@ export const ApplicantPortalView: React.FC<ApplicantPortalViewProps> = ({
                     boxShadow: queryResponse.trim() && !isResponseSent ? '0 4px 14px rgba(22, 101, 52, 0.3)' : 'none'
                   }}
                 >
-                  {isResponseSent ? '✓ Response Submitted' : 'Submit Official Response'}
+                  {isResponseSent ? 'Response Submitted' : 'Submit Official Response'}
                 </button>
               </div>
             </div>

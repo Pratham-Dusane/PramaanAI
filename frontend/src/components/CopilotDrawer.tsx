@@ -36,7 +36,7 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
     {
       id: 'msg-init',
       sender: 'copilot',
-      text: 'Hello. I am the AICTE Regulatory Copilot. I answer compliance questions strictly using the approved AICTE Approval Process Handbook (2024–2027 edition). Every answer includes verifiable section and clause citations.',
+      text: 'Hello. I am the AICTE Regulatory Copilot. I answer compliance questions strictly using the approved AICTE Approval Process Handbook (2024-2027 edition). Every answer includes verifiable section and clause citations.',
       status: 'ANSWERED_WITH_CITATIONS'
     }
   ]);
@@ -84,7 +84,7 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
         responseMsg = {
           id: `cop-${Date.now()}`,
           sender: 'copilot',
-          text: 'Insufficient source support: The configured regulatory corpus (Approval Process Handbook 2024–2027) does not establish an answer to this query. Per safety policy, I will abstain from guessing or extrapolating beyond cited clauses.',
+          text: 'Insufficient source support: The configured regulatory corpus (Approval Process Handbook 2024-2027) does not establish an answer to this query. Per safety policy, I will abstain from guessing or extrapolating beyond cited clauses.',
           status: 'INSUFFICIENT_SOURCE_SUPPORT',
           limitations: 'Corpus coverage limit: Query terms not found in approved handbook index.'
         };
@@ -100,15 +100,16 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
       className="copilot-drawer fade-in"
       style={{
         position: 'fixed',
-        top: 0,
+        top: '72px',
         right: 0,
         bottom: 0,
-        width: '450px',
+        height: 'calc(100vh - 72px)',
+        width: '460px',
         maxWidth: '100vw',
         background: 'var(--bg-surface)',
         borderLeft: '1px solid var(--border-subtle)',
-        boxShadow: 'var(--shadow-lg)',
-        zIndex: 90,
+        boxShadow: '-8px 0 32px rgba(0, 0, 0, 0.16)',
+        zIndex: 1050,
         display: 'flex',
         flexDirection: 'column'
       }}
@@ -138,7 +139,7 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
           <div>
             <h2 style={{ fontSize: '15px', fontWeight: 800, color: '#ffffff' }}>Grounded Regulatory Copilot</h2>
             <p style={{ fontSize: '11px', color: 'var(--text-on-pine-muted)' }}>
-              AICTE Handbook (2024–27 Edition) Grounded RAG
+              AICTE Handbook (2024-27 Edition) Grounded RAG
             </p>
           </div>
         </div>
@@ -362,7 +363,7 @@ export const CopilotDrawer: React.FC<CopilotDrawerProps> = ({ isOpen, onClose })
           textAlign: 'center',
           letterSpacing: '0.02em'
         }}>
-          Grounded to AICTE Approval Process Handbook (2024–27). Advisory citations only.
+          Grounded to AICTE Approval Process Handbook (2024-27). Advisory citations only.
         </div>
       </div>
     </aside>

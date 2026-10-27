@@ -81,6 +81,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
       name: 'AUDITOR C. VERMA',
       email: 'c.verma@audit-central.gov.in',
       avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
+    },
+    EVC_COORDINATOR: {
+      name: 'DR. K. VISWANATHAN',
+      email: 'evc.coordinator@aicte-india.org',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+    },
+    EVC_EXPERT: {
+      name: 'PROF. S. MUKHERJEE',
+      email: 'evc.expert@inspection.nic.in',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
     }
   };
 

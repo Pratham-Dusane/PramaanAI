@@ -361,7 +361,7 @@ export const AccessibleGraph: React.FC<AccessibleGraphProps> = ({
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <h2 style={{ fontSize: '15px', fontWeight: 800, color: 'var(--text-main)', margin: 0 }}>
-                Evidence Graph & Traceability (FR-08)
+                Evidence Graph & Traceability
               </h2>
               <span className="badge badge-info" style={{ fontSize: '10px', padding: '2px 8px' }}>
                 Multi-Institution Topology
